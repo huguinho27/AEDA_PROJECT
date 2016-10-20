@@ -1,7 +1,6 @@
 #include "estudante.h"
 #include <iostream>
 
-using namespace std;
 
 Estudante::Estudante(double nota)
 {

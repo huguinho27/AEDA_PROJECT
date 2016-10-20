@@ -1,4 +1,6 @@
-#pragma once
+#ifndef ENUNCIADO_H
+#define ENUNCIADO_H
+
 #include <iostream>
 
 class Enunciado
@@ -16,3 +18,5 @@ public:
 	void setTitulo(std::string novoTitulo);
 	void setDescricao(std::string novaDescricao);
 };
+
+#endif /* ENUNCIADO_H */
