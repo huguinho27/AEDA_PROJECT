@@ -1,13 +1,13 @@
-#ifndef ESTUDANTE_H
-#define ESTUDANTE_H
+#ifndef STUDENT_H
+#define STUDENT_H
 
-class Estudante
+class Student
 {
 private:
-	double notaTrabalho;
+	double mark;
 public:
-	Estudante(double nota);
-	double getNota() const;
+	Student(double mark);
+	double getMark() const;
 };
 
-#endif /* ESTUDANTE_H */
+#endif /* STUDENT_H */

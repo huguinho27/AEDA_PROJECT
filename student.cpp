@@ -1,15 +1,14 @@
-#include "estudante.h"
+#include "student.h"
 #include <iostream>
 
-
-Estudante::Estudante(double nota)
+Student::Student(double mark)
 {
-	if (nota > 20 || nota < 0)
+	if (mark > 20 || mark < 0)
 		return;
-	notaTrabalho = nota;
+	this->mark = mark;
 }
 
-double Estudante::getNota() const
+double Student::getMark() const
 {
-	return this->notaTrabalho;
+	return mark;
 }

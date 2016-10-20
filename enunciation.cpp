@@ -1,24 +1,29 @@
-#ifndef ENUNCIADO_H
-#define ENUNCIADO_H
+#include "enunciation.h"
 
 using namespace std;
 
-#include <iostream>
-
-class Enunciado
+Enunciation::Enunciation(string title, string description)
 {
-protected:
-	string titulo, descricao;
-	vector<string> anosLetivosProposto;
-	vector<Estudante> estudantesEnvolvidos;
-public:
-	Enunciado(string titulo, string descricao, string anoLetivo, vector<Estudante> estudantes);
-	string getTitulo() const;
-	string getDescricao() const;
-	vector<string> getAnosLetivos() const;
-	vector<Estudante> getEstudantes() const;
-	void setTitulo(std::string novoTitulo);
-	void setDescricao(std::string novaDescricao);
-};
+	this->title = title;
+	this->description = description;
+}
 
-#endif /* ENUNCIADO_H */
+string Enunciation::getTitle() const
+{
+	return title;
+}
+
+string Enunciation::getDescription() const
+{
+	return description;
+}
+
+void Enunciation::setTittle(string newTitle)
+{
+	title = newTitle;
+}
+
+void Enunciation::setDescription(string newDescription)
+{
+	description = newDescription;
+}
