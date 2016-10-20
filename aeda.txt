@@ -1,0 +1,24 @@
+class unidadecurricular
+	-vector<estudante>
+	-vector<enunciation>
+
+class Enunciation //
+	-vector< vector<students>>
+	-vector<string> yearPresent;
+
+class Student //
+	-string name;
+	-static ind id;
+	-vector<UC> ucs;
+	-vector<int> uc_mark;
+
+class sistema
+	-vector<UCS>
+	-vector<enunciations>
+public:
+	-(...) construtores, gets, sets(tambem das classes de cima?),...
+	-oredenaçoes?
+	-interface;
+	-exceçoes
+	-polifmorfismo
+	-derivaçao
