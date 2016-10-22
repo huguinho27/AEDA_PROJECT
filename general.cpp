@@ -10,11 +10,12 @@ class general
 	vector<Enunciation> enunciations;
 	vector<Student> students;
 public:
-
+	general();
+	void MainMenu();
 
 };
 int main()
 {
-
+	//general g();
 	return 0;
 }
