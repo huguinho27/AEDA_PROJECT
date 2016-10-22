@@ -1,0 +1,64 @@
+#include "curricularUnit.h"
+
+using namespace std;
+
+curricularUnit::curricularUnit(string name, string lectureTeacher, Student s, float ECTSCredits)
+{
+	this->name = name;
+	this->lectureTeacher = lectureTeacher;
+	this->ECTSCredits = ECTSCredits;
+	students.push_back(s);
+}
+
+string curricularUnit::getName() const
+{
+	return name;
+}
+
+string curricularUnit::getLectureTeacher() const
+{
+	return lectureTeacher;
+}
+
+vector<Student> curricularUnit::getStudents() const
+{
+	return students;
+}
+
+vector<Enunciation> curricularUnit::getEnunciations() const
+{
+	return enunciations;
+}
+
+float curricularUnit::getECTSCredits() const
+{
+	return ECTSCredits;
+}
+
+int curricularUnit::getNumberStudents() const
+{
+	return students.size();
+}
+
+void curricularUnit::setName(string newName)
+{
+	name = newName;
+}
+
+void curricularUnit::addEnunciations(Enunciation e)
+{
+	enunciations.push_back(e);
+}
+
+void curricularUnit::addEnunciations(vector<Enunciation> multipleEnun)
+{
+	for (unsigned int i = 0; i < multipleEnun.size();i++)
+	{
+		enunciations.push_back(multipleEnun[i]);
+	}
+}
+
+void curricularUnit::setLectureTeacher(string newTeacher)
+{
+	lectureTeacher = newTeacher;
+}
