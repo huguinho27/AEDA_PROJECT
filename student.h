@@ -1,6 +1,12 @@
 #ifndef STUDENT_H
 #define STUDENT_H
 
+using namespace std;
+#include <iostream>
+#include <vector>
+#include "enunciation.h"
+#include "curricularUnit.h"
+
 class Student
 {
 private:

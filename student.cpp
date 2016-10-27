@@ -48,7 +48,7 @@ double Student::getMedia() {
 	return (sum/num);
 }
 
-void Student::setName(string newNane) {
+void Student::setName(string newName) {
 	name = newName;
 }
 
