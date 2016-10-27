@@ -7,8 +7,8 @@ int Student::idgeneral = 1000;
 
 Student::Student(string name){
 	this->id = idgeneral;
-	this->name = name;
 	idgeneral++;
+	this->name = name;
 }
 
 int Student::getId() const {
