@@ -25,17 +25,17 @@ public:
 };
 
 
-class EnunciationSearch
+class EnunciationSearch: public Enunciation
 {
 
 };
 
-class EnunciationAnalysis
+class EnunciationAnalysis: public Enunciation
 {
 
 };
 
-class EnunciationDevelopement
+class EnunciationDevelopement: public Enunciation
 {
 
 };
