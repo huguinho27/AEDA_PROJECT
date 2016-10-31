@@ -3,6 +3,7 @@
 
 using namespace std;
 #include <iostream>
+//#include <vector>
 
 class Enunciation
 {
@@ -27,12 +28,20 @@ public:
 
 class EnunciationSearch: public Enunciation
 {
-
+	protected:
+	string biblio;
+	public:
+	EnunciationSearch(string title, string description, string biblio);
+	string getBiblio();
 };
 
 class EnunciationAnalysis: public Enunciation
 {
-
+	protected:
+	string repos;
+	public:
+	EnunciationAnalysis(string title, string description, string repos);
+	string getRepos();
 };
 
 class EnunciationDevelopement: public Enunciation

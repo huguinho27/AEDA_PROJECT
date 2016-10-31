@@ -46,3 +46,10 @@ void Enunciation::addStudentsOfYear(string newYear, vector <Student> students){
 	addStudents(students);
 }
 
+
+EnunciationSearch::EnunciationSearch(string title, string description, string biblio){
+	this->title = title;
+	this->description = description;
+	this->biblio = biblio;
+}
+
