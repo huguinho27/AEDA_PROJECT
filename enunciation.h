@@ -10,6 +10,7 @@ protected:
 	string title, description;
 	vector <string> years;
 	vector <vector <Student>> studentsByYear;
+
 public:
 	Enunciation(string title, string description);
 	string getTitle() const;
@@ -21,6 +22,22 @@ public:
 	void addYear(string newYear);
 	void addStudents(vector <Student> students);
 	void addStudentsOfYear(string newYear, vector <Student> students);
+};
+
+
+class EnunciationSearch
+{
+
+};
+
+class EnunciationAnalysis
+{
+
+};
+
+class EnunciationDevelopement
+{
+
 };
 
 
