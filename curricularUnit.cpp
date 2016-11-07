@@ -15,14 +15,22 @@ string curricularUnit::getName() const
 	return name;
 }
 
-string curricularUnit::getLectureTeacher() const
+Person curricularUnit::getLectureTeacher() const
 {
 	return lectureTeacher;
 }
 
 vector<Student> curricularUnit::getStudents() const
 {
-	return students;
+	vector<Student> end;
+	for (unsigned int i = 0; i < occurences.size();i++)
+	{
+		for (unsigned int k = 0; k < occurences[i].getStudents().size();k++)
+		{
+			end.push_back(occurences[i].getStudents()[k]);
+		}
+	}
+	return end;
 }
 
 vector<Enunciation> curricularUnit::getEnunciations() const
