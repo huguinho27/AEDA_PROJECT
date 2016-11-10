@@ -26,12 +26,12 @@ public:
 };
 
 
-class EnunciationSearch: public Enunciation
+class EnunciationResearch: public Enunciation
 {
 	protected:
 	string biblio;
 	public:
-	EnunciationSearch(string title, string description, string biblio);
+	EnunciationReeearch(string title, string description, string biblio);
 	string getBiblio();
 };
 
