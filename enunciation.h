@@ -3,7 +3,8 @@
 
 using namespace std;
 #include <iostream>
-//#include <vector>
+#include "student.h"
+#include <vector>
 
 class Enunciation
 {
