@@ -1,10 +1,14 @@
 #ifndef ENUNCIATION_H
 #define ENUNCIATION_H
 
-using namespace std;
+
 #include <iostream>
-#include "student.h"
+#include <string>
 #include <vector>
+#include <fstream>
+#include "student.h"
+
+using namespace std;
 
 class Enunciation
 {
@@ -47,6 +51,10 @@ class EnunciationDevelopement: public Enunciation
 
 };
 
+
+void generateEnunciation();
+
+void saveEnunciation();
 
 
 #endif /* ENUNCIATION_H */
