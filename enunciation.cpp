@@ -85,14 +85,15 @@ void saveEnunciation(Enunciation enun){
 	string title = enun.getTitle();
 	string description = enun.getDescription();
 	vector <string> years = enun.getYears();
+	unsigned int j = years.size();
+	j--;
 	  if (myfile.is_open())
 	  {
 	    myfile << title << ";";
 	    myfile << description << ";";
 	    for (size_t i = 0; i < years.size(); i++){
 	    	myfile << years[i];
-	    	unsigned int j = years.size();
-	    	j--;
+
 	    	if (i != j){
 	    		myfile << ";";
 	    	}
