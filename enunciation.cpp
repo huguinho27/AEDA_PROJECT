@@ -47,7 +47,7 @@ void Enunciation::addStudentsOfYear(string newYear, vector <Student> students){
 }
 
 
-EnunciationSearch::EnunciationSearch(string title, string description, string biblio){
+EnunciationResearch::EnunciationResearch(string title, string description, string biblio){
 	this->title = title;
 	this->description = description;
 	this->biblio = biblio;
