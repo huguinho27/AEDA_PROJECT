@@ -2,25 +2,25 @@
 
 using namespace std;
 
-curricularUnit::curricularUnit(string name, string lectureTeacher, Student s, float ECTSCredits)
+/*curricularUnit::curricularUnit(string name, string lectureTeacher, Student s, float ECTSCredits)
 {
 	this->name = name;
 	this->lectureTeacher = lectureTeacher;
 	this->ECTSCredits = ECTSCredits;
 	students.push_back(s);
-}
+}*/
 
 string curricularUnit::getName() const
 {
 	return name;
 }
 
-Person curricularUnit::getLectureTeacher() const
+/*Person curricularUnit::getLectureTeacher() const
 {
 	return lectureTeacher;
-}
+}*/
 
-vector<Student> curricularUnit::getStudents() const
+/*vector<Student> curricularUnit::getStudents() const
 {
 	vector<Student> end;
 	for (unsigned int i = 0; i < occurences.size();i++)
@@ -31,7 +31,7 @@ vector<Student> curricularUnit::getStudents() const
 		}
 	}
 	return end;
-}
+}*/
 
 vector<Enunciation> curricularUnit::getEnunciations() const
 {
@@ -43,10 +43,10 @@ float curricularUnit::getECTSCredits() const
 	return ECTSCredits;
 }
 
-int curricularUnit::getNumberStudents() const
+/*int curricularUnit::getNumberStudents() const
 {
 	return students.size();
-}
+}*/
 
 void curricularUnit::setName(string newName)
 {
@@ -64,9 +64,4 @@ void curricularUnit::addEnunciations(vector<Enunciation> multipleEnun)
 	{
 		enunciations.push_back(multipleEnun[i]);
 	}
-}
-
-void curricularUnit::setLectureTeacher(string newTeacher)
-{
-	lectureTeacher = newTeacher;
 }

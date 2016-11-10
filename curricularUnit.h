@@ -5,21 +5,19 @@ using namespace std;
 #include <iostream>
 #include <vector>
 #include "enunciation.h"
-#include "student.h"
 #include "occurrence.h"
 
 class curricularUnit
 {
 	string name;
 	float ECTSCredits;
-	Person lectureTeacher;
+	//Person lectureTeacher;
 	vector<Enunciation> enunciations;
 	vector<Occurrence> occurrences;
 public:
-	curricularUnit(string name, Person lectureTeacher, float ECTSCredits);
+	curricularUnit(string name, /*Person lectureTeacher,*/ float ECTSCredits);
 	string getName() const;
-	Person getLectureTeacher() const;
-	vector<Student> getStudents() const;
+	//Person getLectureTeacher() const;
 	vector<Enunciation> getEnunciations() const;
 	float getECTSCredits() const;
 	int getNumberStudents() const;

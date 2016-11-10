@@ -2,6 +2,10 @@
 #define GROUPPROJECT_H
 #include <fstream>
 #include <iostream>
+
+#include "enunciation.h"
+#include "student.h"
+
 using namespace std;
 
 class groupProject
@@ -14,4 +18,5 @@ public:
 	Enunciation getEnunciation() const;
 	fstream getTextFile() const;
 };
+
 #endif
