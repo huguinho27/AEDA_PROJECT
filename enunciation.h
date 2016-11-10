@@ -11,19 +11,16 @@ class Enunciation
 protected:
 	string title, description;
 	vector <string> years;
-	vector <vector <Student>> studentsByYear;
 
 public:
 	Enunciation(string title, string description);
 	string getTitle() const;
 	string getDescription() const;
 	vector <string> getYears();
-	vector <vector <Student>> getStudentsByYear();
 	void setTittle(string newTitle);
 	void setDescription(string newDescription);
 	void addYear(string newYear);
-	void addStudents(vector <Student> students);
-	void addStudentsOfYear(string newYear, vector <Student> students);
+
 };
 
 
@@ -32,7 +29,7 @@ class EnunciationResearch: public Enunciation
 	protected:
 	string biblio;
 	public:
-	EnunciationReeearch(string title, string description, string biblio);
+	EnunciationResearch(string title, string description, string biblio);
 	string getBiblio();
 };
 
