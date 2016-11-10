@@ -20,10 +20,6 @@ vector <string> Enunciation::getYears(){
 	return years;
 }
 
-vector <vector <Student>> Enunciation::getStudentsByYear(){
-	return studentsByYear;
-}
-
 
 void Enunciation::setTittle(string newTitle){
 	title = newTitle;
@@ -37,14 +33,6 @@ void Enunciation::addYear(string newYear){
 	years.push_back(newYear);
 }
 
-void Enunciation::addStudents(vector <Student> students){
-	studentsByYear.push_back(students);
-}
-
-void Enunciation::addStudentsOfYear(string newYear, vector <Student> students){
-	addYear(newYear);
-	addStudents(students);
-}
 
 
 EnunciationResearch::EnunciationResearch(string title, string description, string biblio){
@@ -52,4 +40,13 @@ EnunciationResearch::EnunciationResearch(string title, string description, strin
 	this->description = description;
 	this->biblio = biblio;
 }
+
+
+EnunciationAnalysis::EnunciationAnalysis(string title, string description, string repos){
+	this->title = title;
+	this->description = description;
+	this->repos = repos;
+}
+
+
 
