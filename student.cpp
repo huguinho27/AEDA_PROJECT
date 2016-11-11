@@ -3,32 +3,47 @@
 
 using namespace std;
 
-int Student::idgeneral = 1000;
+/* Person */
 
-Student::Student(string name){
+int Person::idgeneral = 1000;
+
+Person::Person(string name){
 	this->id = idgeneral;
 	idgeneral++;
 	this->name = name;
 }
 
-int Student::getId() const {
+int Person::getId() const {
 	return id;
 }
 
-string Student::getName() const {
+string Person::getName() const {
 	return name;
 }
 
-vector<curricularUnit *> Student::getCurricularUnits() {
+vector<curricularUnit *> Person::getCurricularUnits() {
 	return currUnits;
 }
+
+void Person::setName(string newName) {
+	name = newName;
+}
+
+void Person::setCurricularUnit(curricularUnit *unit) {
+	//TODO exception CurricularUnitExists
+	currUnits.push_back(unit);
+}
+
+/* Student */
+
+Student::Student(string name): Person(name){}
 
 vector<double> Student::getMarks() {
 	return marks;
 }
 
 double Student::getMark(curricularUnit *unit) {
-	for (unsigned int i=0; i<currUnits.size(); i++){
+	for (unsigned int i=0; i< currUnits.size(); i++){
 		if (currUnits[i]==unit) {
 			return marks[i];
 		}
@@ -48,13 +63,8 @@ double Student::getMedia() {
 	return (sum/num);
 }
 
-void Student::setName(string newName) {
-	name = newName;
-}
-
-void Student::setCurricularUnit(curricularUnit *unit) {
-	//TODO exception CurricularUnitExists
-	currUnits.push_back(unit);
+void Student::setCurricularUnit(curricularUnit *unit){
+	Person::setCurricularUnit(unit);
 	marks.push_back(0);
 }
 
@@ -67,3 +77,6 @@ void Student::setMark(curricularUnit *unit, double mark){
 	}
 }
 
+/* Professor */
+
+Professor::Professor(string name): Person(name){}
