@@ -14,6 +14,7 @@ class groupProject
 	Enunciation enunciation;
 	fstream textFile;
 public:
+	groupProject();
 	groupProject(vector<Student> studentsIN, Enunciation enun, fstream file);
 	Enunciation getEnunciation() const;
 	fstream getTextFile() const;

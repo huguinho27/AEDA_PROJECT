@@ -1,8 +1,10 @@
 #include "groupProject.h"
 
+groupProject::groupProject(){};
+
 groupProject::groupProject(vector<Student> studentsIN, Enunciation enun, fstream file)
 {
-	//students = studentsIN;
+	students = studentsIN;
 	enunciation = enun;
 	textFile = file;
 }

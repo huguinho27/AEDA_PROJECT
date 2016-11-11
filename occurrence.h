@@ -12,6 +12,7 @@ class Occurrence
 	string schoolYear;
 	vector<groupProject> projects;
 public:
+	Occurrence();
 	Occurrence(string schoolYear/*, vector<Student> studentsIN*/);
 	//vector<Student> getStudents() const;
 	vector<groupProject> getProjects() const;

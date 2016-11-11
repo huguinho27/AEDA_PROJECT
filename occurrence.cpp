@@ -2,6 +2,8 @@
 
 using namespace std;
 
+Occurrence::Occurrence(){};
+
 Occurrence::Occurrence(string schoolYear/*, vector<Student> studentsIN*/)
 {
 	this->schoolYear = schoolYear;
