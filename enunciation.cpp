@@ -63,16 +63,14 @@ void generateEnunciation(){
 
 	while (!myfile.eof())
 		{
-			getline(myfile, line);
 			stringstream linestream(line);
-			string data;
-
-			linestream >> title;
-
-			getline(linestream, data, ';');
-			linestream >> description;
-			while (getline(linestream, data, ';')){
-			linestream >> year;
+		
+			getline(linestream, title, ';');
+			
+			getline(linestream, description, ';');
+			
+			while (getline(linestream, year, ';')){
+			
 			years.push_back(year);
 			}
 		}
