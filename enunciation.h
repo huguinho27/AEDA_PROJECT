@@ -17,7 +17,7 @@ protected:
 	vector <string> years;
 
 public:
-	Enunciation(string title, string description);
+	Enunciation(string title, string description, vector <string> years);
 	string getTitle() const;
 	string getDescription() const;
 	vector <string> getYears();
