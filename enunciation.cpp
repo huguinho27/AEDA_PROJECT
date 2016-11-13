@@ -2,9 +2,10 @@
 
 using namespace std;
 
-Enunciation::Enunciation(string title, string description){
+Enunciation::Enunciation(string title, string description, vector <string> years){
 	this->title = title;
 	this->description = description;
+	this->years = years;
 }
 
 string Enunciation::getTitle() const{
@@ -70,9 +71,11 @@ void generateEnunciation(){
 			getline(linestream, description, ';');
 			
 			while (getline(linestream, year, ';')){
-			
 			years.push_back(year);
 			}
+		
+		Enunciation(title, description, years);
+		
 		}
 	myfile.close();
 }
