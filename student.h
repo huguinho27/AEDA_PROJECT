@@ -13,15 +13,15 @@ protected:
 	int id;
 	int static idgeneral;
 	string name;
-	vector<curricularUnit *> currUnits;
+	vector<string> currUnits;
 public:
 	Person(string name);
 	virtual ~Person(){};
 	int getId() const;
 	string getName() const;
-	vector<curricularUnit *> getCurricularUnits();
+	vector<string> getCurricularUnits();
 	void setName(string newName);
-	virtual void setCurricularUnit(curricularUnit *unit);
+	virtual void setCurricularUnit(string unit);
 };
 
 
@@ -31,10 +31,10 @@ public:
 	Student(string name);
 	virtual ~Student(){};
 	vector<double> getMarks();
-	double getMark(curricularUnit *unit);
+	double getMark(string unit);
 	double getMedia();
-	void setCurricularUnit(curricularUnit *unit);
-	void setMark(curricularUnit *unit, double mark);
+	void setCurricularUnit(string unit);
+	void setMark(string unit, double mark);
 };
 
 

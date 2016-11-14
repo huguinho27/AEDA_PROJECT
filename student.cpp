@@ -21,7 +21,7 @@ string Person::getName() const {
 	return name;
 }
 
-vector<curricularUnit *> Person::getCurricularUnits() {
+vector<string> Person::getCurricularUnits() {
 	return currUnits;
 }
 
@@ -29,7 +29,7 @@ void Person::setName(string newName) {
 	name = newName;
 }
 
-void Person::setCurricularUnit(curricularUnit *unit) {
+void Person::setCurricularUnit(string unit) {
 	//TODO exception CurricularUnitExists
 	currUnits.push_back(unit);
 }
@@ -42,7 +42,7 @@ vector<double> Student::getMarks() {
 	return marks;
 }
 
-double Student::getMark(curricularUnit *unit) {
+double Student::getMark(string unit) {
 	for (unsigned int i=0; i< currUnits.size(); i++){
 		if (currUnits[i]==unit) {
 			return marks[i];
@@ -63,12 +63,12 @@ double Student::getMedia() {
 	return (sum/num);
 }
 
-void Student::setCurricularUnit(curricularUnit *unit){
+void Student::setCurricularUnit(string unit){
 	Person::setCurricularUnit(unit);
 	marks.push_back(0);
 }
 
-void Student::setMark(curricularUnit *unit, double mark){
+void Student::setMark(string unit, double mark){
 	for (unsigned int i=0; i<currUnits.size(); i++){
 		if (currUnits[i]== unit){
 			marks[i]=mark;
