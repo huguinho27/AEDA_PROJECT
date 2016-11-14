@@ -5,16 +5,17 @@ using namespace std;
 
 #include <iostream>
 #include <vector>
-#include "enunciation.h"
 #include "curricularUnit.h"
 
-class Person{
+class Person
+{
 protected:
 	int id;
 	int static idgeneral;
 	string name;
 	vector<string> currUnits;
 public:
+	Person();
 	Person(string name);
 	virtual ~Person(){};
 	int getId() const;
@@ -28,6 +29,7 @@ public:
 class Student: public Person{
 	vector<double> marks;
 public:
+	Student();
 	Student(string name);
 	virtual ~Student(){};
 	vector<double> getMarks();
@@ -45,18 +47,9 @@ public:
 };
 
 
-class CurricularUnitExists{
-	string unit;
+/*class CurricularUnitExists{
 public:
-	CurricularUnitExists(string unit): unit(unit) {}
-};
-
-class NoCurricularUnit{
-	string unit;
-public:
-	NoCurricularUnit(string unit): unit(unit) {}
-};
-
-
-
+	CurricularUnitExists(curricularUnit unit): nome(nm) {}
+	string getNome() const { return nome; }
+};*/
 #endif /* STUDENT_H */

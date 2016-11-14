@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <vector>
+
 #include "groupProject.h"
 
 using namespace std;
@@ -13,10 +14,7 @@ class Occurrence
 	vector<groupProject> projects;
 public:
 	Occurrence();
-	Occurrence(string schoolYear/*, vector<Student> studentsIN*/);
-	//vector<Student> getStudents() const;
-	vector<groupProject> getProjects() const;
-
+	Occurrence(string schoolYear);
 };
 
 #endif

@@ -4,12 +4,7 @@ using namespace std;
 
 Occurrence::Occurrence(){};
 
-Occurrence::Occurrence(string schoolYear/*, vector<Student> studentsIN*/)
+Occurrence::Occurrence(string schoolYear)
 {
 	this->schoolYear = schoolYear;
-}
-
-vector<groupProject> Occurrence::getProjects() const
-{
-	return projects;
 }

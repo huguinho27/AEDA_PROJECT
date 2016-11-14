@@ -2,6 +2,8 @@
 
 using namespace std;
 
+Enunciation::Enunciation(){};
+
 Enunciation::Enunciation(string title, string description, vector <string> years){
 	this->title = title;
 	this->description = description;

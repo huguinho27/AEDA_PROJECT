@@ -6,7 +6,8 @@
 #include <string>
 #include <vector>
 #include <fstream>
-#include "student.h"
+#include <cstdlib>
+#include <sstream>
 
 using namespace std;
 
@@ -17,6 +18,7 @@ protected:
 	vector <string> years;
 
 public:
+	Enunciation();
 	Enunciation(string title, string description, vector <string> years);
 	string getTitle() const;
 	string getDescription() const;
@@ -26,7 +28,6 @@ public:
 	void addYear(string newYear);
 
 };
-
 
 class EnunciationResearch: public Enunciation
 {

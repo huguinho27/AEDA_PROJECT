@@ -1,25 +1,25 @@
-/*#include "curricularUnit.h"
- #include "enunciation.h"
- #include "student.h"*/
 #include <iostream>
+#include <vector>
+#include "student.h"
+#include "curricularUnit.h"
 
 using namespace std;
 
 class general
 {
-	/*vector<curricularUnit> curricularUnits;
-	vector<Enunciation> enunciations;
-	vector<Student> students;*/
+	vector<Student> students;
+	vector<curricularUnit> currs;
 public:
 	general();
 	void MainMenu();
-
 };
+
+general::general(){};
 
 void general::MainMenu()
 {
 	int option;
-	cout << "ENUNCIATIONS MANAGEMENT OF FEUP\n";
+	cout << "ENUNCIATIONS MANAGEMENT OF FEUP\n\n";
 	cout << "1. Browse Curricular Units\n";
 	cout << "2. Browse Enunciations\n";
 	cout << "3. Browse Teachers/Students\n";
@@ -31,11 +31,11 @@ void general::MainMenu()
 	switch (option)
 	{
 	case 1:
-		cout << "ola\n";
-		//CurricularUnitInterface();
+		//cout << "2" << endl;
 		break;
 	}
 }
+
 int main()
 {
 	general g;

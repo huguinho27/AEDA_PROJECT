@@ -4,6 +4,7 @@
 using namespace std;
 #include <iostream>
 #include <vector>
+
 #include "enunciation.h"
 #include "occurrence.h"
 
@@ -24,7 +25,6 @@ public:
 	int getNumberStudents() const;
 	void setName(string newName);
 	void addEnunciations(Enunciation e);
-	void addEnunciations(vector<Enunciation> multipleEnun);
 	void setLectureTeacher(string newTeacher);
 };
 

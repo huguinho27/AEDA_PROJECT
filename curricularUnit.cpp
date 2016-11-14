@@ -40,11 +40,3 @@ void curricularUnit::addEnunciations(Enunciation e)
 {
 	enunciations.push_back(e);
 }
-
-void curricularUnit::addEnunciations(vector<Enunciation> multipleEnun)
-{
-	for (unsigned int i = 0; i < multipleEnun.size();i++)
-	{
-		enunciations.push_back(multipleEnun[i]);
-	}
-}
