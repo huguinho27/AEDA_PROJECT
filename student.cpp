@@ -30,7 +30,9 @@ void Person::setName(string newName) {
 }
 
 void Person::setCurricularUnit(string unit) {
-	//TODO exception CurricularUnitExists
+	for (unsigned int i=0; i<currUnits.size(); i++){
+		if (currUnits[i]==unit) throw CurricularUnitExists(unit);
+	}
 	currUnits.push_back(unit);
 }
 
@@ -47,8 +49,8 @@ double Student::getMark(string unit) {
 		if (currUnits[i]==unit) {
 			return marks[i];
 		}
-		//TODO exception NoCurricularUnit
 	}
+	throw NoCurricularUnit(unit);
 }
 
 double Student::getMedia() {
@@ -69,12 +71,15 @@ void Student::setCurricularUnit(string unit){
 }
 
 void Student::setMark(string unit, double mark){
+	bool check=false;
 	for (unsigned int i=0; i<currUnits.size(); i++){
 		if (currUnits[i]== unit){
 			marks[i]=mark;
+			check=true;
+			break;
 		}
-		//TODO exception NoCurricularUnit
 	}
+	if (!check) throw NoCurricularUnit(unit);
 }
 
 /* Professor */

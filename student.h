@@ -45,9 +45,18 @@ public:
 };
 
 
-/*class CurricularUnitExists{
+class CurricularUnitExists{
+	string unit;
 public:
-	CurricularUnitExists(curricularUnit unit): nome(nm) {}
-	string getNome() const { return nome; }
-};*/
+	CurricularUnitExists(string unit): unit(unit) {}
+};
+
+class NoCurricularUnit{
+	string unit;
+public:
+	NoCurricularUnit(string unit): unit(unit) {}
+};
+
+
+
 #endif /* STUDENT_H */
