@@ -12,11 +12,11 @@ class groupProject
 {
 	Person teacher;
 	vector<Student> students;
+	string textFile;
 public:
-	fstream textFile;
 	groupProject();
 	groupProject(vector<Student> studentsIN, Person techerIN);
-	fstream getTextFile();
+	string getTextFile();
 };
 
 #endif

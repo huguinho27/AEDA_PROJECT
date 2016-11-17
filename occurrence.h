@@ -3,9 +3,7 @@
 
 #include <iostream>
 #include <vector>
-
 #include "groupProject.h"
-
 using namespace std;
 
 class Occurrence
@@ -15,6 +13,7 @@ class Occurrence
 public:
 	Occurrence();
 	Occurrence(string schoolYear);
+	string getYear() const;
 };
 
 #endif

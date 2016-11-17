@@ -51,6 +51,7 @@ double Student::getMark(string title)
 			return marks[i];
 		}
 	}
+	return -1;
 }
 
 void Student::setMark(double mark, string title)

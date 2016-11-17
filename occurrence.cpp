@@ -8,3 +8,8 @@ Occurrence::Occurrence(string schoolYear)
 {
 	this->schoolYear = schoolYear;
 }
+
+string Occurrence::getYear() const
+{
+	return schoolYear;
+}

@@ -9,7 +9,6 @@
 #include <cstdlib>
 #include <sstream>
 #include "occurrence.h"
-
 using namespace std;
 
 class Enunciation
@@ -23,7 +22,7 @@ public:
 	string getTitle() const;
 	string getDescription() const;
 	vector <Occurrence> getYears();
-	void setTittle(string newTitle);
+	void setTitle(string newTitle);
 	void setDescription(string newDescription);
 	void addYear(Occurrence newYear);
 

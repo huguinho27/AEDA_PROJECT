@@ -1,10 +1,11 @@
 #ifndef STUDENT_H
 #define STUDENT_H
 
-using namespace std;
+
 
 #include <iostream>
 #include <vector>
+using namespace std;
 
 class Person
 {

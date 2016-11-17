@@ -1,8 +1,12 @@
 #include "enunciation.h"
+#include "occurrence.h"
 
 using namespace std;
 
-Enunciation::Enunciation(){};
+Enunciation::Enunciation()
+{
+}
+;
 
 Enunciation::Enunciation(string title, string description)
 {
@@ -20,17 +24,18 @@ string Enunciation::getDescription() const
 	return description;
 }
 
-vector <Occurrence> Enunciation::getYears()
+vector<Occurrence> Enunciation::getYears()
 {
 	return years;
 }
 
-void Enunciation::setTittle(string newTitle)
+void Enunciation::setTitle(string newTitle)
 {
 	title = newTitle;
 }
 
-void Enunciation::setDescription(string newDescription){
+void Enunciation::setDescription(string newDescription)
+{
 	description = newDescription;
 }
 
@@ -46,7 +51,6 @@ EnunciationResearch::EnunciationResearch(string title, string description, strin
 	this->biblio = biblio;
 }
 
-
 EnunciationAnalysis::EnunciationAnalysis(string title, string description, string repos)
 {
 	this->title = title;
@@ -57,7 +61,7 @@ EnunciationAnalysis::EnunciationAnalysis(string title, string description, strin
 void generateEnunciation()
 {
 	string line;
-	ifstream myfile ("enunciation.txt");
+	ifstream myfile("enunciation.txt");
 
 	if (!myfile)
 	{
@@ -68,89 +72,90 @@ void generateEnunciation()
 	string title;
 	string description;
 	string year;
-	vector <string> years;
+	vector<string> years;
 
 	while (!myfile.eof())
+	{
+		stringstream linestream(line);
+
+		getline(linestream, title, ';');
+
+		getline(linestream, description, ';');
+
+		while (getline(linestream, year, ';'))
 		{
-			stringstream linestream(line);
-		
-			getline(linestream, title, ';');
-			
-			getline(linestream, description, ';');
-			
-			while (getline(linestream, year, ';')){
 			years.push_back(year);
-			}
-		
-		Enunciation(title, description, years);
-		
 		}
+
+		Enunciation(title, description);
+
+	}
 	myfile.close();
 }
 
-
 void saveEnunciation(Enunciation enun)
 {
-	ofstream myfile ("enunciation.txt");
+	ofstream myfile("enunciation.txt");
 	string title = enun.getTitle();
 	string description = enun.getDescription();
-	vector <string> years = enun.getYears();
+	vector<Occurrence> years = enun.getYears();
 	unsigned int j = years.size();
 	j--;
-	  if (myfile.is_open())
-	  {
-	    myfile << title << ";";
-	    myfile << description << ";";
-	    for (size_t i = 0; i < years.size(); i++){
-	    	myfile << years[i];
+	if (myfile.is_open())
+	{
+		myfile << title << ";";
+		myfile << description << ";";
+		for (size_t i = 0; i < years.size(); i++)
+		{
+			myfile << years[i].getYear();
 
-	    	if (i != j)
-	    	{
-	    		myfile << ";";
-	    	}
-	    }
-	    myfile.close();
-	  }
-	  else cout << "Unable to open file enunciation.txt";
+			if (i != j)
+			{
+				myfile << ";";
+			}
+		}
+		myfile.close();
+	} else
+		cout << "Unable to open file enunciation.txt";
 }
 
 /*
-void Transportes::fromFilesToVecItens()
-{
-	itens.clear();
-	ifstream inFile("itens.txt");
+ void Transportes::fromFilesToVecItens()
+ {
+ itens.clear();
+ ifstream inFile("itens.txt");
 
-	if (!inFile)
-	{
-		cerr << "Unable to open file itens.txt";
-		exit(1);
-	}
+ if (!inFile)
+ {
+ cerr << "Unable to open file itens.txt";
+ exit(1);
+ }
 
-	string line;
-	int numfatura;
-	double valor, peso;
-	string nomedestino;
+ string line;
+ int numfatura;
+ double valor, peso;
+ string nomedestino;
 
-	while (!inFile.eof())
-	{
-		getline(inFile, line);
-		if(line == "") continue;
-		stringstream linestream(line);
-		string data;
+ while (!inFile.eof())
+ {
+ getline(inFile, line);
+ if(line == "") continue;
+ stringstream linestream(line);
+ string data;
 
-		linestream >> nomedestino;
+ linestream >> nomedestino;
 
-		getline(linestream, data, ';');
-		linestream >> valor;
-		getline(linestream, data, ';');
-		linestream >> peso;
-		getline(linestream, data, ';');
-		linestream >> numfatura;
+ getline(linestream, data, ';');
+ linestream >> valor;
+ getline(linestream, data, ';');
+ linestream >> peso;
+ getline(linestream, data, ';');
+ linestream >> numfatura;
 
-		Destino d("", 0, 0, 0);
-		Item i(nomedestino, valor, peso, numfatura, d);
-		itens.push_back(i);
-	}
-	inFile.close();
-}
-*/
+ Destino d("", 0, 0, 0);
+ Item i(nomedestino, valor, peso, numfatura, d);
+ itens.push_back(i);
+ }
+ inFile.close();
+ }
+ */
