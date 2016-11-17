@@ -15,8 +15,10 @@ class groupProject
 	string textFile;
 public:
 	groupProject();
-	groupProject(vector<Student> studentsIN, Person techerIN);
+	groupProject(vector<Student> studentsIN, Person techerIN, string tFile);
 	string getTextFile();
+	bool addStudent(Student s);
+	vector<Student> getStudents() const;
 };
 
 #endif

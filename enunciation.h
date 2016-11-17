@@ -25,6 +25,7 @@ public:
 	void setTitle(string newTitle);
 	void setDescription(string newDescription);
 	void addYear(Occurrence newYear);
+	vector <Occurrence> getOccurrences() const;
 
 };
 

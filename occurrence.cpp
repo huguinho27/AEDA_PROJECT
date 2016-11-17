@@ -13,3 +13,8 @@ string Occurrence::getYear() const
 {
 	return schoolYear;
 }
+
+vector<groupProject> Occurrence::getGroupProjects() const
+{
+	return projects;
+}

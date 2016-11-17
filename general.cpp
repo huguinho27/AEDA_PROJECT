@@ -16,10 +16,14 @@ public:
 	void browseTechersStudentMenu();
 	void browseEnunciationMenu();
 	void displayLectureTeacher();
-	void browseOccurrences();
 	void createEnunciationMenu();
 	void listEnunciations();
-
+	void findTeacher();
+	void findStudent();
+	void listStudents();
+	void listTeachers();
+	void addTeacher();
+	void addStudent();
 };
 
 general::general()
@@ -65,9 +69,67 @@ void general::createEnunciationMenu()
 	return;
 }
 
-void general::browseOccurrences()
+void general::findTeacher()
 {
 	return;
+}
+
+void general::findStudent()
+{
+	return;
+}
+
+void general::listStudents()
+{
+	return;
+}
+
+void general::listTeachers()
+{
+	return;
+}
+
+void general::addTeacher()
+{
+	return;
+}
+
+void general::addStudent()
+{
+	string input;
+	system("cls");
+
+	cout << "Please enter the name of the student\n";
+	cout << ">> ";
+	cin.clear();
+	cin >> input;
+	cout << "The student will be added to an existing group project with less than 3 members\n";
+	sleep(1);
+
+	Student s(input);
+	bool ctrl = false;
+
+	for (unsigned int i = 0; i < enunciations.size();i++)
+	{
+		for (unsigned int k = 0 ; k < enunciations[i].getOccurrences().size();k++)
+		{
+			vector<Occurrence> occ = enunciations[i].getOccurrences();
+			for (unsigned int j = 0 ; i < occ[k].getGroupProjects().size();j++)
+			{
+				if (occ[k].getGroupProjects()[j].addStudent(s))
+				{
+					occ[k].getGroupProjects()[j].getStudents()[occ[k].getGroupProjects()[j].getStudents().size()-1].addNewTitle(enunciations[i].getTitle());
+					ctrl = true;
+				}
+			}
+		}
+	}
+
+	if (ctrl)
+		cout << "The student was added with success\n";
+	else
+		cout << "Was not possible to add this student\n";
+	sleep(1);
 }
 
 void general::browseTechersStudentMenu()
@@ -79,21 +141,31 @@ void general::browseTechersStudentMenu()
 
 		cout << "STUDENTS/TEACHERS MANAGEMENT\n\n";
 		cout << "1. Find a teacher\n";
-		cout << "2. Find a studennd a teact\n\n";
-		cout << "3. List the teacher\n";
-		cout << "4. Add teacher\n";
-		cout << ". Back to main menu\n";
+		cout << "2. Find a student\n";
+		cout << "3. List teachers\n";
+		cout << "4. List students\n";
+		cout << "5. Add a new teacher\n";
+		cout << "6. Add a new student\n";
+		cout << "7. Back to main menu\n";
 
 		cout << ">> ";
 		getline(cin, input);
 		cin.clear();
-	} while (!verifyGetline(1, 2, input));
+	} while (!verifyGetline(1, 7, input));
 
 	if (input == "1")
-		listEnunciations();
+		findTeacher();
 	else if (input == "2")
-		createEnunciationMenu();
+		findStudent();
 	else if (input == "3")
+		listTeachers();
+	else if (input == "4")
+		listStudents();
+	else if (input == "5")
+		addTeacher();
+	else if (input == "6")
+		addStudent();
+	else if (input == "7")
 		MainMenu();
 
 	return;
@@ -135,8 +207,7 @@ void general::MainMenu()
 		cout << "ENUNCIATIONS MANAGEMENT OF FEUP\n\n";
 		cout << "1. Browse Enunciations\n";
 		cout << "2. Browse Students\n";
-		cout << "3. Browse Occurrences\n\n";
-		cout << "4. Exit\n";
+		cout << "3. Exit\n";
 
 		cout << ">> ";
 		getline(cin, input);
@@ -148,8 +219,6 @@ void general::MainMenu()
 	else if (input == "2")
 		browseTechersStudentMenu();
 	else if (input == "3")
-		browseOccurrences();
-	else if (input == "4")
 		exit(0);
 }
 

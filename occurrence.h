@@ -14,6 +14,7 @@ public:
 	Occurrence();
 	Occurrence(string schoolYear);
 	string getYear() const;
+	vector<groupProject> getGroupProjects() const;
 };
 
 #endif

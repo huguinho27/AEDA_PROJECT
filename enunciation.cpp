@@ -119,6 +119,11 @@ void saveEnunciation(Enunciation enun)
 		cout << "Unable to open file enunciation.txt";
 }
 
+vector <Occurrence> Enunciation::getOccurrences() const
+{
+	return years;
+}
+
 /*
  void Transportes::fromFilesToVecItens()
  {
