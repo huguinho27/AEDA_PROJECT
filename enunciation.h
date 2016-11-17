@@ -8,6 +8,7 @@
 #include <fstream>
 #include <cstdlib>
 #include <sstream>
+#include "occurrence.h"
 
 using namespace std;
 
@@ -15,17 +16,16 @@ class Enunciation
 {
 protected:
 	string title, description;
-	vector <string> years;
-
+	vector <Occurrence> years;
 public:
 	Enunciation();
-	Enunciation(string title, string description, vector <string> years);
+	Enunciation(string title, string description);
 	string getTitle() const;
 	string getDescription() const;
-	vector <string> getYears();
+	vector <Occurrence> getYears();
 	void setTittle(string newTitle);
 	void setDescription(string newDescription);
-	void addYear(string newYear);
+	void addYear(Occurrence newYear);
 
 };
 

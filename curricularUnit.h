@@ -1,4 +1,4 @@
-#ifndef CURRICULARUNIT_H
+/*#ifndef CURRICULARUNIT_H
 #define CURRICULARUNIT_H
 
 using namespace std;
@@ -10,8 +10,6 @@ using namespace std;
 
 class curricularUnit
 {
-	string name;
-	float ECTSCredits;
 	string lectureTeacher;
 	vector<Enunciation> enunciations;
 	vector<Occurrence> occurrences;

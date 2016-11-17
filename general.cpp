@@ -2,15 +2,13 @@
 #include <vector>
 #include <unistd.h>
 #include <string>
-#include "student.h"
-#include "curricularUnit.h"
+#include "enunciation.h"
 
 using namespace std;
 
 class general
 {
-	vector<Student> students;
-	vector<curricularUnit> currs;
+	vector<Enunciation> enunciations;
 public:
 	general();
 	void MainMenu();
@@ -25,10 +23,7 @@ public:
 	void displayGroupProjects();
 };
 
-general::general()
-{
-}
-;
+general::general(){};
 
 /**
  * Checks if an input is a number and if it it between init and end values

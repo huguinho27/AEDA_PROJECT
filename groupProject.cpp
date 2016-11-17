@@ -2,13 +2,9 @@
 
 groupProject::groupProject(){};
 
-groupProject::groupProject(Enunciation enun)
+groupProject::groupProject(vector<Student> studentsIN, Person teacherIN)
 {
-	//students = studentsIN;
-	enunciation = enun;
-}
-
-Enunciation groupProject::getEnunciation() const
-{
-	return enunciation;
+	students = studentsIN;
+	teacher = teacherIN;
+	//textFile = fileIN;
 }

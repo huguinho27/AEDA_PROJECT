@@ -5,40 +5,32 @@ using namespace std;
 
 #include <iostream>
 #include <vector>
-#include "curricularUnit.h"
 
 class Person
 {
 protected:
-	int id;
-	int static idgeneral;
 	string name;
-	vector<string> currUnits;
 public:
 	Person();
 	Person(string name);
 	virtual ~Person(){};
-	int getId() const;
 	string getName() const;
-	vector<string> getCurricularUnits();
 	void setName(string newName);
-	virtual void setCurricularUnit(string unit);
 };
 
-
-class Student: public Person{
+class Student: public Person
+{
 	vector<double> marks;
+	vector<string> titleEnun;
 public:
 	Student();
 	Student(string name);
 	virtual ~Student(){};
 	vector<double> getMarks();
-	double getMark(string unit);
-	double getMedia();
-	void setCurricularUnit(string unit);
-	void setMark(string unit, double mark);
+	double getMark(string title);
+	void setMark(double mark, string title);
+	void addNewTitle(string title);
 };
-
 
 class Professor: public Person{
 public:
@@ -46,10 +38,4 @@ public:
 	virtual ~Professor(){};
 };
 
-
-/*class CurricularUnitExists{
-public:
-	CurricularUnitExists(curricularUnit unit): nome(nm) {}
-	string getNome() const { return nome; }
-};*/
 #endif /* STUDENT_H */

@@ -1,4 +1,4 @@
-#include "curricularUnit.h"
+/*#include "curricularUnit.h"
 
 using namespace std;
 
@@ -39,4 +39,4 @@ void curricularUnit::setName(string newName)
 void curricularUnit::addEnunciations(Enunciation e)
 {
 	enunciations.push_back(e);
-}
+}*/

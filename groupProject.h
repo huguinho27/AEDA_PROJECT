@@ -4,19 +4,19 @@
 #include <fstream>
 #include <iostream>
 
-#include "enunciation.h"
+#include "student.h"
 
 using namespace std;
 
 class groupProject
 {
-	Enunciation enunciation;
+	Person teacher;
+	vector<Student> students;
 public:
 	fstream textFile;
 	groupProject();
-	groupProject(Enunciation enun);
-	Enunciation getEnunciation() const;
-	//fstream getTextFile() const;
+	groupProject(vector<Student> studentsIN, Person techerIN);
+	fstream getTextFile();
 };
 
 #endif

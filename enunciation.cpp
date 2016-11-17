@@ -4,27 +4,29 @@ using namespace std;
 
 Enunciation::Enunciation(){};
 
-Enunciation::Enunciation(string title, string description, vector <string> years){
+Enunciation::Enunciation(string title, string description)
+{
 	this->title = title;
 	this->description = description;
-	this->years = years;
 }
 
-string Enunciation::getTitle() const{
+string Enunciation::getTitle() const
+{
 	return title;
 }
 
-string Enunciation::getDescription() const{
+string Enunciation::getDescription() const
+{
 	return description;
 }
 
-
-vector <string> Enunciation::getYears(){
+vector <Occurrence> Enunciation::getYears()
+{
 	return years;
 }
 
-
-void Enunciation::setTittle(string newTitle){
+void Enunciation::setTittle(string newTitle)
+{
 	title = newTitle;
 }
 
@@ -32,33 +34,37 @@ void Enunciation::setDescription(string newDescription){
 	description = newDescription;
 }
 
-void Enunciation::addYear(string newYear){
+void Enunciation::addYear(Occurrence newYear)
+{
 	years.push_back(newYear);
 }
 
-
-EnunciationResearch::EnunciationResearch(string title, string description, string biblio){
+EnunciationResearch::EnunciationResearch(string title, string description, string biblio)
+{
 	this->title = title;
 	this->description = description;
 	this->biblio = biblio;
 }
 
 
-EnunciationAnalysis::EnunciationAnalysis(string title, string description, string repos){
+EnunciationAnalysis::EnunciationAnalysis(string title, string description, string repos)
+{
 	this->title = title;
 	this->description = description;
 	this->repos = repos;
 }
 
-
-void generateEnunciation(){
+void generateEnunciation()
+{
 	string line;
 	ifstream myfile ("enunciation.txt");
+
 	if (!myfile)
 	{
 		cerr << "Unable to open file enunciation.txt";
 		exit(1);
 	}
+
 	string title;
 	string description;
 	string year;
@@ -83,7 +89,8 @@ void generateEnunciation(){
 }
 
 
-void saveEnunciation(Enunciation enun){
+void saveEnunciation(Enunciation enun)
+{
 	ofstream myfile ("enunciation.txt");
 	string title = enun.getTitle();
 	string description = enun.getDescription();
@@ -97,7 +104,8 @@ void saveEnunciation(Enunciation enun){
 	    for (size_t i = 0; i < years.size(); i++){
 	    	myfile << years[i];
 
-	    	if (i != j){
+	    	if (i != j)
+	    	{
 	    		myfile << ";";
 	    	}
 	    }
