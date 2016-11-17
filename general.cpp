@@ -19,6 +19,10 @@ public:
 	void browseTechersStudentMenu();
 	void browseEnunciationMenu();
 	void browseCurricularMenu();
+	void listStudentTeacher();
+	void listEnunciations();
+	void displayLectureTeacher();
+	void displayGroupProjects();
 };
 
 general::general()
@@ -69,20 +73,40 @@ void general::browseEnunciationMenu()
 	return;
 }
 
+void general::listStudentTeacher()
+{
+	return;
+}
+
+void general::listEnunciations()
+{
+	return;
+}
+
+void general::displayLectureTeacher()
+{
+	return;
+}
+
+void general::displayGroupProjects()
+{
+	return;
+}
+
 void general::browseCurricularMenu()
 {
-	system("cls");
 	string input;
-
-	cout << "CURRICULAR UNITS MANAGEMENT\n\n";
-	cout << "1. List Students of a Curricular Unit\n";
-	cout << "2. List Enunciations of this Curricular Unit\n";
-	cout << "3. Show Lecture Teacher\n";
-	cout << "4. Show Group Projects\n";
-	cout << "5. Back to Main Menu\n";
-
 	do
 	{
+		system("cls");
+
+		cout << "CURRICULAR UNITS MANAGEMENT\n\n";
+		cout << "1. List Students of a Curricular Unit\n";
+		cout << "2. List Enunciations of this Curricular Unit\n";
+		cout << "3. Show Lecture Teacher\n";
+		cout << "4. Show Group Projects\n";
+		cout << "5. Back to Main Menu\n";
+
 		cout << ">> ";
 		getline(cin, input);
 		cin.clear();
@@ -92,25 +116,30 @@ void general::browseCurricularMenu()
 		listStudentTeacher();
 	else if (input == "2")
 		listEnunciations();
-
+	else if (input == "3")
+		displayLectureTeacher();
+	else if (input == "4")
+		displayGroupProjects();
+	else if (input == "5")
+		MainMenu();
 
 	return;
 }
 
 void general::MainMenu()
 {
-	system("cls");
 	string input;
-
-	cout << "ENUNCIATIONS MANAGEMENT OF FEUP\n\n";
-	cout << "1. Browse Curricular Units\n";
-	cout << "2. Browse Enunciations\n";
-	cout << "3. Browse Teachers / Students\n";
-	cout << "4. Browse Group Projects\n";
-	cout << "5. Exit Program\n";
-
 	do
 	{
+		system("cls");
+
+		cout << "ENUNCIATIONS MANAGEMENT OF FEUP\n\n";
+		cout << "1. Browse Curricular Units\n";
+		cout << "2. Browse Enunciations\n";
+		cout << "3. Browse Teachers / Students\n";
+		cout << "4. Browse Group Projects\n";
+		cout << "5. Exit Program\n";
+
 		cout << ">> ";
 		getline(cin, input);
 		cin.clear();
