@@ -1,0 +1,91 @@
+Welcome bla bla bla!
+
+
+					0. Enunciations
+					1. New enunciation
+
+
+---0							|	---1		-->	---0/1/2/3
+0. All enunciations					|	0. research		Enter the title of enunciation
+1. research						|	1. analysis		
+2. analysis						|	2. development		0. Set description
+3. development						|	3. other		1. New occurence (see 'new occurence')
+- Back							|				2. New reference/repository/...
+							|				- Back
+							|
+
+---0/1/2/3
+0. All enunciations/researches/...
+1. Were chosen by less than N groups
+2. Were chosen more than N years ago
+- Back
+
+
+
+---0 ('list of enunc')	| ---1					| ---2
+0. title 0		| Enter the maximum number of groups	| Enter the year when enunciations could be chosen the last time
+1. title 1		| (see 'list of enunc')			| (see 'list of enunc')
+2. title 2
+...
+- Back
+
+
+---0/1/2/...
+title
+description
+
+0. List of occurences
+1. List of group projects ???
+2. New occurence
+3. New reference/repository/...
+- Back
+
+
+---0		| ---1			| ---2 ('new occurence')    //check if year exists
+0. year 0	| (see 'list of proj')	| Enter the year
+1. year 1	|			| 0. New group project -> (see 'new project')
+2. year 2	|			| - Back
+...
+- Back
+
+
+---0/1/2/...		
+0. list of group projects	
+1. new group project		
+- Back			
+
+
+
+---0 ('list of proj')		| ---1 ('new project')
+0. name1, name2, name3 ..	| - Back
+1. name4 ..			| Enter the name of the student
+2. name5, name6 ..		| (see 'project menu')
+...				| 
+- Back
+
+
+---0/1/2/...
+name0 - mark0
+name1 - mark1
+name2 - mark2
+
+('project menu')
+0. new student //
+1. remove student
+2. set mark
+3. upload text file
+4. download file ???
+- Back
+
+
+---0				| ---1					| ---2				| ---3
+Enter the name of the student	| - Back				| - Back			| - Back
+				| 0. name0				| 0. name0			| Enter the name of file 
+0. Set mark			| 1. name1				| 1. name1
+- Back				| 2. name2 ..				| 2. name2 ..
+				| Enter the number of student to remove	| Enter the number of student
+									| Enter the mark
+
+
+---0
+Enter the mark
