@@ -21,7 +21,7 @@ Welcome bla bla bla!
 - Back
 
 
-
+//do the opposite
 ---0 ('list of enunc')	| ---1					| ---2
 0. title 0		| Enter the maximum number of groups	| Enter the year when enunciations could be chosen the last time
 1. title 1		| (see 'list of enunc')			| (see 'list of enunc')

@@ -13,17 +13,19 @@ public:
 	general();
 	void MainMenu();
 	bool verifyGetline(int init, int end, string input);
-	void browseGroupProjectMenu();
 	void browseTechersStudentMenu();
 	void browseEnunciationMenu();
-	void browseCurricularMenu();
-	void listStudentTeacher();
-	void listEnunciations();
 	void displayLectureTeacher();
-	void displayGroupProjects();
+	void browseOccurrences();
+	void createEnunciationMenu();
+	void listEnunciations();
+
 };
 
-general::general(){};
+general::general()
+{
+}
+;
 
 /**
  * Checks if an input is a number and if it it between init and end values
@@ -53,69 +55,72 @@ bool general::verifyGetline(int init, int end, string input)
 	return goodInput;
 }
 
-void general::browseGroupProjectMenu()
+void general::listEnunciations()
+{
+	return;
+}
+
+void general::createEnunciationMenu()
+{
+	return;
+}
+
+void general::browseOccurrences()
 {
 	return;
 }
 
 void general::browseTechersStudentMenu()
 {
+	string input;
+	do
+	{
+		system("cls");
+
+		cout << "STUDENTS/TEACHERS MANAGEMENT\n\n";
+		cout << "1. Find a teacher\n";
+		cout << "2. Find a studennd a teact\n\n";
+		cout << "3. List the teacher\n";
+		cout << "4. Add teacher\n";
+		cout << ". Back to main menu\n";
+
+		cout << ">> ";
+		getline(cin, input);
+		cin.clear();
+	} while (!verifyGetline(1, 2, input));
+
+	if (input == "1")
+		listEnunciations();
+	else if (input == "2")
+		createEnunciationMenu();
+	else if (input == "3")
+		MainMenu();
+
 	return;
 }
 
 void general::browseEnunciationMenu()
-{
-	return;
-}
-
-void general::listStudentTeacher()
-{
-	return;
-}
-
-void general::listEnunciations()
-{
-	return;
-}
-
-void general::displayLectureTeacher()
-{
-	return;
-}
-
-void general::displayGroupProjects()
-{
-	return;
-}
-
-void general::browseCurricularMenu()
 {
 	string input;
 	do
 	{
 		system("cls");
 
-		cout << "CURRICULAR UNITS MANAGEMENT\n\n";
-		cout << "1. List Students of a Curricular Unit\n";
-		cout << "2. List Enunciations of this Curricular Unit\n";
-		cout << "3. Show Lecture Teacher\n";
-		cout << "4. Show Group Projects\n";
-		cout << "5. Back to Main Menu\n";
+		cout << "ENUNCIATIONS MANAGEMENT\n\n";
+		cout << "1. List Enunciations\n";
+		cout << "2. Create an Enunciation\n\n";
+		cout << "3. Back to main menu\n";
 
 		cout << ">> ";
 		getline(cin, input);
 		cin.clear();
-	} while (!verifyGetline(1, 5, input));
+	} while (!verifyGetline(1, 2, input));
 
 	if (input == "1")
-		listStudentTeacher();
-	else if (input == "2")
 		listEnunciations();
+	else if (input == "2")
+		createEnunciationMenu();
 	else if (input == "3")
-		displayLectureTeacher();
-	else if (input == "4")
-		displayGroupProjects();
-	else if (input == "5")
 		MainMenu();
 
 	return;
@@ -127,28 +132,24 @@ void general::MainMenu()
 	do
 	{
 		system("cls");
-
 		cout << "ENUNCIATIONS MANAGEMENT OF FEUP\n\n";
-		cout << "1. Browse Curricular Units\n";
-		cout << "2. Browse Enunciations\n";
-		cout << "3. Browse Teachers / Students\n";
-		cout << "4. Browse Group Projects\n";
-		cout << "5. Exit Program\n";
+		cout << "1. Browse Enunciations\n";
+		cout << "2. Browse Students\n";
+		cout << "3. Browse Occurrences\n\n";
+		cout << "4. Exit\n";
 
 		cout << ">> ";
 		getline(cin, input);
 		cin.clear();
-	} while (!verifyGetline(1, 5, input));
+	} while (!verifyGetline(1, 3, input));
 
 	if (input == "1")
-		browseCurricularMenu();
-	else if (input == "2")
 		browseEnunciationMenu();
-	else if (input == "3")
+	else if (input == "2")
 		browseTechersStudentMenu();
+	else if (input == "3")
+		browseOccurrences();
 	else if (input == "4")
-		browseGroupProjectMenu();
-	else if (input == "5")
 		exit(0);
 }
 
