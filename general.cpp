@@ -26,10 +26,7 @@ public:
 	void addStudent();
 };
 
-general::general()
-{
-}
-;
+general::general(){};
 
 /**
  * Checks if an input is a number and if it it between init and end values
@@ -61,6 +58,10 @@ bool general::verifyGetline(int init, int end, string input)
 
 void general::listEnunciations()
 {
+	for (unsigned int i = 0; i < enunciations.size();i++)
+	{
+		//enunciations[i].
+	}
 	return;
 }
 
@@ -71,11 +72,112 @@ void general::createEnunciationMenu()
 
 void general::findTeacher()
 {
+	int a;
+	string input;
+	bool ctrl;
+	do
+	{
+		system("cls");
+		cout << "Please enter the name of the teacher OR " "back" " to return to main menu\n";
+		cout << ">> ";
+		cin.clear();
+		cin >> input;
+		sleep(1);
+		cout << "\n";
+
+		if (input == "back")
+		{
+			break;
+			ctrl = true;
+		}
+		ctrl = false;
+
+		for (unsigned int i = 0; i < enunciations.size(); i++)
+		{
+			for (unsigned int j = 0; j < enunciations[i].getOccurrences().size(); j++)
+			{
+				for (unsigned int k = 0; k < enunciations[i].getOccurrences()[j].getGroupProjects().size(); k++)
+				{
+					vector<groupProject> grp = enunciations[i].getOccurrences()[j].getGroupProjects();
+					for (unsigned int h = 0; h < grp[k].getStudents().size(); h++)
+					{
+						if (grp[k].getStudents()[h].getName() == input)
+							ctrl = true;
+					}
+				}
+			}
+		}
+
+		if (!ctrl)
+		{
+			cout << " '" << input << "'" << " was not found in the system.\n";
+			cout << "Try again.";
+			sleep(2);
+		}
+
+	} while (!ctrl);
+
+	cout << "Press a button to return to Main Menu\n";
+
+	cin.clear();
+	cin >> a;
+	MainMenu();
 	return;
 }
 
 void general::findStudent()
 {
+	//int a;
+	string input;
+	bool ctrl;
+	do
+	{
+		system("cls");
+		cout << "Please enter the name of the student OR " "back" " to return to main menu\n";
+		cout << ">> ";
+		cin.clear();
+		cin >> input;
+		sleep(1);
+		cout << "\n";
+
+		if (input == "back")
+		{
+			break;
+			ctrl = true;
+		}
+		ctrl = false;
+
+		for (unsigned int i = 0; i < enunciations.size(); i++)
+		{
+			for (unsigned int j = 0; j < enunciations[i].getOccurrences().size(); j++)
+			{
+				vector<Occurrence> occ = enunciations[i].getOccurrences();
+				for (unsigned int k = 0; k < occ[j].getGroupProjects().size(); k++)
+				{
+					for (unsigned int h = 0; h < occ[j].getGroupProjects()[k].getStudents().size(); h++)
+					{
+						if (occ[j].getGroupProjects()[k].getStudents()[h].getName() == input)
+						{
+							ctrl = true;
+							occ[j].getGroupProjects()[k].getStudents()[h].printInfoStudent();
+						}
+					}
+				}
+			}
+		}
+
+		if (!ctrl)
+		{
+			cout << " '" << input << "'" << " was not found in the system.\n";
+			cout << "Try again.";
+			sleep(2);
+		}
+
+	} while (!ctrl);
+
+	cin.clear();
+	system("pause");
+	MainMenu();
 	return;
 }
 
@@ -91,6 +193,44 @@ void general::listTeachers()
 
 void general::addTeacher()
 {
+	string input;
+	system("cls");
+
+	cout << "Please enter the name of the teacher\n";
+	cout << ">> ";
+	cin.clear();
+	cin >> input;
+	cout << "The teacher will be added to an existing group project with no assigned monitor.\n";
+	sleep(1);
+
+	Professor s(input);
+	bool ctrl = false;
+
+	for (unsigned int i = 0; i < enunciations.size(); i++)
+	{
+		for (unsigned int k = 0; k < enunciations[i].getOccurrences().size(); k++)
+		{
+			vector<Occurrence> occ = enunciations[i].getOccurrences();
+			for (unsigned int j = 0; i < occ[k].getGroupProjects().size(); j++)
+			{
+				if (occ[k].getGroupProjects()[j].getTeacher().getName() == "no_teacher")
+				{
+					occ[k].getGroupProjects()[j].setTeacher(s);
+					ctrl = true;
+				}
+			}
+		}
+	}
+
+	if (ctrl)
+		cout << "The teacher was added with success\n";
+	else
+	{
+		cout << "Was not possible to add this teacher\n";
+		cout << "Returning to main menu";
+	}
+	sleep(2);
+	MainMenu();
 	return;
 }
 
@@ -109,16 +249,16 @@ void general::addStudent()
 	Student s(input);
 	bool ctrl = false;
 
-	for (unsigned int i = 0; i < enunciations.size();i++)
+	for (unsigned int i = 0; i < enunciations.size(); i++)
 	{
-		for (unsigned int k = 0 ; k < enunciations[i].getOccurrences().size();k++)
+		for (unsigned int k = 0; k < enunciations[i].getOccurrences().size(); k++)
 		{
 			vector<Occurrence> occ = enunciations[i].getOccurrences();
-			for (unsigned int j = 0 ; i < occ[k].getGroupProjects().size();j++)
+			for (unsigned int j = 0; i < occ[k].getGroupProjects().size(); j++)
 			{
 				if (occ[k].getGroupProjects()[j].addStudent(s))
 				{
-					occ[k].getGroupProjects()[j].getStudents()[occ[k].getGroupProjects()[j].getStudents().size()-1].addNewTitle(enunciations[i].getTitle());
+					occ[k].getGroupProjects()[j].getStudents()[occ[k].getGroupProjects()[j].getStudents().size() - 1].addNewTitle(enunciations[i].getTitle());
 					ctrl = true;
 				}
 			}
@@ -128,8 +268,12 @@ void general::addStudent()
 	if (ctrl)
 		cout << "The student was added with success\n";
 	else
+	{
 		cout << "Was not possible to add this student\n";
-	sleep(1);
+		cout << "Returning to main menu";
+	}
+	sleep(2);
+	MainMenu();
 }
 
 void general::browseTechersStudentMenu()
@@ -186,7 +330,7 @@ void general::browseEnunciationMenu()
 		cout << ">> ";
 		getline(cin, input);
 		cin.clear();
-	} while (!verifyGetline(1, 2, input));
+	} while (!verifyGetline(1, 3, input));
 
 	if (input == "1")
 		listEnunciations();
@@ -206,7 +350,7 @@ void general::MainMenu()
 		system("cls");
 		cout << "ENUNCIATIONS MANAGEMENT OF FEUP\n\n";
 		cout << "1. Browse Enunciations\n";
-		cout << "2. Browse Students\n";
+		cout << "2. Browse Students / Teachers\n";
 		cout << "3. Exit\n";
 
 		cout << ">> ";
