@@ -13,8 +13,11 @@ class Occurrence
 public:
 	Occurrence();
 	Occurrence(string schoolYear);
+	void setYear (string year);
+	void newGroupProject(groupProject proj);
 	string getYear() const;
 	vector<groupProject> getGroupProjects() const;
+	string printInfoOccurrence(string title);
 };
 
 #endif

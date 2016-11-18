@@ -16,7 +16,7 @@ class groupProject
 	unsigned int maxN;
 public:
 	groupProject();
-	groupProject(vector<Student> studentsIN, Professor teacherIN, string tFile, unsigned num);
+	groupProject(vector<Student> studentsIN, string tFile);
 	bool addStudent(Student st);
 	void removeSudent(Student st);
 	void setTeacher(Professor prof);

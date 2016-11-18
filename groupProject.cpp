@@ -3,12 +3,13 @@
 
 groupProject::groupProject(){};
 
-groupProject::groupProject(vector<Student> studentsIN, Professor teacherIN, string tFile, unsigned int num)
+groupProject::groupProject(vector<Student> studentsIN, string tFile)
 {
 	students = studentsIN;
-	teacher = teacherIN;
+	Professor p("no_teacher");
+	teacher = p;
 	textFile = tFile;
-	maxN = num;
+	maxN = 99;
 }
 
 bool groupProject::addStudent(Student st)
