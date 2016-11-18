@@ -18,6 +18,7 @@ public:
 	virtual ~Person(){};
 	string getName() const;
 	void setName(string newName);
+	virtual void addNewTitle(string title);
 };
 
 class Student: public Person
@@ -30,12 +31,13 @@ public:
 	vector<double> getMarks();
 	double getMark(string title);
 	void setMark(double mark, string title);
-	void addNewTitle(string title);
 	string printInfoStudent();
+	void addNewTitle(string title);
 };
 
 class Professor: public Person{
 public:
+	Professor();
 	Professor(string name);
 	virtual ~Professor(){};
 	string printInfoProfessor();

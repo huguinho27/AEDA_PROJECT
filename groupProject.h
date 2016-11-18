@@ -21,12 +21,11 @@ public:
 	void removeSudent(Student st);
 	void setTeacher(Professor prof);
 	void setTextFile(string tFile);
-	void setMark(Student st, double mark);
 	void setMaxNum(unsigned int num);
 	vector<Student> getStudents() const;
 	string getTextFile();
 	Professor getTeacher() const;
-	unsigned int getNum() const;
+	string printInfoProject(string title);
 };
 
 #endif

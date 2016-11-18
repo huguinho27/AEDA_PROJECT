@@ -1,5 +1,6 @@
 #include "student.h"
 #include <iostream>
+#include <sstream>
 
 using namespace std;
 
@@ -65,6 +66,11 @@ void Student::setMark(double mark, string title)
 	}
 }
 
+void Person::addNewTitle(string title)
+{
+	titleEnun.push_back(title);
+}
+
 void Student::addNewTitle(string title)
 {
 	titleEnun.push_back(title);
@@ -83,6 +89,7 @@ string Student::printInfoStudent()
 }
 
 /* Professor */
+Professor::Professor() {};
 
 Professor::Professor(string name) : Person(name){}
 
