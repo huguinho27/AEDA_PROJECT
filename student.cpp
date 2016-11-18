@@ -71,6 +71,28 @@ void Student::addNewTitle(string title)
 	marks.push_back(0);
 }
 
+string Student::printInfoStudent()
+{
+	stringstream ss;
+	ss << name << "\n";
+	for (unsigned int i = 0; i < titleEnun.size(); i++)
+	{
+		ss << titleEnun[i] << " - " << marks[i] << "\n";
+	}
+	return ss.str();
+}
+
 /* Professor */
 
 Professor::Professor(string name) : Person(name){}
+
+string Professor::printInfoProfessor()
+{
+	stringstream ss;
+	ss << name << "\n";
+	for (unsigned int i = 0; i < titleEnun.size(); i++)
+	{
+		ss << titleEnun[i] << "\n";
+	}
+	return ss.str();
+}

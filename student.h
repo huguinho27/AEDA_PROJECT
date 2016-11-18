@@ -11,6 +11,7 @@ class Person
 {
 protected:
 	string name;
+	vector<string> titleEnun;
 public:
 	Person();
 	Person(string name);
@@ -22,7 +23,6 @@ public:
 class Student: public Person
 {
 	vector<double> marks;
-	vector<string> titleEnun;
 public:
 	Student();
 	Student(string name);
@@ -31,12 +31,14 @@ public:
 	double getMark(string title);
 	void setMark(double mark, string title);
 	void addNewTitle(string title);
+	string printInfoStudent();
 };
 
 class Professor: public Person{
 public:
 	Professor(string name);
 	virtual ~Professor(){};
+	string printInfoProfessor();
 };
 
 #endif /* STUDENT_H */
