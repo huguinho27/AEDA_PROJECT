@@ -65,9 +65,10 @@ string Enunciation::getInfo()
 }
 
 /*Research*/
-EnunciationResearch::EnunciationResearch(string title, string description, vector<string> biblio) : Enunciation(title, description)
+EnunciationResearch::EnunciationResearch(string title, string description) : Enunciation(title, description)
 {
-	this->biblio = biblio;
+	vector<string> v;
+	this->biblio = v;
 }
 
 vector<string> EnunciationResearch::getBiblio()
@@ -102,9 +103,10 @@ string EnunciationResearch::getInfo()
 }
 
 /*Analysis*/
-EnunciationAnalysis::EnunciationAnalysis(string title, string description, vector<string> repos) : Enunciation(title, description)
+EnunciationAnalysis::EnunciationAnalysis(string title, string description) : Enunciation(title, description)
 {
-	this->repos = repos;
+	vector<string> v;
+	this->repos = v;
 }
 
 vector<string> EnunciationAnalysis::getRepos()
@@ -139,9 +141,10 @@ string EnunciationAnalysis::getInfo()
 }
 
 /*Development*/
-EnunciationDevelopment::EnunciationDevelopment(string title, string description, vector<string> results) : Enunciation(title, description)
+EnunciationDevelopment::EnunciationDevelopment(string title, string description) : Enunciation(title, description)
 {
-	this->results = results;
+	vector<string> v;
+	this->results = v;
 }
 
 vector<string> EnunciationDevelopment::getResults()

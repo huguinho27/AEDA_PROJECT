@@ -34,7 +34,7 @@ class EnunciationResearch: public Enunciation
 protected:
 	vector<string> biblio;
 public:
-	EnunciationResearch(string title, string description, vector<string> biblio);
+	EnunciationResearch(string title, string description);
 	vector<string> getBiblio();
 	void newBiblio(string biblio1);
 	void setBiblio(vector<string> biblio);
@@ -46,7 +46,7 @@ class EnunciationAnalysis: public Enunciation
 protected:
 	vector<string> repos;
 public:
-	EnunciationAnalysis(string title, string description, vector<string> repos);
+	EnunciationAnalysis(string title, string description);
 	vector<string> getRepos();
 	void newRepos(string repos1);
 	void setRepos(vector<string> repos);
@@ -58,7 +58,7 @@ class EnunciationDevelopment: public Enunciation
 protected:
 	vector<string> results;
 public:
-	EnunciationDevelopment(string title, string description, vector<string> results);
+	EnunciationDevelopment(string title, string description);
 	vector<string> getResults();
 	void newResult(string result1);
 	void setResult(vector<string> results);
