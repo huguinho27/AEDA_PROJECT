@@ -26,7 +26,10 @@ public:
 	void addStudent();
 };
 
-general::general(){};
+general::general()
+{
+}
+;
 
 /**
  * Checks if an input is a number and if it it between init and end values
@@ -58,10 +61,14 @@ bool general::verifyGetline(int init, int end, string input)
 
 void general::listEnunciations()
 {
-	for (unsigned int i = 0; i < enunciations.size();i++)
+	system("cls");
+	for (unsigned int i = 0; i < enunciations.size(); i++)
 	{
-		//enunciations[i].
+		enunciations[i].getInfo();
+		cout << "--------------------------------------------";
 	}
+	system("pause");
+	MainMenu();
 	return;
 }
 
@@ -72,7 +79,6 @@ void general::createEnunciationMenu()
 
 void general::findTeacher()
 {
-	int a;
 	string input;
 	bool ctrl;
 	do
@@ -82,7 +88,6 @@ void general::findTeacher()
 		cout << ">> ";
 		cin.clear();
 		cin >> input;
-		sleep(1);
 		cout << "\n";
 
 		if (input == "back")
@@ -117,17 +122,12 @@ void general::findTeacher()
 
 	} while (!ctrl);
 
-	cout << "Press a button to return to Main Menu\n";
-
-	cin.clear();
-	cin >> a;
 	MainMenu();
 	return;
 }
 
 void general::findStudent()
 {
-	//int a;
 	string input;
 	bool ctrl;
 	do
@@ -137,7 +137,7 @@ void general::findStudent()
 		cout << ">> ";
 		cin.clear();
 		cin >> input;
-		sleep(1);
+		//sleep(1);
 		cout << "\n";
 
 		if (input == "back")
@@ -175,14 +175,29 @@ void general::findStudent()
 
 	} while (!ctrl);
 
-	cin.clear();
-	system("pause");
 	MainMenu();
 	return;
 }
 
 void general::listStudents()
 {
+	system("cls");
+	for (unsigned int i = 0; i < enunciations.size(); i++)
+	{
+		for (unsigned int j = 0; j < enunciations[i].getOccurrences().size();j++)
+		{
+			for (unsigned int k = 0 ; k < enunciations[i].getOccurrences()[j].getGroupProjects().size();k++)
+			{
+				for (unsigned int h = 0; h < enunciations[i].getOccurrences()[j].getGroupProjects()[k].getStudents().size();h++)
+				{
+					enunciations[i].getOccurrences()[j].getGroupProjects()[k].getStudents()[h].printInfoStudent();
+					cout << "--------------------------------------------";
+				}
+			}
+		}
+	}
+	system("pause");
+	MainMenu();
 	return;
 }
 

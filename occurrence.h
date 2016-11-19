@@ -18,6 +18,7 @@ public:
 	string getYear() const;
 	vector<groupProject> getGroupProjects() const;
 	string printInfoOccurrence(string title);
+	bool operator< (const Occurrence &right);
 };
 
 #endif

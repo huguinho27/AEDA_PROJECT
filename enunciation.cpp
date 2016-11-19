@@ -1,5 +1,6 @@
 #include "enunciation.h"
 #include "occurrence.h"
+#include "algorithm"
 
 using namespace std;
 
@@ -122,6 +123,24 @@ void saveEnunciation(Enunciation enun)
 vector <Occurrence> Enunciation::getOccurrences() const
 {
 	return years;
+}
+
+string Enunciation::getInfo()
+{
+	sort(years.begin(),years.end());
+
+	stringstream ss;
+	ss << "Title: " << title << "\n" << "Description: " << description << "\n"
+			<< "Years used: ";
+	for (unsigned int i = 0; i < years.size(); i++)
+	{
+		if (i == years.size()-1)
+		{
+			ss << years[i].getYear() << ".";
+		}
+		ss << years[i].getYear() << ", ";
+	}
+	return ss.str();
 }
 
 /*

@@ -45,3 +45,8 @@ vector<groupProject> Occurrence::getGroupProjects() const
 	 }
 	 return ss.str();
  }
+
+ bool Occurrence::operator<(const Occurrence &right)
+ {
+	 return schoolYear < right.getYear();
+ }
