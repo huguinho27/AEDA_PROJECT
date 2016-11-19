@@ -9,6 +9,7 @@ using namespace std;
 class general
 {
 	vector<Enunciation> enunciations;
+	vector<Enunciation> unused_enunciation;
 public:
 	general();
 	void MainMenu();
@@ -24,6 +25,8 @@ public:
 	void listTeachers();
 	void addTeacher();
 	void addStudent();
+	void createNewOccurrence();
+	bool checkGoodDateInput(string date);
 };
 
 general::general()
@@ -59,13 +62,52 @@ bool general::verifyGetline(int init, int end, string input)
 	return goodInput;
 }
 
+bool general::checkGoodDateInput(string date)
+{
+	if (date.size() != 9)
+		return false;
+
+	string part1;
+	part1.append(date.begin(), date.begin() + 4);
+	string part2;
+	part2.append(date.begin() + 5, date.end());
+
+	//cout << part1 << " " << part2;
+
+	bool good = true;
+
+	for (unsigned int i = 0; i < date.size(); i++)
+	{
+		cout << i << " " << date[i] <<  "\n";
+		if (i == 5)
+		{
+			cout << i << " " << date[i] <<  "\n";
+			if (date[i] != '-')
+				good = false;
+		} else if (date[i] < '0' || date[i] > '9')
+		{
+			cout << i << " " << date[i] <<  "\n";
+			good = false;
+			//break;
+		}
+	}
+	return good;
+}
+
+void general::createNewOccurrence()
+{
+	/*do
+	 {*/
+
+}
+
 void general::listEnunciations()
 {
 	system("cls");
 	for (unsigned int i = 0; i < enunciations.size(); i++)
 	{
 		enunciations[i].getInfo();
-		cout << "--------------------------------------------";
+		cout << "--------------------------------------------\n";
 	}
 	system("pause");
 	MainMenu();
@@ -74,6 +116,60 @@ void general::listEnunciations()
 
 void general::createEnunciationMenu()
 {
+	int control = unused_enunciation.size();
+	string title, description, input;
+	system("cls");
+
+	cout << "Please enter the title for the new enunciation\n";
+	cout << ">> ";
+	cin.clear();
+	cin >> title;
+
+	cout << "Please enter the description for the new enunciation\n";
+	cout << ">> ";
+	cin.clear();
+	cin >> description;
+
+	do
+	{
+		system("cls");
+
+		cout << "What's the type of enunciation you wish to create?\n";
+		cout << "1. Research\n";
+		cout << "2. Analysis\n";
+		cout << "3. Development\n";
+		cout << "4. Other\n";
+		cout << ">> ";
+		getline(cin, input);
+		cin.clear();
+
+	} while (!verifyGetline(1, 4, input));
+
+	if (input == "1")
+	{
+		EnunciationResearch d(title, description, "");
+		unused_enunciation.push_back(d);
+	} else if (input == "2")
+	{
+		EnunciationAnalysis d(title, description, "");
+		unused_enunciation.push_back(d);
+	} else if (input == "3") //TODO: UNCOMMENT THIS LATER
+	{
+		//EnunciationDevelopement d(title,description);
+		//unused_enunciation.push_back(d);
+	} else if (input == "4")
+	{
+		Enunciation d(title, description);
+		unused_enunciation.push_back(d);
+	}
+
+	if (unused_enunciation.size() > control)
+		cout << "Enunciation added with success\n";
+	else
+		cout << "Error while adding enunciation\n";
+
+	sleep(2);
+	MainMenu();
 	return;
 }
 
@@ -184,14 +280,14 @@ void general::listStudents()
 	system("cls");
 	for (unsigned int i = 0; i < enunciations.size(); i++)
 	{
-		for (unsigned int j = 0; j < enunciations[i].getOccurrences().size();j++)
+		for (unsigned int j = 0; j < enunciations[i].getOccurrences().size(); j++)
 		{
-			for (unsigned int k = 0 ; k < enunciations[i].getOccurrences()[j].getGroupProjects().size();k++)
+			for (unsigned int k = 0; k < enunciations[i].getOccurrences()[j].getGroupProjects().size(); k++)
 			{
-				for (unsigned int h = 0; h < enunciations[i].getOccurrences()[j].getGroupProjects()[k].getStudents().size();h++)
+				for (unsigned int h = 0; h < enunciations[i].getOccurrences()[j].getGroupProjects()[k].getStudents().size(); h++)
 				{
 					enunciations[i].getOccurrences()[j].getGroupProjects()[k].getStudents()[h].printInfoStudent();
-					cout << "--------------------------------------------";
+					cout << "--------------------------------------------\n";
 				}
 			}
 		}
@@ -203,6 +299,20 @@ void general::listStudents()
 
 void general::listTeachers()
 {
+	system("cls");
+	for (unsigned int i = 0; i < enunciations.size(); i++)
+	{
+		for (unsigned int j = 0; j < enunciations[i].getOccurrences().size(); j++)
+		{
+			for (unsigned int k = 0; k < enunciations[i].getOccurrences()[j].getGroupProjects().size(); k++)
+			{
+				enunciations[i].getOccurrences()[j].getGroupProjects()[k].getTeacher().printInfoProfessor();
+				cout << "--------------------------------------------\n";
+			}
+		}
+	}
+	system("pause");
+	MainMenu();
 	return;
 }
 
@@ -366,24 +476,31 @@ void general::MainMenu()
 		cout << "ENUNCIATIONS MANAGEMENT OF FEUP\n\n";
 		cout << "1. Browse Enunciations\n";
 		cout << "2. Browse Students / Teachers\n";
-		cout << "3. Exit\n";
+		cout << "3. Create new Occurrence\n";
+		cout << "4. Exit\n";
 
 		cout << ">> ";
 		getline(cin, input);
 		cin.clear();
-	} while (!verifyGetline(1, 3, input));
+	} while (!verifyGetline(1, 4, input));
 
 	if (input == "1")
 		browseEnunciationMenu();
 	else if (input == "2")
 		browseTechersStudentMenu();
-	else if (input == "3")
+	else if (input == "4")
+		createNewOccurrence();
+	else if (input == "4")
 		exit(0);
 }
 
 int main()
 {
 	general g;
-	g.MainMenu();
+	if (g.checkGoodDateInput("2015-2016"))
+		cout << "ta fixe";
+	else
+		cout << "nao ta fixe";
+	//g.MainMenu();
 	return 0;
 }
