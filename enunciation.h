@@ -26,6 +26,7 @@ public:
 	void addYear(Occurrence newYear);
 	vector <Occurrence> getOccurrences() const;
 	virtual string getInfo();
+	virtual string getCode();
 
 };
 
@@ -39,6 +40,7 @@ public:
 	void newBiblio(string biblio1);
 	void setBiblio(vector<string> biblio);
 	string getInfo();
+	string getCode();
 };
 
 class EnunciationAnalysis: public Enunciation
@@ -51,6 +53,7 @@ public:
 	void newRepos(string repos1);
 	void setRepos(vector<string> repos);
 	string getInfo();
+	string getCode();
 };
 
 class EnunciationDevelopment: public Enunciation
@@ -63,6 +66,7 @@ public:
 	void newResult(string result1);
 	void setResult(vector<string> results);
 	string getInfo();
+	string getCode();
 };
 
 

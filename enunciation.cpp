@@ -64,6 +64,11 @@ string Enunciation::getInfo()
 	return ss.str();
 }
 
+string Enunciation::getCode()
+{
+	return "0";
+}
+
 /*Research*/
 EnunciationResearch::EnunciationResearch(string title, string description) : Enunciation(title, description)
 {
@@ -100,6 +105,11 @@ string EnunciationResearch::getInfo()
 		ss << i+1 << " - " << biblio[i] << ";\n";
 	}
 	return ss.str();
+}
+
+string EnunciationResearch::getCode()
+{
+	return "1";
 }
 
 /*Analysis*/
@@ -140,6 +150,11 @@ string EnunciationAnalysis::getInfo()
 	return ss.str();
 }
 
+string EnunciationAnalysis::getCode()
+{
+	return 2;
+}
+
 /*Development*/
 EnunciationDevelopment::EnunciationDevelopment(string title, string description) : Enunciation(title, description)
 {
@@ -176,6 +191,11 @@ string EnunciationDevelopment::getInfo()
 		ss << i+1 << " - " << results[i] << ";\n";
 	}
 	return ss.str();
+}
+
+string EnunciationDevelopment::getCode()
+{
+	return "3";
 }
 
 /*void generateEnunciation()
