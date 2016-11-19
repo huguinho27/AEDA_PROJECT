@@ -21,42 +21,54 @@ public:
 	Enunciation(string title, string description);
 	string getTitle() const;
 	string getDescription() const;
-	vector <Occurrence> getYears();
 	void setTitle(string newTitle);
 	void setDescription(string newDescription);
 	void addYear(Occurrence newYear);
 	vector <Occurrence> getOccurrences() const;
-	string getInfo();
+	virtual string getInfo();
 
 };
 
 class EnunciationResearch: public Enunciation
 {
-	protected:
-	string biblio;
-	public:
-	EnunciationResearch(string title, string description, string biblio);
-	string getBiblio();
+protected:
+	vector<string> biblio;
+public:
+	EnunciationResearch(string title, string description, vector<string> biblio);
+	vector<string> getBiblio();
+	void newBiblio(string biblio1);
+	void setBiblio(vector<string> biblio);
+	string getInfo();
 };
 
 class EnunciationAnalysis: public Enunciation
 {
-	protected:
-	string repos;
-	public:
-	EnunciationAnalysis(string title, string description, string repos);
-	string getRepos();
+protected:
+	vector<string> repos;
+public:
+	EnunciationAnalysis(string title, string description, vector<string> repos);
+	vector<string> getRepos();
+	void newRepos(string repos1);
+	void setRepos(vector<string> repos);
+	string getInfo();
 };
 
-class EnunciationDevelopement: public Enunciation
+class EnunciationDevelopment: public Enunciation
 {
-
+protected:
+	vector<string> results;
+public:
+	EnunciationDevelopment(string title, string description, vector<string> results);
+	vector<string> getResults();
+	void newResult(string result1);
+	void setResult(vector<string> results);
+	string getInfo();
 };
 
 
-void generateEnunciation();
+//void generateEnunciation();
 
-void saveEnunciation();
+//void saveEnunciation();
 
 
 #endif /* ENUNCIATION_H */
