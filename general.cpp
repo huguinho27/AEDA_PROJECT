@@ -27,12 +27,145 @@ public:
 	void addStudent();
 	void createNewOccurrence();
 	bool checkGoodDateInput(string date);
+	void storeEnunciationsInFile();
+	void storeUnusedEnunciationsInFile();
+	void readEnunciationsFromFile();
 };
 
 general::general()
 {
 }
 ;
+
+void general::readEnunciationsFromFile()
+{
+	string line;
+	ifstream myfile("enunciation.txt");
+
+	if (!myfile)
+	{
+		cerr << "Unable to open file enunciation.txt";
+		exit(1);
+	}
+
+	string title;
+	string description;
+	string year;
+	vector<string> years;
+
+	while (!myfile.eof())
+	{
+		stringstream linestream(line);
+
+		getline(linestream, title, ';');
+
+		getline(linestream, description, ';');
+
+		while (getline(linestream, year, ';'))
+		{
+			years.push_back(year);
+		}
+
+		Enunciation(title, description);
+
+	}
+	myfile.close();
+}
+
+void general::storeUnusedEnunciationsInFile()
+{
+	ofstream myfile("unused_enunciations.txt");
+	string title;
+	string description;
+	string code;
+
+	if (myfile.is_open())
+	{
+		for (unsigned int i = 0; i < unused_enunciation.size(); i++)
+		{
+			code = unused_enunciation[i].getCode();
+			title = unused_enunciation[i].getTitle();
+			description = unused_enunciation[i].getDescription();
+
+			if (unused_enunciation[i].getOccurrences().size() == 0)
+			{
+				myfile << code << ";";
+				myfile << title << ";";
+				myfile << description;
+			} else
+			{
+				myfile << code << ";";
+				myfile << title << ";";
+				myfile << description << ";";
+			}
+
+			if (unused_enunciation[i].getOccurrences().size() != 0)
+			{
+				for (unsigned int j = 0; j < unused_enunciation[i].getOccurrences().size(); j++)
+				{
+					myfile << unused_enunciation[i].getOccurrences()[j].getYear();
+
+					if (j != unused_enunciation[i].getOccurrences().size() - 1)
+					{
+						myfile << ";";
+					}
+				}
+			}
+
+		}
+		myfile.close();
+	} else
+		cout << "Unable to open file\n";
+	return;
+}
+
+void general::storeEnunciationsInFile()
+{
+	ofstream myfile("enunciations.txt");
+	string title;
+	string description;
+	string code;
+
+	if (myfile.is_open())
+	{
+		for (unsigned int i = 0; i < enunciations.size(); i++)
+		{
+			code = enunciations[i].getCode();
+			title = enunciations[i].getTitle();
+			description = enunciations[i].getDescription();
+
+			if (enunciations[i].getOccurrences().size() == 0)
+			{
+				myfile << code << ";";
+				myfile << title << ";";
+				myfile << description;
+			} else
+			{
+				myfile << code << ";";
+				myfile << title << ";";
+				myfile << description << ";";
+			}
+
+			if (enunciations[i].getOccurrences().size() != 0)
+			{
+				for (unsigned int j = 0; j < enunciations[i].getOccurrences().size(); j++)
+				{
+					myfile << enunciations[i].getOccurrences()[j].getYear();
+
+					if (j != enunciations[i].getOccurrences().size() - 1)
+					{
+						myfile << ";";
+					}
+				}
+			}
+
+		}
+		myfile.close();
+	} else
+		cout << "Unable to open file\n";
+	storeUnusedEnunciationsInFile();
+	return;
+}
 
 /**
  * Checks if an input is a number and if it it between init and end values
@@ -78,15 +211,15 @@ bool general::checkGoodDateInput(string date)
 
 	for (unsigned int i = 0; i < date.size(); i++)
 	{
-		cout << i << " " << date[i] <<  "\n";
+		cout << i << " " << date[i] << "\n";
 		if (i == 5)
 		{
-			cout << i << " " << date[i] <<  "\n";
+			cout << i << " " << date[i] << "\n";
 			if (date[i] != '-')
 				good = false;
 		} else if (date[i] < '0' || date[i] > '9')
 		{
-			cout << i << " " << date[i] <<  "\n";
+			cout << i << " " << date[i] << "\n";
 			good = false;
 			//break;
 		}
@@ -96,9 +229,7 @@ bool general::checkGoodDateInput(string date)
 
 void general::createNewOccurrence()
 {
-	/*do
-	 {*/
-
+	//TODO
 }
 
 void general::listEnunciations()
@@ -147,16 +278,16 @@ void general::createEnunciationMenu()
 
 	if (input == "1")
 	{
-		EnunciationResearch d(title, description, "");
+		EnunciationResearch d(title, description);
 		unused_enunciation.push_back(d);
 	} else if (input == "2")
 	{
-		EnunciationAnalysis d(title, description, "");
+		EnunciationAnalysis d(title, description);
 		unused_enunciation.push_back(d);
 	} else if (input == "3") //TODO: UNCOMMENT THIS LATER
 	{
-		//EnunciationDevelopement d(title,description);
-		//unused_enunciation.push_back(d);
+		EnunciationDevelopment d(title, description);
+		unused_enunciation.push_back(d);
 	} else if (input == "4")
 	{
 		Enunciation d(title, description);
