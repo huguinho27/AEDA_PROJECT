@@ -32,6 +32,11 @@ void Person::setId(int id)
 	this->id = id;
 }
 
+int Person::getId()
+{
+	return id;
+}
+
 void Person::deleteTitle(string title)
 {
 	for (unsigned int i=0; i<titleEnun.size(); i++)

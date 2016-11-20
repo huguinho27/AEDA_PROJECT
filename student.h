@@ -20,6 +20,7 @@ public:
 	string getName() const;
 	void setName(string newName);
 	void setId(int id);
+	int getId();
 	virtual void addNewTitle(string title);
 	virtual void deleteTitle(string title);
 };
