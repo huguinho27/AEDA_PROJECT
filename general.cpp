@@ -468,7 +468,32 @@ bool general::checkGoodDateInput(string date)
 
 void general::createNewOccurrence()
 {
-	//TODO
+	string currYear;
+	bool has_only_digits;
+
+	do
+	{
+		system("cls");
+		cout << "What's the current year?\n";
+		cin >> currYear;
+		has_only_digits = (currYear.find_first_not_of("0123456789") == string::npos);
+
+
+	}while (!has_only_digits);
+
+	vector<Enunciation> en = sortEnunciations();
+
+	for (unsigned int i = 0; i < en.size(); i++)
+	{
+		for (unsigned int j = 0; j < enunciations.size(); j++)
+		{
+			if (enunciations[j].getTitle() == en[i].getTitle())
+			{
+				/*Occurrence o()
+				enunciations[j].addYear()*/
+			}
+		}
+	}
 }
 
 void general::listEnunciations()
@@ -605,7 +630,9 @@ vector<Enunciation> general::sortEnunciations()
 {
 	int yearsAgo, minNumStu, counter;
 	vector<Enunciation> end;
+
 	system("cls");
+
 	cout << "From how many years ago do you wish to use enunciations?\n";
 	cin >> yearsAgo;
 	cout << "What's the minimum number of group projects an enunciation must have NOT to be chosen for next occurrence?\n";
@@ -620,7 +647,7 @@ vector<Enunciation> general::sortEnunciations()
 
 		if (counter < minNumStu)
 			end.push_back(enunciations[i]);
-		else if (atoi(enunciations[i].getOccurrences()[0].getYear().c_str()) - atoi(enunciations[i].getOccurrences()[1].getYear().c_str()) >= 2)
+		else if (atoi(enunciations[i].getOccurrences()[0].getYear().c_str()) - atoi(enunciations[i].getOccurrences()[1].getYear().c_str()) >= yearsAgo)
 			end.push_back(enunciations[i]);
 	}
 
@@ -628,7 +655,7 @@ vector<Enunciation> general::sortEnunciations()
 	for (unsigned int i = 0; i < end.size(); i++)
 	{
 		end[i].getInfo();
-		cout << "----------------------------------------------------------\n";
+		cout << "--------------------------------------------\n";
 	}
 	system("pause");
 	return end;
