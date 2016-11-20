@@ -68,15 +68,25 @@ vector<float> Student::getMarks()
 
 float Student::getMark(string title)
 {
-	unsigned int i = sequentialSearch(titleEnun, title);
-	if (i == -1) return -1;
-	return marks[i];
+	for (unsigned int i = 0; i < titleEnun.size(); i++)
+	{
+		if (titleEnun[i] == title)
+		{
+			return marks[i];
+		}
+	}
+	return -1;
 }
 
 void Student::setMark(float mark, string title)
 {
-	unsigned int i = sequentialSearch(titleEnun, title);
-	marks[i] = mark;
+	for (unsigned int i = 0; i < titleEnun.size(); i++)
+	{
+		if (titleEnun[i] == title)
+		{
+			marks[i] = mark;
+		}
+	}
 }
 
 void Person::addNewTitle(string title)

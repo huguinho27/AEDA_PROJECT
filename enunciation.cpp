@@ -1,7 +1,6 @@
 #include "enunciation.h"
 #include "occurrence.h"
 #include "insertionSort.h"
-//#include "algorithm"
 
 using namespace std;
 
@@ -67,6 +66,11 @@ string Enunciation::getInfo()
 string Enunciation::getCode()
 {
 	return "0";
+}
+
+void Enunciation::sortOccurrences()
+{
+	insertionSort(years);
 }
 
 /*Research*/

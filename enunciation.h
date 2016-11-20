@@ -27,6 +27,7 @@ public:
 	vector <Occurrence> getOccurrences() const;
 	virtual string getInfo();
 	virtual string getCode();
+	void sortOccurrences();
 
 };
 

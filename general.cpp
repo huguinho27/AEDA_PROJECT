@@ -3,10 +3,12 @@
 #include <unistd.h>
 #include <string>
 #include "enunciation.h"
+#include "insertionSort.h"
 
 using namespace std;
 
-class general {
+class general
+{
 	vector<Enunciation> enunciations;
 	vector<Enunciation> unused_enunciation;
 	vector<Student> students;
@@ -36,23 +38,24 @@ public:
 	void readProjectsFromFile();
 	void readUnusedEnunciationsFromFile();
 	int newId();
+	vector<Enunciation> sortEnunciations();
 };
 
 int general::personId = 1000;
 
 int general::newId()
 {
-	for (unsigned int i=0; i<students.size(); i++)
+	for (unsigned int i = 0; i < students.size(); i++)
 	{
-		if (students[i].getId()==personId)
+		if (students[i].getId() == personId)
 		{
 			personId++;
 			newId();
 		}
 	}
-	for (unsigned int i=0; i<professors.size(); i++)
+	for (unsigned int i = 0; i < professors.size(); i++)
 	{
-		if (professors[i].getId()==personId)
+		if (professors[i].getId() == personId)
 		{
 			personId++;
 			newId();
@@ -61,16 +64,19 @@ int general::newId()
 	return personId;
 }
 
-general::general() {
+general::general()
+{
 }
 ;
 
-void general::readUnusedEnunciationsFromFile() {
+void general::readUnusedEnunciationsFromFile()
+{
 	string line;
 	string fName = "unused_enunciation.txt";
 	ifstream myfile(fName.c_str());
 
-	if (!myfile) {
+	if (!myfile)
+	{
 		cerr << "Unable to open file " << fName;
 		exit(1);
 	}
@@ -78,7 +84,8 @@ void general::readUnusedEnunciationsFromFile() {
 	string title, description, year, code;
 	vector<string> years;
 
-	while (!myfile.eof()) {
+	while (!myfile.eof())
+	{
 		stringstream linestream(line);
 
 		getline(linestream, code, ';');
@@ -91,34 +98,32 @@ void general::readUnusedEnunciationsFromFile() {
 		{
 			Enunciation r(title, description);
 			unused_enunciation.push_back(r);
-		}
-		else if (code == "1")
+		} else if (code == "1")
 		{
 			EnunciationResearch r(title, description);
 			unused_enunciation.push_back(r);
-		}
-		else if (code == "2")
+		} else if (code == "2")
 		{
 			EnunciationAnalysis r(title, description);
 			unused_enunciation.push_back(r);
-		}
-		else if (code == "3")
+		} else if (code == "3")
 		{
 			EnunciationDevelopment r(title, description);
 			unused_enunciation.push_back(r);
 		}
 
-
 	}
 	myfile.close();
 }
 
-void general::readALLEnunciationsFromFile() {
+void general::readALLEnunciationsFromFile()
+{
 	string line;
 	string fName = "enunciation.txt";
 	ifstream myfile(fName.c_str());
 
-	if (!myfile) {
+	if (!myfile)
+	{
 		cerr << "Unable to open file " << fName;
 		exit(1);
 	}
@@ -126,7 +131,8 @@ void general::readALLEnunciationsFromFile() {
 	string title, description, year, code;
 	vector<string> years;
 
-	while (!myfile.eof()) {
+	while (!myfile.eof())
+	{
 		stringstream linestream(line);
 
 		getline(linestream, code, ';');
@@ -135,41 +141,43 @@ void general::readALLEnunciationsFromFile() {
 
 		getline(linestream, description, ';');
 
-		while (getline(linestream, year, ';')) {
+		while (getline(linestream, year, ';'))
+		{
 			years.push_back(year);
 		}
 
 		if (code == "0")
 		{
 			Enunciation r(title, description);
-			for (unsigned int i = 0; i < years.size(); i++) {
+			for (unsigned int i = 0; i < years.size(); i++)
+			{
 				Occurrence o(years[i]);
 				r.addYear(o);
 			}
 			enunciations.push_back(r);
-		}
-		else if (code == "1")
+		} else if (code == "1")
 		{
 			EnunciationResearch r(title, description);
-			for (unsigned int i = 0; i < years.size(); i++) {
+			for (unsigned int i = 0; i < years.size(); i++)
+			{
 				Occurrence o(years[i]);
 				r.addYear(o);
 			}
 			enunciations.push_back(r);
-		}
-		else if (code == "2")
+		} else if (code == "2")
 		{
 			EnunciationAnalysis r(title, description);
-			for (unsigned int i = 0; i < years.size(); i++) {
+			for (unsigned int i = 0; i < years.size(); i++)
+			{
 				Occurrence o(years[i]);
 				r.addYear(o);
 			}
 			enunciations.push_back(r);
-		}
-		else if (code == "3")
+		} else if (code == "3")
 		{
 			EnunciationDevelopment r(title, description);
-			for (unsigned int i = 0; i < years.size(); i++) {
+			for (unsigned int i = 0; i < years.size(); i++)
+			{
 				Occurrence o(years[i]);
 				r.addYear(o);
 			}
@@ -180,12 +188,14 @@ void general::readALLEnunciationsFromFile() {
 	myfile.close();
 }
 
-void general::readPeopleFromFile() {
+void general::readPeopleFromFile()
+{
 	string line;
 	string fName = "people.txt";
 	ifstream myfile(fName.c_str());
 
-	if (!myfile) {
+	if (!myfile)
+	{
 		cerr << "Unable to open file " << fName;
 		exit(1);
 	}
@@ -196,30 +206,36 @@ void general::readPeopleFromFile() {
 	string name;
 	stringstream convert;
 
-	while (!myfile.eof()) {
+	while (!myfile.eof())
+	{
 		stringstream linestream(line);
 		getline(linestream, status, ';');
 		getline(linestream, sId, ';');
 		getline(linestream, name, ';');
 		convert << sId;
 		convert >> id;
-		if (status == "1") {
+		if (status == "1")
+		{
 			Student st(name, id);
 			students.push_back(st);
-		} else if (status == "2") {
+		} else if (status == "2")
+		{
 			Professor pr(name, id);
 			professors.push_back(pr);
-		} else cerr << "Unknown person";
+		} else
+			cerr << "Unknown person";
 
 	}
 	myfile.close();
 }
 
-void general::readProjectsFromFile() {
+void general::readProjectsFromFile()
+{
 	string line;
 	ifstream myfile("projects.txt");
 
-	if (!myfile) {
+	if (!myfile)
+	{
 		cerr << "Unable to open file projects.txt";
 		exit(1);
 	}
@@ -230,7 +246,8 @@ void general::readProjectsFromFile() {
 	int numMax, idProf, idSt;
 	float mark;
 
-	while (!myfile.eof()) {
+	while (!myfile.eof())
+	{
 		stringstream convMax, convP;
 		vector<Student> stud;
 		stringstream linestream(line);
@@ -250,9 +267,9 @@ void general::readProjectsFromFile() {
 			getline(linestream, sMark, ';');
 			convM << sMark;
 			convM >> mark;
-			for (unsigned int i=0; i<students.size(); i++)
+			for (unsigned int i = 0; i < students.size(); i++)
 			{
-				if (students[i].getId()==idSt)
+				if (students[i].getId() == idSt)
 				{
 					students[i].addNewTitle(title);
 					students[i].setMark(mark, title);
@@ -263,9 +280,9 @@ void general::readProjectsFromFile() {
 		}
 
 		groupProject gp(stud);
-		for(unsigned int i=0; i<professors.size(); i++)
+		for (unsigned int i = 0; i < professors.size(); i++)
 		{
-			if (professors[i].getId()==idProf)
+			if (professors[i].getId() == idProf)
 			{
 				professors[i].addNewTitle(title);
 				gp.setTeacher(professors[i]);
@@ -273,13 +290,13 @@ void general::readProjectsFromFile() {
 			}
 		}
 		gp.setMaxNum(numMax);
-		for (unsigned int i=0; i<enunciations.size(); i++)
+		for (unsigned int i = 0; i < enunciations.size(); i++)
 		{
-			if (enunciations[i].getTitle()==title)
+			if (enunciations[i].getTitle() == title)
 			{
-				for (unsigned int j=0; j<enunciations[i].getOccurrences().size(); j++)
+				for (unsigned int j = 0; j < enunciations[i].getOccurrences().size(); j++)
 				{
-					if (enunciations[i].getOccurrences()[j].getYear()==year)
+					if (enunciations[i].getOccurrences()[j].getYear() == year)
 					{
 						enunciations[i].getOccurrences()[j].newGroupProject(gp);
 						break;
@@ -293,39 +310,42 @@ void general::readProjectsFromFile() {
 	myfile.close();
 }
 
-void general::storeUnusedEnunciationsInFile() {
+void general::storeUnusedEnunciationsInFile()
+{
 	string fName = "unused_enunciations.txt";
 	ofstream myfile(fName.c_str());
 	string title;
 	string description;
 	string code;
 
-	if (myfile.is_open()) {
-		for (unsigned int i = 0; i < unused_enunciation.size(); i++) {
+	if (myfile.is_open())
+	{
+		for (unsigned int i = 0; i < unused_enunciation.size(); i++)
+		{
 			code = unused_enunciation[i].getCode();
 			title = unused_enunciation[i].getTitle();
 			description = unused_enunciation[i].getDescription();
 
-			if (unused_enunciation[i].getOccurrences().size() == 0) {
+			if (unused_enunciation[i].getOccurrences().size() == 0)
+			{
 				myfile << code << ";";
 				myfile << title << ";";
 				myfile << description;
-			} else {
+			} else
+			{
 				myfile << code << ";";
 				myfile << title << ";";
 				myfile << description << ";";
 			}
 
-			if (unused_enunciation[i].getOccurrences().size() != 0) {
-				for (unsigned int j = 0;
-						j < unused_enunciation[i].getOccurrences().size();
-						j++) {
-					myfile
-							<< unused_enunciation[i].getOccurrences()[j].getYear();
+			if (unused_enunciation[i].getOccurrences().size() != 0)
+			{
+				for (unsigned int j = 0; j < unused_enunciation[i].getOccurrences().size(); j++)
+				{
+					myfile << unused_enunciation[i].getOccurrences()[j].getYear();
 
-					if (j
-							!= unused_enunciation[i].getOccurrences().size()
-									- 1) {
+					if (j != unused_enunciation[i].getOccurrences().size() - 1)
+					{
 						myfile << ";";
 					}
 				}
@@ -338,35 +358,42 @@ void general::storeUnusedEnunciationsInFile() {
 	return;
 }
 
-void general::storeALLEnunciationsInFile() {
+void general::storeALLEnunciationsInFile()
+{
 	string fName = "enunciation.txt";
 	ofstream myfile(fName.c_str());
 	string title;
 	string description;
 	string code;
 
-	if (myfile.is_open()) {
-		for (unsigned int i = 0; i < enunciations.size(); i++) {
+	if (myfile.is_open())
+	{
+		for (unsigned int i = 0; i < enunciations.size(); i++)
+		{
 			code = enunciations[i].getCode();
 			title = enunciations[i].getTitle();
 			description = enunciations[i].getDescription();
 
-			if (enunciations[i].getOccurrences().size() == 0) {
+			if (enunciations[i].getOccurrences().size() == 0)
+			{
 				myfile << code << ";";
 				myfile << title << ";";
 				myfile << description;
-			} else {
+			} else
+			{
 				myfile << code << ";";
 				myfile << title << ";";
 				myfile << description << ";";
 			}
 
-			if (enunciations[i].getOccurrences().size() != 0) {
-				for (unsigned int j = 0;
-						j < enunciations[i].getOccurrences().size(); j++) {
+			if (enunciations[i].getOccurrences().size() != 0)
+			{
+				for (unsigned int j = 0; j < enunciations[i].getOccurrences().size(); j++)
+				{
 					myfile << enunciations[i].getOccurrences()[j].getYear();
 
-					if (j != enunciations[i].getOccurrences().size() - 1) {
+					if (j != enunciations[i].getOccurrences().size() - 1)
+					{
 						myfile << ";";
 					}
 				}
@@ -384,17 +411,22 @@ void general::storeALLEnunciationsInFile() {
  * Checks if an input is a number and if it it between init and end values
  * @return true if ok, false if not
  */
-bool general::verifyGetline(int init, int end, string input) {
+bool general::verifyGetline(int init, int end, string input)
+{
+	if (input == "back")
+		return true;
 	bool goodInput = false;
 
-	if (!goodInput) {
+	if (!goodInput)
+	{
 		bool number = true;
 
 		for (unsigned int i = 0; i < input.length() && number; i++)
 			if (!(input[i] >= '0' && input[i] <= '9'))
 				number = false;
 
-		if (number) {
+		if (number)
+		{
 			stringstream value_ss(input);
 			int value;
 			value_ss >> value;
@@ -405,7 +437,8 @@ bool general::verifyGetline(int init, int end, string input) {
 	return goodInput;
 }
 
-bool general::checkGoodDateInput(string date) {
+bool general::checkGoodDateInput(string date)
+{
 	if (date.size() != 9)
 		return false;
 
@@ -416,11 +449,14 @@ bool general::checkGoodDateInput(string date) {
 
 	bool good = true;
 
-	for (unsigned int i = 0; i < date.size(); i++) {
-		if (i == 4) {
+	for (unsigned int i = 0; i < date.size(); i++)
+	{
+		if (i == 4)
+		{
 			if (date[i] != '-')
 				return false;
-		} else if (date[i] < '0' || date[i] > '9') {
+		} else if (date[i] < '0' || date[i] > '9')
+		{
 			return false;
 		}
 	}
@@ -430,13 +466,16 @@ bool general::checkGoodDateInput(string date) {
 	return good;
 }
 
-void general::createNewOccurrence() {
+void general::createNewOccurrence()
+{
 	//TODO
 }
 
-void general::listEnunciations() {
+void general::listEnunciations()
+{
 	system("cls");
-	for (unsigned int i = 0; i < enunciations.size(); i++) {
+	for (unsigned int i = 0; i < enunciations.size(); i++)
+	{
 		enunciations[i].getInfo();
 		cout << "--------------------------------------------\n";
 	}
@@ -445,7 +484,8 @@ void general::listEnunciations() {
 	return;
 }
 
-void general::createEnunciationMenu() {
+void general::createEnunciationMenu()
+{
 	int control = unused_enunciation.size();
 	string title, description, input;
 	system("cls");
@@ -460,7 +500,8 @@ void general::createEnunciationMenu() {
 	cin.clear();
 	cin >> description;
 
-	do {
+	do
+	{
 		system("cls");
 
 		cout << "What's the type of enunciation you wish to create?\n";
@@ -474,22 +515,25 @@ void general::createEnunciationMenu() {
 
 	} while (!verifyGetline(1, 4, input));
 
-	if (input == "1") {
+	if (input == "1")
+	{
 		EnunciationResearch d(title, description);
 		unused_enunciation.push_back(d);
-	} else if (input == "2") {
+	} else if (input == "2")
+	{
 		EnunciationAnalysis d(title, description);
 		unused_enunciation.push_back(d);
-	} else if (input == "3") //TODO: UNCOMMENT THIS LATER
-			{
+	} else if (input == "3")
+	{
 		EnunciationDevelopment d(title, description);
 		unused_enunciation.push_back(d);
-	} else if (input == "4") {
+	} else if (input == "4")
+	{
 		Enunciation d(title, description);
 		unused_enunciation.push_back(d);
 	}
 
-	if (unused_enunciation.size() > control)
+	if (unused_enunciation.size() > (unsigned int) control)
 		cout << "Enunciation added with success\n";
 	else
 		cout << "Error while adding enunciation\n";
@@ -499,43 +543,52 @@ void general::createEnunciationMenu() {
 	return;
 }
 
-void general::findTeacher() {
+void general::findTeacher() //DONE, I THINK
+{
 	string input;
-	bool ctrl;
-	do {
-		system("cls");
-		cout
-				<< "Please enter the name of the teacher OR " "back" " to return to main menu\n";
-		cout << ">> ";
-		cin.clear();
-		cin >> input;
-		cout << "\n";
+	bool ctrl = false;
 
-		if (input == "back") {
+	do
+	{
+		do
+		{
+			system("cls");
+
+			cout << "Search teacher by name or id? (0: name ; 1: id) OR " "back" " to return to menu\n";
+			cout << ">> ";
+			cin.clear();
+			cin >> input;
+			cout << "\n";
+		} while (!verifyGetline(0, 1, input));
+
+		if (input == "back")
+		{
 			ctrl = true;
-			break;
-		}
-		ctrl = false;
-
-		for (unsigned int i = 0; i < enunciations.size(); i++) {
-			for (unsigned int j = 0;
-					j < enunciations[i].getOccurrences().size(); j++) {
-				for (unsigned int k = 0;
-						k
-								< enunciations[i].getOccurrences()[j].getGroupProjects().size();
-						k++) {
-					vector<groupProject> grp =
-							enunciations[i].getOccurrences()[j].getGroupProjects();
-					for (unsigned int h = 0; h < grp[k].getStudents().size();
-							h++) {
-						if (grp[k].getStudents()[h].getName() == input)
-							ctrl = true;
+		} else
+		{
+			for (unsigned int i = 0; i < professors.size(); i++)
+			{
+				if (input == "0")
+				{
+					if (professors[i].getName() == input)
+					{
+						professors[i].printInfoProfessor();
+						ctrl = true;
+					}
+				} else if (input == "1")
+				{
+					if (professors[i].getId() == atoi(input.c_str()))
+					{
+						professors[i].printInfoProfessor();
+						ctrl = true;
 					}
 				}
+
 			}
 		}
 
-		if (!ctrl) {
+		if (!ctrl)
+		{
 			cout << " '" << input << "'" << " was not found in the system.\n";
 			cout << "Try again.";
 			sleep(2);
@@ -543,50 +596,90 @@ void general::findTeacher() {
 
 	} while (!ctrl);
 
+	system("pause");
 	MainMenu();
 	return;
 }
 
-void general::findStudent() {
+vector<Enunciation> general::sortEnunciations()
+{
+	int yearsAgo, minNumStu, counter;
+	vector<Enunciation> end;
+	system("cls");
+	cout << "From how many years ago do you wish to use enunciations?\n";
+	cin >> yearsAgo;
+	cout << "What's the minimum number of group projects an enunciation must have NOT to be chosen for next occurrence?\n";
+	cin >> minNumStu;
+
+	for (unsigned int i = 0; i < enunciations.size(); i++)
+	{
+		counter = 0;
+		enunciations[i].sortOccurrences();
+
+		counter += enunciations[i].getOccurrences()[0].getGroupProjects().size();
+
+		if (counter < minNumStu)
+			end.push_back(enunciations[i]);
+		else if (atoi(enunciations[i].getOccurrences()[0].getYear().c_str()) - atoi(enunciations[i].getOccurrences()[1].getYear().c_str()) >= 2)
+			end.push_back(enunciations[i]);
+	}
+
+	cout << "Enunciations approved are the following\n";
+	for (unsigned int i = 0; i < end.size(); i++)
+	{
+		end[i].getInfo();
+		cout << "----------------------------------------------------------\n";
+	}
+	system("pause");
+	return end;
+}
+
+void general::findStudent()
+{
 	string input;
-	bool ctrl;
-	do {
-		system("cls");
-		cout
-				<< "Please enter the name of the student OR " "back" " to return to main menu\n";
-		cout << ">> ";
-		cin.clear();
-		cin >> input;
-		//sleep(1);
-		cout << "\n";
+	bool ctrl = false;
 
-		if (input == "back") {
-			break;
+	do
+	{
+		do
+		{
+			system("cls");
+
+			cout << "Search student by name or id? (0: name ; 1: id) OR " "back" " to return to menu\n";
+			cout << ">> ";
+			cin.clear();
+			cin >> input;
+			cout << "\n";
+		} while (!verifyGetline(0, 1, input));
+
+		if (input == "back")
+		{
 			ctrl = true;
-		}
-		ctrl = false;
-
-		for (unsigned int i = 0; i < enunciations.size(); i++) {
-			for (unsigned int j = 0;
-					j < enunciations[i].getOccurrences().size(); j++) {
-				vector<Occurrence> occ = enunciations[i].getOccurrences();
-				for (unsigned int k = 0; k < occ[j].getGroupProjects().size();
-						k++) {
-					for (unsigned int h = 0;
-							h
-									< occ[j].getGroupProjects()[k].getStudents().size();
-							h++) {
-						if (occ[j].getGroupProjects()[k].getStudents()[h].getName()
-								== input) {
-							ctrl = true;
-							occ[j].getGroupProjects()[k].getStudents()[h].printInfoStudent();
-						}
+		} else
+		{
+			for (unsigned int i = 0; i < students.size(); i++)
+			{
+				if (input == "0")
+				{
+					if (students[i].getName() == input)
+					{
+						students[i].printInfoStudent();
+						ctrl = true;
+					}
+				} else if (input == "1")
+				{
+					if (students[i].getId() == atoi(input.c_str()))
+					{
+						students[i].printInfoStudent();
+						ctrl = true;
 					}
 				}
+
 			}
 		}
 
-		if (!ctrl) {
+		if (!ctrl)
+		{
 			cout << " '" << input << "'" << " was not found in the system.\n";
 			cout << "Try again.";
 			sleep(2);
@@ -594,54 +687,39 @@ void general::findStudent() {
 
 	} while (!ctrl);
 
+	system("pause");
 	MainMenu();
 	return;
 }
 
-void general::listStudents() {
+void general::listStudents()
+{
 	system("cls");
-	for (unsigned int i = 0; i < enunciations.size(); i++) {
-		for (unsigned int j = 0; j < enunciations[i].getOccurrences().size();
-				j++) {
-			for (unsigned int k = 0;
-					k
-							< enunciations[i].getOccurrences()[j].getGroupProjects().size();
-					k++) {
-				for (unsigned int h = 0;
-						h
-								< enunciations[i].getOccurrences()[j].getGroupProjects()[k].getStudents().size();
-						h++) {
-					enunciations[i].getOccurrences()[j].getGroupProjects()[k].getStudents()[h].printInfoStudent();
-					cout << "--------------------------------------------\n";
-				}
-			}
-		}
+	for (unsigned int i = 0; i < students.size(); i++)
+	{
+		students[i].printInfoStudent();
+		cout << "--------------------------------------------\n";
 	}
 	system("pause");
 	MainMenu();
 	return;
 }
 
-void general::listTeachers() {
+void general::listTeachers()
+{
 	system("cls");
-	for (unsigned int i = 0; i < enunciations.size(); i++) {
-		for (unsigned int j = 0; j < enunciations[i].getOccurrences().size();
-				j++) {
-			for (unsigned int k = 0;
-					k
-							< enunciations[i].getOccurrences()[j].getGroupProjects().size();
-					k++) {
-				enunciations[i].getOccurrences()[j].getGroupProjects()[k].getTeacher().printInfoProfessor();
-				cout << "--------------------------------------------\n";
-			}
-		}
+	for (unsigned int i = 0; i < professors.size(); i++)
+	{
+		professors[i].printInfoProfessor();
+		cout << "--------------------------------------------\n";
 	}
 	system("pause");
 	MainMenu();
 	return;
 }
 
-void general::addTeacher() {
+void general::addTeacher()
+{
 	string input;
 	system("cls");
 
@@ -649,21 +727,21 @@ void general::addTeacher() {
 	cout << ">> ";
 	cin.clear();
 	cin >> input;
-	cout
-			<< "The teacher will be added to an existing group project with no assigned monitor.\n";
+	cout << "The teacher will be added to an existing group project with no assigned monitor.\n";
 	sleep(1);
 
 	Professor s(input, newId());
 	bool ctrl = false;
 
-	for (unsigned int i = 0; i < enunciations.size(); i++) {
-		for (unsigned int k = 0; k < enunciations[i].getOccurrences().size();
-				k++) {
+	for (unsigned int i = 0; i < enunciations.size(); i++)
+	{
+		for (unsigned int k = 0; k < enunciations[i].getOccurrences().size(); k++)
+		{
 			vector<Occurrence> occ = enunciations[i].getOccurrences();
-			for (unsigned int j = 0; i < occ[k].getGroupProjects().size();
-					j++) {
-				if (occ[k].getGroupProjects()[j].getTeacher().getName()
-						== "no_teacher") {
+			for (unsigned int j = 0; i < occ[k].getGroupProjects().size(); j++)
+			{
+				if (occ[k].getGroupProjects()[j].getTeacher().getName() == "no_teacher")
+				{
 					occ[k].getGroupProjects()[j].setTeacher(s);
 					ctrl = true;
 				}
@@ -673,7 +751,8 @@ void general::addTeacher() {
 
 	if (ctrl)
 		cout << "The teacher was added with success\n";
-	else {
+	else
+	{
 		cout << "Was not possible to add this teacher\n";
 		cout << "Returning to main menu";
 	}
@@ -682,7 +761,8 @@ void general::addTeacher() {
 	return;
 }
 
-void general::addStudent() {
+void general::addStudent()
+{
 	string input;
 	system("cls");
 
@@ -690,31 +770,17 @@ void general::addStudent() {
 	cout << ">> ";
 	cin.clear();
 	cin >> input;
-	cout
-			<< "The student will be added to an existing group project with less than 3 members\n";
 	sleep(1);
 
 	Student s(input, newId());
-	bool ctrl = false;
 
-	for (unsigned int i = 0; i < enunciations.size(); i++) {
-		for (unsigned int k = 0; k < enunciations[i].getOccurrences().size();
-				k++) {
-			vector<Occurrence> occ = enunciations[i].getOccurrences();
-			for (unsigned int j = 0; i < occ[k].getGroupProjects().size();
-					j++) {
-				if (occ[k].getGroupProjects()[j].addStudent(s)) {
-					occ[k].getGroupProjects()[j].getStudents()[occ[k].getGroupProjects()[j].getStudents().size()
-							- 1].addNewTitle(enunciations[i].getTitle());
-					ctrl = true;
-				}
-			}
-		}
-	}
+	int ctrl = students.size();
+	students.push_back(s);
 
-	if (ctrl)
+	if (ctrl < students.size())
 		cout << "The student was added with success\n";
-	else {
+	else
+	{
 		cout << "Was not possible to add this student\n";
 		cout << "Returning to main menu";
 	}
@@ -722,9 +788,11 @@ void general::addStudent() {
 	MainMenu();
 }
 
-void general::browseTechersStudentMenu() {
+void general::browseTechersStudentMenu()
+{
 	string input;
-	do {
+	do
+	{
 		system("cls");
 
 		cout << "STUDENTS/TEACHERS MANAGEMENT\n\n";
@@ -759,9 +827,11 @@ void general::browseTechersStudentMenu() {
 	return;
 }
 
-void general::browseEnunciationMenu() {
+void general::browseEnunciationMenu()
+{
 	string input;
-	do {
+	do
+	{
 		system("cls");
 
 		cout << "ENUNCIATIONS MANAGEMENT\n\n";
@@ -784,9 +854,11 @@ void general::browseEnunciationMenu() {
 	return;
 }
 
-void general::MainMenu() {
+void general::MainMenu()
+{
 	string input;
-	do {
+	do
+	{
 		system("cls");
 		cout << "ENUNCIATIONS MANAGEMENT OF FEUP\n\n";
 		cout << "1. Browse Enunciations\n";
@@ -803,13 +875,14 @@ void general::MainMenu() {
 		browseEnunciationMenu();
 	else if (input == "2")
 		browseTechersStudentMenu();
-	else if (input == "4")
+	else if (input == "3")
 		createNewOccurrence();
 	else if (input == "4")
 		exit(0);
 }
 
-int main() {
+int main()
+{
 	general g;
 	g.MainMenu();
 	return 0;
