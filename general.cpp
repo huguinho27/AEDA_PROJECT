@@ -83,7 +83,7 @@ void general::readUnusedEnunciationsFromFile()
 		exit(1);
 	}
 
-	string title, description, year, code;
+	string title, description, year, code, addition;
 	vector<string> years;
 
 	while (!myfile.eof())
@@ -96,6 +96,8 @@ void general::readUnusedEnunciationsFromFile()
 
 		getline(linestream, description, ';');
 
+		getline(linestream, addition, ';');
+
 		if (code == "0")
 		{
 			Enunciation r(title, description);
@@ -103,14 +105,17 @@ void general::readUnusedEnunciationsFromFile()
 		} else if (code == "1")
 		{
 			EnunciationResearch r(title, description);
+			r.setBiblio(addition);
 			unused_enunciation.push_back(r);
 		} else if (code == "2")
 		{
 			EnunciationAnalysis r(title, description);
+			r.setRepos(addition);
 			unused_enunciation.push_back(r);
 		} else if (code == "3")
 		{
 			EnunciationDevelopment r(title, description);
+			r.setResult(addition);
 			unused_enunciation.push_back(r);
 		}
 
@@ -130,7 +135,7 @@ void general::readALLEnunciationsFromFile()
 		exit(1);
 	}
 
-	string title, description, year, code;
+	string title, description, year, code, addition;
 	vector<string> years;
 
 	while (!myfile.eof())
@@ -142,6 +147,8 @@ void general::readALLEnunciationsFromFile()
 		getline(linestream, title, ';');
 
 		getline(linestream, description, ';');
+
+		getline(linestream, addition, ';');
 
 		while (getline(linestream, year, ';'))
 		{
@@ -160,6 +167,7 @@ void general::readALLEnunciationsFromFile()
 		} else if (code == "1")
 		{
 			EnunciationResearch r(title, description);
+			r.setBiblio(addition);
 			for (unsigned int i = 0; i < years.size(); i++)
 			{
 				Occurrence o(years[i]);
@@ -169,6 +177,7 @@ void general::readALLEnunciationsFromFile()
 		} else if (code == "2")
 		{
 			EnunciationAnalysis r(title, description);
+			r.setRepos(addition);
 			for (unsigned int i = 0; i < years.size(); i++)
 			{
 				Occurrence o(years[i]);
@@ -178,6 +187,7 @@ void general::readALLEnunciationsFromFile()
 		} else if (code == "3")
 		{
 			EnunciationDevelopment r(title, description);
+			r.setResult(addition);
 			for (unsigned int i = 0; i < years.size(); i++)
 			{
 				Occurrence o(years[i]);
@@ -243,7 +253,7 @@ void general::readProjectsFromFile()
 		exit(1);
 	}
 
-	string title;
+	string title, textF;
 	string year;
 	string sNumMax, sIdProf, sIdSt, sMark;
 	int numMax, idProf, idSt;
@@ -259,6 +269,7 @@ void general::readProjectsFromFile()
 		getline(linestream, sNumMax, ';');
 		convMax << sNumMax;
 		convMax >> numMax;
+		getline(linestream, textF, ';');
 		getline(linestream, sIdProf, ';');
 		convP << sIdProf;
 		convP >> idProf;
@@ -283,16 +294,20 @@ void general::readProjectsFromFile()
 		}
 
 		groupProject gp(stud);
-		for (unsigned int i = 0; i < professors.size(); i++)
+		if (idProf != 0)
 		{
-			if (professors[i].getId() == idProf)
+			for (unsigned int i = 0; i < professors.size(); i++)
 			{
-				professors[i].addNewTitle(title);
-				gp.setTeacher(professors[i]);
-				break;
+				if (professors[i].getId() == idProf)
+				{
+					professors[i].addNewTitle(title);
+					gp.setTeacher(professors[i]);
+					break;
+				}
 			}
 		}
 		gp.setMaxNum(numMax);
+		gp.setTextFile(textF);
 		for (unsigned int i = 0; i < enunciations.size(); i++)
 		{
 			if (enunciations[i].getTitle() == title)
@@ -320,15 +335,18 @@ void general::storeUnusedEnunciationsInFile() {
 	string title;
 	string description;
 	string code;
+	string addition;
 
 	if (myfile.is_open()) {
 		for (unsigned int i = 0; i < unused_enunciation.size(); i++) {
 			code = unused_enunciation[i].getCode();
 			title = unused_enunciation[i].getTitle();
 			description = unused_enunciation[i].getDescription();
+			addition = unused_enunciation[i].getAddition();
 			myfile << code << ";";
 			myfile << title << ";";
-			myfile << description << ";\n";
+			myfile << description << ";";
+			myfile << addition << ";\n";
 		}
 		myfile.close();
 	} else
@@ -342,15 +360,18 @@ void general::storeALLEnunciationsInFile() {
 	string title;
 	string description;
 	string code;
+	string addition;
 
 	if (myfile.is_open()) {
 		for (unsigned int i = 0; i < enunciations.size(); i++) {
 			code = enunciations[i].getCode();
 			title = enunciations[i].getTitle();
 			description = enunciations[i].getDescription();
+			addition = enunciations[i].getAddition();
 			myfile << code << ";";
 			myfile << title << ";";
 			myfile << description << ";";
+			myfile << addition << ";";
 
 			if (enunciations[i].getOccurrences().size() != 0) {
 				for (unsigned int j = 0; j < enunciations[i].getOccurrences().size(); j++) {
@@ -399,7 +420,7 @@ void general::storeProjectsInFile()
 	string fName = "projects.txt";
 	ofstream myfile(fName.c_str());
 	myfile.clear();
-	string title, year;
+	string title, year, textF;
 	int idPr, idSt, maxN;
 	float mark;
 
@@ -415,7 +436,8 @@ void general::storeProjectsInFile()
 				{
 					idPr = enunciations[i].getOccurrences()[j].getGroupProjects()[k].getTeacher().getId();
 					maxN = enunciations[i].getOccurrences()[j].getGroupProjects()[k].getMax();
-					myfile << title << ";" << year << ";" << maxN << ";" << idPr << ";";
+					textF = enunciations[i].getOccurrences()[j].getGroupProjects()[k].getTextFile();
+					myfile << title << ";" << year << ";" << maxN << ";" << textF << ";" << idPr << ";";
 					for (unsigned int l=0; l<enunciations[i].getOccurrences()[j].getGroupProjects()[k].getStudents().size(); l++)
 					{
 						idSt = enunciations[i].getOccurrences()[j].getGroupProjects()[k].getStudents()[l].getId();

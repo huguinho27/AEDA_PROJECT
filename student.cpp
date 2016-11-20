@@ -69,8 +69,7 @@ vector<float> Student::getMarks()
 
 float Student::getMark(string title)
 {
-	unsigned int i = sequentialSearch(titleEnun, title);
-	if (i == -1) return -1;
+	int i = sequentialSearch(titleEnun, title);
 	return marks[i];
 }
 
@@ -82,12 +81,13 @@ void Student::setMark(float mark, string title)
 
 void Person::addNewTitle(string title)
 {
-	titleEnun.push_back(title);
+	if (sequentialSearch(titleEnun, title) == -1)
+	{titleEnun.push_back(title);}
 }
 
 void Student::addNewTitle(string title)
 {
-	titleEnun.push_back(title);
+	Person::addNewTitle(title);
 	marks.push_back(0);
 }
 

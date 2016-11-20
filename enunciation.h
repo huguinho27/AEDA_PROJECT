@@ -27,6 +27,7 @@ public:
 	vector <Occurrence> getOccurrences() const;
 	virtual string getInfo();
 	virtual string getCode();
+	virtual string getAddition(){};
 	void sortOccurrences();
 
 };
@@ -34,12 +35,11 @@ public:
 class EnunciationResearch: public Enunciation
 {
 protected:
-	vector<string> biblio;
+	string biblio;
 public:
 	EnunciationResearch(string title, string description);
-	vector<string> getBiblio();
-	void newBiblio(string biblio1);
-	void setBiblio(vector<string> biblio);
+	string getAddition();
+	void setBiblio(string biblio);
 	string getInfo();
 	string getCode();
 };
@@ -47,12 +47,11 @@ public:
 class EnunciationAnalysis: public Enunciation
 {
 protected:
-	vector<string> repos;
+	string repos;
 public:
 	EnunciationAnalysis(string title, string description);
-	vector<string> getRepos();
-	void newRepos(string repos1);
-	void setRepos(vector<string> repos);
+	string getAddition();
+	void setRepos(string repos);
 	string getInfo();
 	string getCode();
 };
@@ -60,12 +59,11 @@ public:
 class EnunciationDevelopment: public Enunciation
 {
 protected:
-	vector<string> results;
+	string results;
 public:
 	EnunciationDevelopment(string title, string description);
-	vector<string> getResults();
-	void newResult(string result1);
-	void setResult(vector<string> results);
+	string getAddition();
+	void setResult(string results);
 	string getInfo();
 	string getCode();
 };

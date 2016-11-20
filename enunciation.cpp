@@ -77,37 +77,23 @@ void Enunciation::sortOccurrences()
 EnunciationResearch::EnunciationResearch(string title, string description) : Enunciation(title, description)
 {
 	vector<string> v;
-	this->biblio = v;
 }
 
-vector<string> EnunciationResearch::getBiblio()
+string EnunciationResearch::getAddition()
 {
 	return biblio;
 }
 
-void EnunciationResearch::setBiblio(vector<string> biblio)
+void EnunciationResearch::setBiblio(string biblio)
 {
 	this->biblio = biblio;
-}
-
-void EnunciationResearch::newBiblio(string biblio1)
-{
-	biblio.push_back(biblio1);
 }
 
 string EnunciationResearch::getInfo()
 {
 	stringstream ss;
 	ss << "Enunciation type: Research\n" << Enunciation::getInfo() << "\n";
-	ss << "Bibliographical references:\n";
-	for (unsigned int i = 0; i<biblio.size(); i++)
-	{
-		if (i == biblio.size()-1)
-		{
-			ss << biblio.size() << " - " <<biblio[i] << ".\n";
-		}
-		ss << i+1 << " - " << biblio[i] << ";\n";
-	}
+	ss << "Bibliographical references: " << biblio << "\n";
 	return ss.str();
 }
 
@@ -120,20 +106,14 @@ string EnunciationResearch::getCode()
 EnunciationAnalysis::EnunciationAnalysis(string title, string description) : Enunciation(title, description)
 {
 	vector<string> v;
-	this->repos = v;
 }
 
-vector<string> EnunciationAnalysis::getRepos()
+string EnunciationAnalysis::getAddition()
 {
 	return repos;
 }
 
-void EnunciationAnalysis::newRepos(string repos1)
-{
-	repos.push_back(repos1);
-}
-
-void EnunciationAnalysis::setRepos(vector<string> repos)
+void EnunciationAnalysis::setRepos(string repos)
 {
 	this->repos = repos;
 }
@@ -142,15 +122,7 @@ string EnunciationAnalysis::getInfo()
 {
 	stringstream ss;
 	ss << "Enunciation type: Analysis\n" << Enunciation::getInfo() << "\n";
-	ss << "Data repositories:\n";
-	for (unsigned int i = 0; i<repos.size(); i++)
-	{
-		if (i == repos.size()-1)
-		{
-			ss << repos.size() << " - " <<repos[i] << ".\n";
-		}
-		ss << i+1 << " - " << repos[i] << ";\n";
-	}
+	ss << "Data repositories: " << repos << "\n";
 	return ss.str();
 }
 
@@ -163,20 +135,14 @@ string EnunciationAnalysis::getCode()
 EnunciationDevelopment::EnunciationDevelopment(string title, string description) : Enunciation(title, description)
 {
 	vector<string> v;
-	this->results = v;
 }
 
-vector<string> EnunciationDevelopment::getResults()
+string EnunciationDevelopment::getAddition()
 {
 	return results;
 }
 
-void EnunciationDevelopment::newResult(string result1)
-{
-	results.push_back(result1);
-}
-
-void EnunciationDevelopment::setResult(vector<string> results)
+void EnunciationDevelopment::setResult(string results)
 {
 	this->results = results;
 }
@@ -185,16 +151,7 @@ string EnunciationDevelopment::getInfo()
 {
 	stringstream ss;
 	ss << "Enunciation type: Development\n" << Enunciation::getInfo() << "\n";
-	ss << "Data repositories:\n";
-	for (unsigned int i = 0; i<results.size(); i++)
-	{
-		if (i == results.size()-1)
-		{
-			ss << results.size() << " - " <<results[i] << ".\n";
-		}
-		ss << i+1 << " - " << results[i] << ";\n";
-	}
-	return ss.str();
+	ss << "Data repositories: " << results << "\n";
 }
 
 string EnunciationDevelopment::getCode()

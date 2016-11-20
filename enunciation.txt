@@ -1,4 +1,4 @@
-2;Athlete Formation;Management of a sports activity;2011/2012;2012/2013;2015/2016;
-1;The Voice;The Voice is a TV show, to find good singers;2009/2010;2011/2012;2014/2015;
-3;Work Topics;A teacher wants to store every work his students have done;2009/2010;2011/2012;2012/2013;2013/2014;2014/2015;
-0;Share Market;In a share market, clients can buy or sell shares;2007/2008;2012/2013;2013/2014;2015/2016;
+2;Athlete Formation;Management of a sports activity;some repositories;2011/2012;2012/2013;2015/2016;
+1;The Voice;The Voice is a TV show, to find good singers;some references;2009/2010;2011/2012;2014/2015;
+3;Work Topics;A teacher wants to store every work his students have done;;2009/2010;2011/2012;2012/2013;2013/2014;2014/2015;
+0;Share Market;In a share market, clients can buy or sell shares;;2007/2008;2012/2013;2013/2014;2015/2016;
