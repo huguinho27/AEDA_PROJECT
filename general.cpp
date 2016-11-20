@@ -40,7 +40,7 @@ public:
 	int newId();
 	void storePeopleInFile();
 	void storeProjectsInFile();
-	vector<Enunciation> sortEnunciations();
+	void sortByNumberStudentsEnunciations();
 	void listProjects();
 };
 
@@ -525,35 +525,6 @@ bool general::checkGoodDateInput(string date)
 	return good;
 }
 
-void general::createNewOccurrence() //TODO
-{
-	string currYear;
-	bool has_only_digits;
-
-	do
-	{
-		system("cls");
-		cout << "What's the current year?\n";
-		cin >> currYear;
-		has_only_digits = (currYear.find_first_not_of("0123456789") == string::npos);
-
-	} while (!has_only_digits);
-
-	vector<Enunciation> en = sortEnunciations();
-
-	for (unsigned int i = 0; i < en.size(); i++)
-	{
-		for (unsigned int j = 0; j < enunciations.size(); j++)
-		{
-			if (enunciations[j].getTitle() == en[i].getTitle())
-			{
-				/*Occurrence o()
-				 enunciations[j].addYear()*/
-			}
-		}
-	}
-}
-
 void general::listEnunciations()
 {
 	system("cls");
@@ -714,29 +685,36 @@ void general::findTeacher() //DONE, I THINK
 	return;
 }
 
-vector<Enunciation> general::sortEnunciations()
+void general::sortByNumberStudentsEnunciations()
 {
-	int yearsAgo, minNumStu, counter;
+	int minNumStu, counter;
+	string yearsAgo;
 	vector<Enunciation> end;
 
 	system("cls");
 
-	cout << "From how many years ago do you wish to use enunciations?\n";
-	cin >> yearsAgo;
-	cout << "What's the minimum number of group projects an enunciation must have NOT to be chosen for next occurrence?\n";
+	cout << "Enter the latest acceptable year when the enunciation was proposed (e.g. 1999/2000)\n";
+	cin.clear();
+	getline(cin, yearsAgo);
+
+	cout << "What's the minimum number of group projects an enunciation must have NOT to be chosen?\n";
+	cin.clear();
 	cin >> minNumStu;
 
 	for (unsigned int i = 0; i < enunciations.size(); i++)
 	{
 		counter = 0;
 		enunciations[i].sortOccurrences();
+		if (enunciations[i].getOccurrences()[0].getYear() <= yearsAgo)
+		{
+			for (unsigned int j = 0; j < enunciations[i].getOccurrences().size();j++)
+			{
+				counter += enunciations[i].getOccurrences()[j].getGroupProjects().size();
+			}
 
-		counter += enunciations[i].getOccurrences()[0].getGroupProjects().size();
-
-		if (counter < minNumStu)
-			end.push_back(enunciations[i]);
-		else if (atoi(enunciations[i].getOccurrences()[0].getYear().c_str()) - atoi(enunciations[i].getOccurrences()[1].getYear().c_str()) >= yearsAgo)
-			end.push_back(enunciations[i]);
+			if (counter <= minNumStu)
+				end.push_back(enunciations[i]);
+		}
 	}
 
 	cout << "Enunciations approved are the following\n";
@@ -746,7 +724,7 @@ vector<Enunciation> general::sortEnunciations()
 		cout << "--------------------------------------------\n";
 	}
 	system("pause");
-	return end;
+	MainMenu();
 }
 
 void general::findStudent()
@@ -763,10 +741,9 @@ void general::findStudent()
 			cout << "Search student by name or id? (0: name ; 1: id) OR " "back" " to return to menu\n";
 			cout << ">> ";
 			cin.clear();
-			getline(cin,input);
+			getline(cin, input);
 			cout << "\n";
 		} while (!verifyGetline(0, 1, input));
-
 
 		if (input == "0")
 		{
@@ -965,19 +942,22 @@ void general::browseEnunciationMenu()
 
 		cout << "ENUNCIATIONS MANAGEMENT\n\n";
 		cout << "1. List Enunciations\n";
-		cout << "2. Create an Enunciation\n\n";
-		cout << "3. Back to main menu\n";
+		cout << "2. Create an Enunciation\n";
+		cout << "3. Enunciations chosen by less than...\n";
+		cout << "4. Back to main menu\n";
 
 		cout << ">> ";
 		getline(cin, input);
 		cin.clear();
-	} while (!verifyGetline(1, 3, input));
+	} while (!verifyGetline(1, 5, input));
 
 	if (input == "1")
 		listEnunciations();
 	else if (input == "2")
 		createEnunciationMenu();
 	else if (input == "3")
+		sortByNumberStudentsEnunciations();
+	else if (input == "4")
 		MainMenu();
 
 	return;
@@ -988,18 +968,17 @@ void general::MainMenu()
 	string input;
 	do
 	{
-		//system("cls");
+		system("cls");
 		cout << "ENUNCIATIONS MANAGEMENT OF FEUP\n\n";
 		cout << "1. Browse Enunciations\n";
 		cout << "2. Browse Students / Teachers\n";
 		cout << "3. List Group Projects\n";
-		cout << "4. Create new Occurrence\n";
-		cout << "5. Exit\n";
+		cout << "4. Exit\n";
 
 		cout << ">> ";
 		getline(cin, input);
 		cin.clear();
-	} while (!verifyGetline(1, 5, input));
+	} while (!verifyGetline(1, 4, input));
 
 	if (input == "1")
 		browseEnunciationMenu();
@@ -1008,8 +987,6 @@ void general::MainMenu()
 	else if (input == "3")
 		listProjects();
 	else if (input == "4")
-		createNewOccurrence();
-	else if (input == "5")
 		exit(0);
 }
 
@@ -1020,8 +997,8 @@ int main()
 	g.readPeopleFromFile();
 	g.readProjectsFromFile();
 	g.MainMenu();
-	/*g.storeALLEnunciationsInFile();
-	 g.storePeopleInFile();
-	 g.storeProjectsInFile();*/
+	g.storeALLEnunciationsInFile();
+	g.storePeopleInFile();
+	g.storeProjectsInFile();
 	return 0;
 }
