@@ -68,11 +68,5 @@ public:
 	string getCode();
 };
 
-
-//void generateEnunciation();
-
-//void saveEnunciation();
-
-
 #endif /* ENUNCIATION_H */
 

@@ -1,7 +1,7 @@
 #include "groupProject.h"
 #include <sstream>
 
-groupProject::groupProject(){};
+groupProject::groupProject(){maxN = 99;};
 
 groupProject::groupProject(vector<Student> studentsIN)
 {
