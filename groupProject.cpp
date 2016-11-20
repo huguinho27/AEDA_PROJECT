@@ -64,6 +64,17 @@ Professor groupProject::getTeacher() const
 	return teacher;
 }
 
+void groupProject::setMark(Student st, int mark, string title)
+{
+	for (unsigned int i=0; i<students.size(); i++)
+	{
+		if (students[i].getId()== st.getId())
+		{
+			students[i].setMark(mark, title);
+		}
+	}
+}
+
 string groupProject::printInfoProject(string title)
 {
 	stringstream ss;

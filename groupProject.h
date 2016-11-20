@@ -22,6 +22,7 @@ public:
 	void setTeacher(Professor prof);
 	void setTextFile(string tFile);
 	void setMaxNum(int num);
+	void setMark(Student st, int mark, string title);
 	vector<Student> getStudents() const;
 	string getTextFile();
 	Professor getTeacher() const;

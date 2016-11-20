@@ -42,6 +42,9 @@ public:
 	void storeProjectsInFile();
 	void sortByNumberStudentsEnunciations();
 	void listProjects();
+	void enunciationShow(Enunciation en);
+	void yearShow(Occurrence year, string title);
+	void projectShow(groupProject pr, string title);
 };
 
 int general::personId = 1000;
@@ -65,6 +68,165 @@ int general::newId()
 		}
 	}
 	return personId;
+}
+
+void general::enunciationShow(Enunciation en)
+{
+	cout<<en.getInfo();
+	system("cls");
+
+	string input;
+	cout<<"\n"<<"Enter the number of occurrence (e.x. 1)\n";
+	cout << "(enter - to go to Main menu)\n";
+	cout << ">> ";
+	getline(cin, input);
+	cin.clear();
+	if (input=="-") MainMenu();
+	unsigned int n = atoi(input.c_str());
+	yearShow(en.getOccurrences()[n-1], en.getTitle());
+
+}
+
+void general::yearShow(Occurrence year, string title)
+{
+	cout<<year.printInfoOccurrence(title);
+	system("cls");
+
+	string input;
+	cout<<"\n"<<"Enter the number of group (e.x. 1)\n";
+	cout << "(enter - to go to Main menu)\n";
+	cout << ">> ";
+	getline(cin, input);
+	cin.clear();
+	if (input=="-") MainMenu();
+	unsigned int n = atoi(input.c_str());
+	projectShow(year.getGroupProjects()[n-1], title);
+}
+
+void general::projectShow(groupProject pr, string title)
+{
+	pr.printInfoProject(title);
+	system("cls");
+	string input;
+		cout<<"\n";
+		cout << "1. Add a student\n";
+		cout << "2. Remove student\n";
+		cout << "3. Set teacher\n";
+		cout << "4. Set maximum number of student\n";
+		cout << "5. Set text file\n";
+		cout << "6. Set mark\n";
+		cout << "(enter - to go to Main menu)\n";
+		cout << ">> ";
+		getline(cin, input);
+		cin.clear();
+		if (input == "1")
+		{
+			string inp;
+			cout<<"Enter the id of student\n";
+			cout << ">> ";
+			getline(cin, inp);
+			cin.clear();
+			for (unsigned int i = 0; i < students.size(); i++)
+			{
+				if (students[i].getId() == atoi(inp.c_str()))
+				{
+					students[i].addNewTitle(title);
+					pr.addStudent(students[i]);
+					break;
+				}
+			}
+			projectShow(pr, title);
+		}
+		else if (input == "2")
+		{
+			string inp;
+			cout<<"Enter the id of student\n";
+			cout << ">> ";
+			getline(cin, inp);
+			cin.clear();
+			for (unsigned int i = 0; i < pr.getStudents().size(); i++)
+			{
+				if (pr.getStudents()[i].getId() == atoi(inp.c_str()))
+				{
+					pr.removeSudent(pr.getStudents()[i], title);
+					break;
+				}
+				if (students[i].getId() == atoi(inp.c_str()))
+				{
+					students[i].deleteTitle(title);
+					break;
+				}
+			}
+			projectShow(pr, title);
+		}
+		else if (input == "3")
+		{
+			string inp;
+			cout<<"Enter the id of professor\n";
+			cout << ">> ";
+			getline(cin, inp);
+			cin.clear();
+			for (unsigned int i = 0; i < professors.size(); i++)
+			{
+				if (professors[i].getId() == atoi(inp.c_str()))
+				{
+					professors[i].addNewTitle(title);
+					pr.setTeacher(professors[i]);
+					break;
+				}
+			}
+			projectShow(pr, title);
+		}
+		else if (input == "4")
+		{
+			string inp;
+			cout<<"Enter the maximum number of students\n";
+			cout << ">> ";
+			getline(cin, inp);
+			cin.clear();
+			pr.setMaxNum(atoi(inp.c_str()));
+			projectShow(pr, title);
+		}
+		else if (input == "5")
+		{
+			string inp;
+			cout<<"Enter the name of text file\n";
+			cout << ">> ";
+			getline(cin, inp);
+			cin.clear();
+			pr.setTextFile(inp);
+			projectShow(pr, title);
+		}
+		else if (input == "6")
+		{
+			string id, mark;
+			cout<<"Enter the id of student\n";
+			cout << ">> ";
+			getline(cin, id);
+			cin.clear();
+			cout<<"Enter the mark\n";
+			cout << ">> ";
+			getline(cin, mark);
+			cin.clear();
+			for (unsigned int i = 0; i < pr.getStudents().size(); i++)
+			{
+				if (pr.getStudents()[i].getId() == atoi(id.c_str()))
+				{
+					pr.setMark(pr.getStudents()[i], atoi(mark.c_str()), title);
+					break;
+				}
+				if (students[i].getId() == atoi(id.c_str()))
+				{
+					students[i].setMark(atoi(mark.c_str()), title);
+					break;
+				}
+			}
+			projectShow(pr, title);
+		}
+		else if (input =="-")
+		{MainMenu();}
+
+
 }
 
 general::general()
@@ -530,6 +692,18 @@ void general::listEnunciations()
 	system("cls");
 	for (unsigned int i = 0; i < enunciations.size(); i++)
 	{
+		cout <<i+1<<" - "<<enunciations[i].getTitle()<<"\n";
+	}
+
+	string input;
+	cout<<"\n"<<"Enter the number of enunciation\n";
+	cout << ">> ";
+	getline(cin, input);
+	cin.clear();
+	unsigned int n = atoi(input.c_str());
+	enunciationShow(enunciations[n-1]);
+	/*for (unsigned int i = 0; i < enunciations.size(); i++)
+	{
 		cout << enunciations[i].getInfo();
 		cout << "--------------------------------------------\n";
 	}
@@ -538,11 +712,12 @@ void general::listEnunciations()
 	{
 		cout << unused_enunciation[i].getInfo();
 		cout << "--------------------------------------------\n";
-	}
+	}*/
 
-	system("pause");
+
+	/*system("pause");
 	MainMenu();
-	return;
+	return;*/
 }
 
 void general::createEnunciationMenu()
