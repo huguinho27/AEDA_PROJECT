@@ -958,6 +958,12 @@ void general::MainMenu()
 int main()
 {
 	general g;
+	g.readALLEnunciationsFromFile();
+	g.readPeopleFromFile();
+	g.readProjectsFromFile();
 	g.MainMenu();
+	g.storeALLEnunciationsInFile();
+	g.storePeopleInFile();
+	g.storeProjectsInFile();
 	return 0;
 }
