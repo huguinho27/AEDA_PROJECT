@@ -29,11 +29,12 @@ public:
 	void addStudent();
 	void createNewOccurrence();
 	bool checkGoodDateInput(string date);
-	void storeEnunciationsInFile();
+	void storeALLEnunciationsInFile();
 	void storeUnusedEnunciationsInFile();
-	void readEnunciationsFromFile();
+	void readALLEnunciationsFromFile();
 	void readPeopleFromFile();
 	void readProjectsFromFile();
+	void readUnusedEnunciationsFromFile();
 };
 
 int general::personId = 1000;
@@ -43,25 +44,26 @@ general::general()
 }
 ;
 
-void general::readEnunciationsFromFile()
+void general::readUnusedEnunciationsFromFile()
 {
 	string line;
-	ifstream myfile("enunciation.txt");
+	string fName = "unused_enunciation.txt";
+	ifstream myfile(fName.c_str());
 
 	if (!myfile)
 	{
-		cerr << "Unable to open file enunciation.txt";
+		cerr << "Unable to open file " << fName;
 		exit(1);
 	}
 
-	string title;
-	string description;
-	string year;
+	string title, description, year, code;
 	vector<string> years;
 
 	while (!myfile.eof())
 	{
 		stringstream linestream(line);
+
+		getline(linestream, code, ';');
 
 		getline(linestream, title, ';');
 
@@ -72,8 +74,54 @@ void general::readEnunciationsFromFile()
 			years.push_back(year);
 		}
 
-		Enunciation(title, description);
+		Enunciation r(title, description);
 
+		for (unsigned int i = 0; i < years.size(); i++)
+		{
+			Occurrence o(years[i]);
+			r.addYear(o);
+		}
+	}
+	myfile.close();
+}
+
+void general::readALLEnunciationsFromFile()
+{
+	string line;
+	string fName = "enunciation.txt";
+	ifstream myfile(fName.c_str());
+
+	if (!myfile)
+	{
+		cerr << "Unable to open file " << fName;
+		exit(1);
+	}
+
+	string title, description, year, code;
+	vector<string> years;
+
+	while (!myfile.eof())
+	{
+		stringstream linestream(line);
+
+		getline(linestream, code, ';');
+
+		getline(linestream, title, ';');
+
+		getline(linestream, description, ';');
+
+		while (getline(linestream, year, ';'))
+		{
+			years.push_back(year);
+		}
+
+		Enunciation r(title, description);
+
+		for (unsigned int i = 0; i < years.size(); i++)
+		{
+			Occurrence o(years[i]);
+			r.addYear(o);
+		}
 	}
 	myfile.close();
 }
@@ -81,11 +129,12 @@ void general::readEnunciationsFromFile()
 void general::readPeopleFromFile()
 {
 	string line;
-	ifstream myfile("people.txt");
+	string fName = "people.txt";
+	ifstream myfile(fName.c_str());
 
 	if (!myfile)
 	{
-		cerr << "Unable to open file people.txt";
+		cerr << "Unable to open file " << fName;
 		exit(1);
 	}
 
@@ -107,13 +156,11 @@ void general::readPeopleFromFile()
 		{
 			Student st(name, id);
 			people.push_back(st);
-		}
-		else if (status == "2")
+		} else if (status == "2")
 		{
 			Professor pr(name, id);
 			people.push_back(pr);
-		}
-		else
+		} else
 		{
 			Person p(name, id);
 			people.push_back(p);
@@ -124,49 +171,50 @@ void general::readPeopleFromFile()
 }
 
 /*void general::readProjectsFromFile()
-{
-	string line;
-	ifstream myfile("projects.txt");
+ {
+ string line;
+ ifstream myfile("projects.txt");
 
-	if (!myfile)
-	{
-		cerr << "Unable to open file projects.txt";
-		exit(1);
-	}
+ if (!myfile)
+ {
+ cerr << "Unable to open file projects.txt";
+ exit(1);
+ }
 
-	string title;
-	string year;
-	string sNumMax, sIdProf, sIdSt, sMark;
-	int numMax, idProf, idSt;
-	float mark;
+ string title;
+ string year;
+ string sNumMax, sIdProf, sIdSt, sMark;
+ int numMax, idProf, idSt;
+ float mark;
 
-	while (!myfile.eof())
-	{
-		stringstream convMax, convP, convS, convM;
-		vector<Student> stud;
-		stringstream linestream(line);
-		getline(linestream, title, ';');
-		getline(linestream, year, ';');
-		getline(linestream, sNumMax, ';');
-		convMax << sNumMax;
-		convMax >> numMax;
-		getline(linestream, sIdProf, ';');
-		convP << sIdProf;
-		convP >> idProf;
-		while (getline(linestream, sIdSt, ';'))
-		{
-			years.push_back(year);
-		}
+ while (!myfile.eof())
+ {
+ stringstream convMax, convP, convS, convM;
+ vector<Student> stud;
+ stringstream linestream(line);
+ getline(linestream, title, ';');
+ getline(linestream, year, ';');
+ getline(linestream, sNumMax, ';');
+ convMax << sNumMax;
+ convMax >> numMax;
+ getline(linestream, sIdProf, ';');
+ convP << sIdProf;
+ convP >> idProf;
+ while (getline(linestream, sIdSt, ';'))
+ {
+ years.push_back(year);
+ }
 
-		Enunciation(title, description);
+ Enunciation(title, description);
 
-	}
-	myfile.close();
-}*/
+ }
+ myfile.close();
+ }*/
 
 void general::storeUnusedEnunciationsInFile()
 {
-	ofstream myfile("unused_enunciations.txt");
+	string fName = "unused_enunciations.txt";
+	ofstream myfile(fName.c_str());
 	string title;
 	string description;
 	string code;
@@ -207,13 +255,14 @@ void general::storeUnusedEnunciationsInFile()
 		}
 		myfile.close();
 	} else
-		cout << "Unable to open file\n";
+		cout << "Unable to open file " << fName << "\n";
 	return;
 }
 
-void general::storeEnunciationsInFile()
+void general::storeALLEnunciationsInFile()
 {
-	ofstream myfile("enunciations.txt");
+	string fName = "enunciation.txt";
+	ofstream myfile(fName.c_str());
 	string title;
 	string description;
 	string code;
@@ -254,7 +303,7 @@ void general::storeEnunciationsInFile()
 		}
 		myfile.close();
 	} else
-		cout << "Unable to open file\n";
+		cout << "Unable to open file " << fName << "\n";
 	storeUnusedEnunciationsInFile();
 	return;
 }
@@ -297,25 +346,23 @@ bool general::checkGoodDateInput(string date)
 	string part2;
 	part2.append(date.begin() + 5, date.end());
 
-	//cout << part1 << " " << part2;
 
 	bool good = true;
 
 	for (unsigned int i = 0; i < date.size(); i++)
 	{
-		cout << i << " " << date[i] << "\n";
-		if (i == 5)
+		if (i == 4)
 		{
-			cout << i << " " << date[i] << "\n";
 			if (date[i] != '-')
-				good = false;
+				return false;
 		} else if (date[i] < '0' || date[i] > '9')
 		{
-			cout << i << " " << date[i] << "\n";
-			good = false;
-			//break;
+			return false;
 		}
 	}
+
+	if (part1 > part2)
+		return false;
 	return good;
 }
 
@@ -720,10 +767,6 @@ void general::MainMenu()
 int main()
 {
 	general g;
-	if (g.checkGoodDateInput("2015-2016"))
-		cout << "ta fixe";
-	else
-		cout << "nao ta fixe";
-	//g.MainMenu();
+	g.MainMenu();
 	return 0;
 }
