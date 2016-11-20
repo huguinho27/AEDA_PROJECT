@@ -6,7 +6,7 @@ groupProject::groupProject(){};
 groupProject::groupProject(vector<Student> studentsIN, string tFile)
 {
 	students = studentsIN;
-	Professor p("no_teacher");
+	Professor p("no_teacher", 0);
 	teacher = p;
 	textFile = tFile;
 	maxN = 99;
@@ -22,8 +22,9 @@ bool groupProject::addStudent(Student st)
 	return false;
 }
 
-void groupProject::removeSudent(Student st)
+void groupProject::removeSudent(Student st, string title)
 {
+	st.deleteTitle(title);
 	for (vector<Student>::iterator it = students.begin(); it != students.end(); it++)
 	{
 		if ((*it).getName() == st.getName())
@@ -44,7 +45,7 @@ void groupProject::setTextFile(string tFile)
 	textFile = tFile;
 }
 
-void groupProject::setMaxNum(unsigned int num)
+void groupProject::setMaxNum(int num)
 {
 	maxN = num;
 }

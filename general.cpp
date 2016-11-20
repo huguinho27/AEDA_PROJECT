@@ -10,6 +10,8 @@ class general
 {
 	vector<Enunciation> enunciations;
 	vector<Enunciation> unused_enunciation;
+	vector<Person> people;
+	int static personId;
 public:
 	general();
 	void MainMenu();
@@ -30,7 +32,11 @@ public:
 	void storeEnunciationsInFile();
 	void storeUnusedEnunciationsInFile();
 	void readEnunciationsFromFile();
+	void readPeopleFromFile();
+	void readProjectsFromFile();
 };
+
+int general::personId = 1000;
 
 general::general()
 {
@@ -71,6 +77,92 @@ void general::readEnunciationsFromFile()
 	}
 	myfile.close();
 }
+
+void general::readPeopleFromFile()
+{
+	string line;
+	ifstream myfile("people.txt");
+
+	if (!myfile)
+	{
+		cerr << "Unable to open file people.txt";
+		exit(1);
+	}
+
+	string status;
+	string sId;
+	int id;
+	string name;
+	stringstream convert;
+
+	while (!myfile.eof())
+	{
+		stringstream linestream(line);
+		getline(linestream, status, ';');
+		getline(linestream, sId, ';');
+		getline(linestream, name, ';');
+		convert << sId;
+		convert >> id;
+		if (status == "1")
+		{
+			Student st(name, id);
+			people.push_back(st);
+		}
+		else if (status == "2")
+		{
+			Professor pr(name, id);
+			people.push_back(pr);
+		}
+		else
+		{
+			Person p(name, id);
+			people.push_back(p);
+		}
+
+	}
+	myfile.close();
+}
+
+/*void general::readProjectsFromFile()
+{
+	string line;
+	ifstream myfile("projects.txt");
+
+	if (!myfile)
+	{
+		cerr << "Unable to open file projects.txt";
+		exit(1);
+	}
+
+	string title;
+	string year;
+	string sNumMax, sIdProf, sIdSt, sMark;
+	int numMax, idProf, idSt;
+	float mark;
+
+	while (!myfile.eof())
+	{
+		stringstream convMax, convP, convS, convM;
+		vector<Student> stud;
+		stringstream linestream(line);
+		getline(linestream, title, ';');
+		getline(linestream, year, ';');
+		getline(linestream, sNumMax, ';');
+		convMax << sNumMax;
+		convMax >> numMax;
+		getline(linestream, sIdProf, ';');
+		convP << sIdProf;
+		convP >> idProf;
+		while (getline(linestream, sIdSt, ';'))
+		{
+			years.push_back(year);
+		}
+
+		Enunciation(title, description);
+
+	}
+	myfile.close();
+}*/
 
 void general::storeUnusedEnunciationsInFile()
 {
@@ -459,7 +551,7 @@ void general::addTeacher()
 	cout << "The teacher will be added to an existing group project with no assigned monitor.\n";
 	sleep(1);
 
-	Professor s(input);
+	Professor s(input, personId);
 	bool ctrl = false;
 
 	for (unsigned int i = 0; i < enunciations.size(); i++)
@@ -502,7 +594,7 @@ void general::addStudent()
 	cout << "The student will be added to an existing group project with less than 3 members\n";
 	sleep(1);
 
-	Student s(input);
+	Student s(input, personId);
 	bool ctrl = false;
 
 	for (unsigned int i = 0; i < enunciations.size(); i++)

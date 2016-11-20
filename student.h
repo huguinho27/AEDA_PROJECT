@@ -10,35 +10,39 @@ using namespace std;
 class Person
 {
 protected:
+	int id;
 	string name;
 	vector<string> titleEnun;
 public:
 	Person();
-	Person(string name);
+	Person(string name, int id);
 	virtual ~Person(){};
 	string getName() const;
 	void setName(string newName);
+	void setId(int id);
 	virtual void addNewTitle(string title);
+	virtual void deleteTitle(string title);
 };
 
 class Student: public Person
 {
-	vector<double> marks;
+	vector<float> marks;
 public:
 	Student();
-	Student(string name);
+	Student(string name, int id);
 	virtual ~Student(){};
-	vector<double> getMarks();
-	double getMark(string title);
-	void setMark(double mark, string title);
+	vector<float> getMarks();
+	float getMark(string title);
+	void setMark(float mark, string title);
 	string printInfoStudent();
 	void addNewTitle(string title);
+	void deleteTitle(string title);
 };
 
 class Professor: public Person{
 public:
 	Professor();
-	Professor(string name);
+	Professor(string name, int id);
 	virtual ~Professor(){};
 	string printInfoProfessor();
 };

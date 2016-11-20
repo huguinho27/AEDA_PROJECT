@@ -152,7 +152,7 @@ string EnunciationAnalysis::getInfo()
 
 string EnunciationAnalysis::getCode()
 {
-	return 2;
+	return "2";
 }
 
 /*Development*/

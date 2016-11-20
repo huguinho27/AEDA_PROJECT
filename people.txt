@@ -1,0 +1,13 @@
+2;1000;Ana Paula Cunha da Rocha;
+2;1001;Henrique Daniel de Avelar Lopes Cardoso;
+2;1002;Rosaldo Jose Fernandes Rossetti;
+1;1003;Afonso Bernardino da Silva Pinto;
+1;1004;Bernardo Manuel Faria Ramos;
+1;1005;Daniela Jose Antao Joao;
+1;1006;Francisco Jose Sousa Silva;
+1;1007;Joao Carlos Sousa Barros;
+1;1008;Jose Manuel Rocha Ruiz;
+1;1009;Maria dos Santos de Abreu;
+1;1010;Nuno Soares Marques;
+1;1011;Rui Andre Rebolo Fernandes Leixo;
+1;1012;Vitor Miguel Medeiros Cordeiro;

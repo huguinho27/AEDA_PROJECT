@@ -11,9 +11,10 @@ Person::Person()
 }
 ;
 
-Person::Person(string name)
+Person::Person(string name, int id)
 {
 	this->name = name;
+	this->id = id;
 }
 
 string Person::getName() const
@@ -23,7 +24,24 @@ string Person::getName() const
 
 void Person::setName(string newName)
 {
-	name = newName;
+	this->name = newName;
+}
+
+void Person::setId(int id)
+{
+	this->id = id;
+}
+
+void Person::deleteTitle(string title)
+{
+	for (unsigned int i=0; i<titleEnun.size(); i++)
+	{
+		if ((titleEnun[i]) == title)
+		{
+			titleEnun.erase(titleEnun.begin()+i);
+			break;
+		}
+	}
 }
 
 /* Student */
@@ -33,17 +51,17 @@ Student::Student()
 }
 ;
 
-Student::Student(string name) :
-		Person(name)
+Student::Student(string name, int id) :
+		Person(name, id)
 {
 }
 
-vector<double> Student::getMarks()
+vector<float> Student::getMarks()
 {
 	return marks;
 }
 
-double Student::getMark(string title)
+float Student::getMark(string title)
 {
 	for (unsigned int i = 0; i < titleEnun.size(); i++)
 	{
@@ -55,7 +73,7 @@ double Student::getMark(string title)
 	return -1;
 }
 
-void Student::setMark(double mark, string title)
+void Student::setMark(float mark, string title)
 {
 	for (unsigned int i = 0; i < titleEnun.size(); i++)
 	{
@@ -77,6 +95,19 @@ void Student::addNewTitle(string title)
 	marks.push_back(0);
 }
 
+void Student::deleteTitle(string title)
+{
+	for (unsigned int i=0; i<titleEnun.size(); i++)
+	{
+		if ((titleEnun[i]) == title)
+		{
+			titleEnun.erase(titleEnun.begin()+i);
+			marks.erase(marks.begin()+i);
+			break;
+		}
+	}
+}
+
 string Student::printInfoStudent()
 {
 	stringstream ss;
@@ -91,7 +122,7 @@ string Student::printInfoStudent()
 /* Professor */
 Professor::Professor() {};
 
-Professor::Professor(string name) : Person(name){}
+Professor::Professor(string name, int id) : Person(name, id){}
 
 string Professor::printInfoProfessor()
 {
