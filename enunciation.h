@@ -29,6 +29,7 @@ public:
 	virtual string getCode();
 	virtual string getAddition();
 	void sortOccurrences();
+	void newProj(string year, groupProject proj);
 
 };
 

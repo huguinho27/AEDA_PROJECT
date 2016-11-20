@@ -327,9 +327,7 @@ void general::readProjectsFromFile()
 				{
 					if (enunciations[i].getOccurrences()[j].getYear() == year)
 					{
-						cout<<enunciations[i].getOccurrences()[j].getGroupProjects().size()<<"\n";
-						enunciations[i].getOccurrences()[j].getGroupProjects().push_back(gp);
-						cout<<enunciations[i].getOccurrences()[j].getGroupProjects().size()<<"\n";
+						enunciations[i].newProj(year, gp);
 					}
 				}
 			}
@@ -1021,7 +1019,7 @@ int main()
 	g.readALLEnunciationsFromFile();
 	g.readPeopleFromFile();
 	g.readProjectsFromFile();
-	//g.MainMenu();
+	g.MainMenu();
 	/*g.storeALLEnunciationsInFile();
 	 g.storePeopleInFile();
 	 g.storeProjectsInFile();*/

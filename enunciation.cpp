@@ -76,6 +76,19 @@ void Enunciation::sortOccurrences()
 
 string Enunciation::getAddition(){return "";};
 
+void Enunciation::newProj(string year, groupProject proj)
+{
+	for (unsigned int i=0; i<years.size(); i++)
+	{
+		if (years[i].getYear()==year)
+		{
+			years[i].newGroupProject(proj);
+			break;
+		}
+	}
+}
+
+
 /*Research*/
 EnunciationResearch::EnunciationResearch(string title, string description) : Enunciation(title, description)
 {
