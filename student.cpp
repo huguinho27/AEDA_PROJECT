@@ -62,18 +62,18 @@ Student::Student(string name, int id) :
 {
 }
 
-vector<float> Student::getMarks()
+vector<int> Student::getMarks()
 {
 	return marks;
 }
 
-float Student::getMark(string title)
+int Student::getMark(string title)
 {
 	int i = sequentialSearch(titleEnun, title);
 	return marks[i];
 }
 
-void Student::setMark(float mark, string title)
+void Student::setMark(int mark, string title)
 {
 	unsigned int i = sequentialSearch(titleEnun, title);
 	marks[i] = mark;
@@ -81,8 +81,15 @@ void Student::setMark(float mark, string title)
 
 void Person::addNewTitle(string title)
 {
-	if (sequentialSearch(titleEnun, title) == -1)
-	{titleEnun.push_back(title);}
+	bool ctrl = false;
+	for (unsigned int i = 0 ; i < titleEnun.size();i++)
+	{
+		if (titleEnun[i] == title)
+			ctrl = true;
+	}
+
+	if (!ctrl)
+		titleEnun.push_back(title);
 }
 
 void Student::addNewTitle(string title)
@@ -107,7 +114,7 @@ void Student::deleteTitle(string title)
 string Student::printInfoStudent()
 {
 	stringstream ss;
-	ss << name << "\n";
+	ss << id << "\t" << name << "\n";
 	for (unsigned int i = 0; i < titleEnun.size(); i++)
 	{
 		ss << titleEnun[i] << " - " << marks[i] << "\n";
@@ -123,7 +130,7 @@ Professor::Professor(string name, int id) : Person(name, id){}
 string Professor::printInfoProfessor()
 {
 	stringstream ss;
-	ss << name << "\n";
+	ss << id << "\t" <<name << "\n";
 	for (unsigned int i = 0; i < titleEnun.size(); i++)
 	{
 		ss << titleEnun[i] << "\n";

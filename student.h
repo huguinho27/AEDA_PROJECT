@@ -27,14 +27,14 @@ public:
 
 class Student: public Person
 {
-	vector<float> marks;
+	vector<int> marks;
 public:
 	Student();
 	Student(string name, int id);
 	virtual ~Student(){};
-	vector<float> getMarks();
-	float getMark(string title);
-	void setMark(float mark, string title);
+	vector<int> getMarks();
+	int getMark(string title);
+	void setMark(int mark, string title);
 	string printInfoStudent();
 	void addNewTitle(string title);
 	void deleteTitle(string title);
