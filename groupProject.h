@@ -26,6 +26,7 @@ public:
 	string getTextFile();
 	Professor getTeacher() const;
 	string printInfoProject(string title);
+	int getMax();
 };
 
 #endif

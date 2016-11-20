@@ -38,6 +38,8 @@ public:
 	void readProjectsFromFile();
 	void readUnusedEnunciationsFromFile();
 	int newId();
+	void storePeopleInFile();
+	void storeProjectsInFile();
 	vector<Enunciation> sortEnunciations();
 };
 
@@ -186,6 +188,7 @@ void general::readALLEnunciationsFromFile()
 
 	}
 	myfile.close();
+	readUnusedEnunciationsFromFile();
 }
 
 void general::readPeopleFromFile()
@@ -310,101 +313,123 @@ void general::readProjectsFromFile()
 	myfile.close();
 }
 
-void general::storeUnusedEnunciationsInFile()
-{
+void general::storeUnusedEnunciationsInFile() {
 	string fName = "unused_enunciations.txt";
 	ofstream myfile(fName.c_str());
+	myfile.clear();
 	string title;
 	string description;
 	string code;
 
-	if (myfile.is_open())
-	{
-		for (unsigned int i = 0; i < unused_enunciation.size(); i++)
-		{
+	if (myfile.is_open()) {
+		for (unsigned int i = 0; i < unused_enunciation.size(); i++) {
 			code = unused_enunciation[i].getCode();
 			title = unused_enunciation[i].getTitle();
 			description = unused_enunciation[i].getDescription();
-
-			if (unused_enunciation[i].getOccurrences().size() == 0)
-			{
-				myfile << code << ";";
-				myfile << title << ";";
-				myfile << description;
-			} else
-			{
-				myfile << code << ";";
-				myfile << title << ";";
-				myfile << description << ";";
-			}
-
-			if (unused_enunciation[i].getOccurrences().size() != 0)
-			{
-				for (unsigned int j = 0; j < unused_enunciation[i].getOccurrences().size(); j++)
-				{
-					myfile << unused_enunciation[i].getOccurrences()[j].getYear();
-
-					if (j != unused_enunciation[i].getOccurrences().size() - 1)
-					{
-						myfile << ";";
-					}
-				}
-			}
-
+			myfile << code << ";";
+			myfile << title << ";";
+			myfile << description << ";\n";
 		}
 		myfile.close();
 	} else
 		cout << "Unable to open file " << fName << "\n";
-	return;
 }
 
-void general::storeALLEnunciationsInFile()
-{
+void general::storeALLEnunciationsInFile() {
 	string fName = "enunciation.txt";
 	ofstream myfile(fName.c_str());
+	myfile.clear();
 	string title;
 	string description;
 	string code;
 
-	if (myfile.is_open())
-	{
-		for (unsigned int i = 0; i < enunciations.size(); i++)
-		{
+	if (myfile.is_open()) {
+		for (unsigned int i = 0; i < enunciations.size(); i++) {
 			code = enunciations[i].getCode();
 			title = enunciations[i].getTitle();
 			description = enunciations[i].getDescription();
+			myfile << code << ";";
+			myfile << title << ";";
+			myfile << description << ";";
 
-			if (enunciations[i].getOccurrences().size() == 0)
-			{
-				myfile << code << ";";
-				myfile << title << ";";
-				myfile << description;
-			} else
-			{
-				myfile << code << ";";
-				myfile << title << ";";
-				myfile << description << ";";
-			}
-
-			if (enunciations[i].getOccurrences().size() != 0)
-			{
-				for (unsigned int j = 0; j < enunciations[i].getOccurrences().size(); j++)
-				{
-					myfile << enunciations[i].getOccurrences()[j].getYear();
-
-					if (j != enunciations[i].getOccurrences().size() - 1)
-					{
-						myfile << ";";
+			if (enunciations[i].getOccurrences().size() != 0) {
+				for (unsigned int j = 0; j < enunciations[i].getOccurrences().size(); j++) {
+					myfile << enunciations[i].getOccurrences()[j].getYear() << ";";
 					}
 				}
+			myfile << "\n";
 			}
-
-		}
 		myfile.close();
-	} else
+	}
+	else
 		cout << "Unable to open file " << fName << "\n";
 	storeUnusedEnunciationsInFile();
-	return;
+}
+
+void general::storePeopleInFile()
+{
+	string fName = "people.txt";
+	ofstream myfile(fName.c_str());
+	myfile.clear();
+	int id;
+	string name;
+
+	if (myfile.is_open())
+	{
+		for (unsigned int i=0; i<students.size(); i++)
+		{
+			id = students[i].getId();
+			name = students[i].getName();
+			myfile << "1;" << id << ";" << name << ";\n";
+		}
+		for (unsigned int i=0; i<professors.size(); i++)
+		{
+			id = professors[i].getId();
+			name = professors[i].getName();
+			myfile << "2;" << id << ";" << name << ";\n";
+		}
+		myfile.close();
+	}
+	else
+		cout << "Unable to open file " << fName << "\n";
+}
+
+void general::storeProjectsInFile()
+{
+	string fName = "projects.txt";
+	ofstream myfile(fName.c_str());
+	myfile.clear();
+	string title, year;
+	int idPr, idSt, maxN;
+	float mark;
+
+	if (myfile.is_open())
+	{
+		for (unsigned int i=0; i<enunciations.size(); i++)
+		{
+			title = enunciations[i].getTitle();
+			for (unsigned int j=0; j<enunciations[i].getOccurrences().size(); j++)
+			{
+				year = enunciations[i].getOccurrences()[j].getYear();
+				for (unsigned int k=0; k<enunciations[i].getOccurrences()[j].getGroupProjects().size(); k++)
+				{
+					idPr = enunciations[i].getOccurrences()[j].getGroupProjects()[k].getTeacher().getId();
+					maxN = enunciations[i].getOccurrences()[j].getGroupProjects()[k].getMax();
+					myfile << title << ";" << year << ";" << maxN << ";" << idPr << ";";
+					for (unsigned int l=0; l<enunciations[i].getOccurrences()[j].getGroupProjects()[k].getStudents().size(); l++)
+					{
+						idSt = enunciations[i].getOccurrences()[j].getGroupProjects()[k].getStudents()[l].getId();
+						mark = enunciations[i].getOccurrences()[j].getGroupProjects()[k].getStudents()[l].getMark(title);
+						myfile << idSt << ";" << mark << ";";
+					}
+					myfile << "\n";
+				}
+			}
+		}
+		myfile.close();
+	}
+	else
+		cout << "Unable to open file " << fName << "\n";
 }
 
 /**

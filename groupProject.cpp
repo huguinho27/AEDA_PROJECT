@@ -76,3 +76,8 @@ string groupProject::printInfoProject(string title)
 	ss << "\n Free places: " << (maxN - students.size()) << "\n";
 	return ss.str();
 }
+
+int groupProject::getMax()
+{
+	return maxN;
+}
