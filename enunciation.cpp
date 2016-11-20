@@ -152,6 +152,7 @@ string EnunciationDevelopment::getInfo()
 	stringstream ss;
 	ss << "Enunciation type: Development\n" << Enunciation::getInfo() << "\n";
 	ss << "Data repositories: " << results << "\n";
+	return ss.str();
 }
 
 string EnunciationDevelopment::getCode()
@@ -222,7 +223,7 @@ void saveEnunciation(Enunciation enun)
 
 
 
-/*
+
  void Transportes::fromFilesToVecItens()
  {
  itens.clear();
