@@ -15,7 +15,7 @@ void Occurrence::setYear(string year)
 	schoolYear = year;
 }
 
-void Occurrence::newGroupProject(groupProject proj)
+void Occurrence::newGroupProject(groupProject *proj)
 {
 	projects.push_back(proj);
 }
@@ -25,7 +25,7 @@ string Occurrence::getYear() const
 	return schoolYear;
 }
 
-vector<groupProject> Occurrence::getGroupProjects() const
+vector<groupProject *> Occurrence::getGroupProjects() const
 {
 	return projects;
 }
@@ -37,9 +37,9 @@ vector<groupProject> Occurrence::getGroupProjects() const
 	 for (unsigned int i=0; i<projects.size(); i++)
 	 {
 		 ss << (i+1) << " - ";
-		 for (unsigned int j=0; j<projects[i].getStudents().size(); j++)
+		 for (unsigned int j=0; j<projects[i]->getStudents().size(); j++)
 		 {
-			 ss << projects[i].getStudents()[j].getName() << "; ";
+			 ss << projects[i]->getStudents()[j]->getName() << "; ";
 		 }
 		 ss << "\n";
 	 }

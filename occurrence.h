@@ -9,14 +9,14 @@ using namespace std;
 class Occurrence
 {
 	string schoolYear;
-	vector<groupProject> projects;
+	vector<groupProject *> projects;
 public:
 	Occurrence();
 	Occurrence(string schoolYear);
 	void setYear (string year);
-	void newGroupProject(groupProject proj);
+	void newGroupProject(groupProject *proj);
 	string getYear() const;
-	vector<groupProject> getGroupProjects() const;
+	vector<groupProject *> getGroupProjects() const;
 	string printInfoOccurrence(string title);
 	bool operator< (const Occurrence &right);
 };

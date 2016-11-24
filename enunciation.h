@@ -15,7 +15,7 @@ class Enunciation
 {
 protected:
 	string title, description;
-	vector <Occurrence> years;
+	vector <Occurrence *> years;
 public:
 	Enunciation();
 	Enunciation(string title, string description);
@@ -23,13 +23,13 @@ public:
 	string getDescription() const;
 	void setTitle(string newTitle);
 	void setDescription(string newDescription);
-	void addYear(Occurrence newYear);
-	vector <Occurrence> getOccurrences() const;
+	void addYear(Occurrence *newYear);
+	vector <Occurrence *> getOccurrences() const;
 	virtual string getInfo();
 	virtual string getCode();
 	virtual string getAddition();
 	void sortOccurrences();
-	void newProj(string year, groupProject proj);
+	//void newProj(string year, groupProject proj);
 
 };
 

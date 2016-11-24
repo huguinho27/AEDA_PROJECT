@@ -40,14 +40,8 @@ int Person::getId()
 
 void Person::deleteTitle(string title)
 {
-	for (unsigned int i=0; i<titleEnun.size(); i++)
-	{
-		if ((titleEnun[i]) == title)
-		{
-			titleEnun.erase(titleEnun.begin()+i);
-			break;
-		}
-	}
+	int i = sequentialSearch(titleEnun, title);
+	titleEnun.erase(titleEnun.begin()+i);
 }
 
 /* Student */

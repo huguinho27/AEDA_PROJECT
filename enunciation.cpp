@@ -35,12 +35,12 @@ void Enunciation::setDescription(string newDescription)
 	description = newDescription;
 }
 
-void Enunciation::addYear(Occurrence newYear)
+void Enunciation::addYear(Occurrence *newYear)
 {
 	years.push_back(newYear);
 }
 
-vector <Occurrence> Enunciation::getOccurrences() const
+vector <Occurrence *> Enunciation::getOccurrences() const
 {
 	return years;
 }
@@ -56,10 +56,10 @@ string Enunciation::getInfo()
 	{
 		if (i == years.size()-1)
 		{
-			ss << years.size() << " - " <<years[i].getYear() << ".\n";
+			ss << years.size() << " - " <<years[i]->getYear() << ".\n";
 			break;
 		}
-		ss << i+1 << " - " << years[i].getYear() << ",\n";
+		ss << i+1 << " - " << years[i]->getYear() << ",\n";
 	}
 	return ss.str();
 }
@@ -76,7 +76,7 @@ void Enunciation::sortOccurrences()
 
 string Enunciation::getAddition(){return "";};
 
-void Enunciation::newProj(string year, groupProject proj)
+/*void Enunciation::newProj(string year, groupProject proj)
 {
 	for (unsigned int i=0; i<years.size(); i++)
 	{
@@ -86,7 +86,7 @@ void Enunciation::newProj(string year, groupProject proj)
 			break;
 		}
 	}
-}
+}*/
 
 
 /*Research*/

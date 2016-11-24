@@ -3,7 +3,7 @@
 
 groupProject::groupProject(){maxN = 99;};
 
-groupProject::groupProject(vector<Student> studentsIN)
+groupProject::groupProject(vector<Student *> studentsIN)
 {
 	students = studentsIN;
 	Professor p("no_teacher", 0);
@@ -11,7 +11,7 @@ groupProject::groupProject(vector<Student> studentsIN)
 	maxN = 99;
 }
 
-bool groupProject::addStudent(Student st)
+bool groupProject::addStudent(Student *st)
 {
 	if (students.size() < maxN)
 	{
@@ -21,12 +21,12 @@ bool groupProject::addStudent(Student st)
 	return false;
 }
 
-void groupProject::removeSudent(Student st, string title)
+void groupProject::removeSudent(Student *st, string title)
 {
-	st.deleteTitle(title);
-	for (vector<Student>::iterator it = students.begin(); it != students.end(); it++)
+	st->deleteTitle(title);
+	for (vector<Student *>::iterator it = students.begin(); it != students.end(); it++)
 	{
-		if ((*it).getName() == st.getName())
+		if ((*it)->getName() == st->getName())
 		{
 			students.erase(it);
 			break;
@@ -34,9 +34,10 @@ void groupProject::removeSudent(Student st, string title)
 	}
 }
 
-void groupProject::setTeacher(Professor prof)
+void groupProject::setTeacher(Professor *prof)
 {
-	teacher = prof;
+	this->teacher.setId(prof->getId());
+	this->teacher.setName(prof->getName());
 }
 
 void groupProject::setTextFile(string tFile)
@@ -49,7 +50,7 @@ void groupProject::setMaxNum(int num)
 	maxN = num;
 }
 
-vector<Student> groupProject::getStudents() const
+vector<Student *> groupProject::getStudents() const
 {
 	return students;
 }
@@ -64,13 +65,13 @@ Professor groupProject::getTeacher() const
 	return teacher;
 }
 
-void groupProject::setMark(Student st, int mark, string title)
+void groupProject::setMark(Student *st, int mark, string title)
 {
-	for (unsigned int i=0; i<students.size(); i++)
+	for (vector<Student *>::iterator it=students.begin(); it != students.end(); it++)
 	{
-		if (students[i].getId()== st.getId())
+		if ((*it)->getId() == st->getId())
 		{
-			students[i].setMark(mark, title);
+			(*it)->setMark(mark, title);
 		}
 	}
 }
@@ -78,11 +79,12 @@ void groupProject::setMark(Student st, int mark, string title)
 string groupProject::printInfoProject(string title)
 {
 	stringstream ss;
-	ss << "Monitor: " << teacher.getName() << "\n \n";
+	ss << "Title: " << title << "\n\n";
+	ss << "Monitor: " << teacher.getName() << "\n";
 	ss << "Students\n";
 	for (unsigned int i=0; i<students.size(); i++)
 	{
-		ss << students[i].getName() << " - " << students[i].getMark(title) << "\n|";
+		ss << students[i]->getName() << " - " << students[i]->getMark(title) << "\n";
 	}
 	ss << "\n Free places: " << (maxN - students.size()) << "\n";
 	return ss.str();
