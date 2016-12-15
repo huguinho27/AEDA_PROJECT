@@ -2,13 +2,34 @@
 #include <vector>
 #include <unistd.h>
 #include <string>
+#include <queue>
 #include "enunciation.h"
 #include "insertionSort.h"
+#include "groupProject.h"
 
 using namespace std;
+struct groupProjectHash
+{
+	int operator() (const groupProject & gp) const
+	{
+		int n = 0;
+		return n;
+	}
+
+	bool operator() (const groupProject & gp1, const groupProject & gp2) const
+	{
+		return false;
+	}
+};
+typedef tr1::unordered_set<groupProject, groupProjectHash, groupProjectHash> tabHProject;
+typedef priority_queue<groupProject> HEAP_GP;
 
 class general
 {
+	BST<groupProject *> gProjects;
+	tabHProject oldGP;
+	HEAP_GP notValuatedGP;
+
 	vector<Enunciation *> enunciations;
 	vector<Enunciation *> unused_enunciation;
 	vector<Student *> students;
