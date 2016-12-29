@@ -17,12 +17,20 @@ void Occurrence::setYear(string year)
 
 void Occurrence::newGroupProject(groupProject *proj)
 {
+	proj->setTitle(title);
+	proj->setYear(schoolYear);
+	proj->setType(type);
 	projects.push_back(proj);
 }
 
 string Occurrence::getYear() const
 {
 	return schoolYear;
+}
+
+string Occurrence::getType()
+{
+	return type;
 }
 
 vector<groupProject *> Occurrence::getGroupProjects() const

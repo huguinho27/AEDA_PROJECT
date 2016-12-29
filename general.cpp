@@ -22,7 +22,7 @@ struct groupProjectHash
 	}
 };
 typedef tr1::unordered_set<groupProject, groupProjectHash, groupProjectHash> tabHProject;
-typedef priority_queue<groupProject> HEAP_GP;
+typedef priority_queue<groupProject *> HEAP_GP;
 
 class general
 {
@@ -36,7 +36,7 @@ class general
 	vector<Professor *> professors;
 	int static personId;
 public:
-	general();
+	general():gProjects(new groupProject()){};
 	void MainMenu();
 	bool verifyGetline(int init, int end, string input);
 	void browseTechersStudentMenu();
@@ -172,6 +172,11 @@ void general::yearShow(Occurrence *year, string title)
 	} else if (input == "2")
 	{
 		groupProject *p = new groupProject();
+		p->setTitle(title);
+		p->setYear(year->getYear());
+		p->setType(year->getType());
+		p->setStatus("nf");
+		gProjects.insert(p);
 		year->newGroupProject(p);
 		yearShow(year, title);
 	}
@@ -204,7 +209,10 @@ void general::projectShow(groupProject *pr, string title, Occurrence *year)
 		cout << "3. Set teacher\n";
 		cout << "4. Set maximum number of student\n";
 		cout << "5. Set text file\n";
-		cout << "6. Set mark\n";
+		if (pr->getStatus() == "nf")
+		{
+			cout << "6. Finish project\n";
+		}
 		cout << "Write 'back' to go back to previous menu\n";
 		cout << ">> ";
 		getline(cin, input);
@@ -283,31 +291,12 @@ void general::projectShow(groupProject *pr, string title, Occurrence *year)
 		getline(cin, inp);
 		cin.clear();
 		pr->setTextFile(inp);
+		pr->setStatus("f");
 		projectShow(pr, title, year);
 	} else if (input == "6")
 	{
-		string id, mark;
-		cout << "Enter the id of student\n";
-		cout << ">> ";
-		getline(cin, id);
-		cin.clear();
-		cout << "Enter the mark\n";
-		cout << ">> ";
-		getline(cin, mark);
-		cin.clear();
-		for (unsigned int i = 0; i < pr->getStudents().size(); i++)
-		{
-			if (pr->getStudents()[i]->getId() == atoi(id.c_str()))
-			{
-				pr->setMark(pr->getStudents()[i], atoi(mark.c_str()), title);
-				break;
-			}
-			if (students[i]->getId() == atoi(id.c_str()))
-			{
-				students[i]->setMark(atoi(mark.c_str()), title);
-				break;
-			}
-		}
+		pr->setStatus("f");
+		notValuatedGP.push(pr);
 		projectShow(pr, title, year);
 	} else if (input == "back")
 	{
@@ -316,10 +305,6 @@ void general::projectShow(groupProject *pr, string title, Occurrence *year)
 
 }
 
-general::general()
-{
-}
-;
 
 /*void general::listProjects()
  {
@@ -427,12 +412,14 @@ void general::readALLEnunciationsFromFile()
 			years.push_back(year);
 		}
 
-		if (code == "0")
+		if (code == "9")
 		{
 			Enunciation *r = new Enunciation(title, description);
 			for (unsigned int i = 0; i < years.size(); i++)
 			{
 				Occurrence *o = new Occurrence(years[i]);
+				o->setTitle(title);
+				o->setType(code);
 				r->addYear(o);
 			}
 			enunciations.push_back(r);
@@ -444,6 +431,8 @@ void general::readALLEnunciationsFromFile()
 			for (unsigned int i = 0; i < years.size(); i++)
 			{
 				Occurrence *o = new Occurrence(years[i]);
+				o->setTitle(title);
+				o->setType(code);
 				r->addYear(o);
 			}
 			enunciations.push_back(r);
@@ -455,6 +444,8 @@ void general::readALLEnunciationsFromFile()
 			for (unsigned int i = 0; i < years.size(); i++)
 			{
 				Occurrence *o = new Occurrence(years[i]);
+				o->setTitle(title);
+				o->setType(code);
 				r->addYear(o);
 			}
 			enunciations.push_back(r);
@@ -466,6 +457,8 @@ void general::readALLEnunciationsFromFile()
 			for (unsigned int i = 0; i < years.size(); i++)
 			{
 				Occurrence *o = new Occurrence(years[i]);
+				o->setTitle(title);
+				o->setType(code);
 				r->addYear(o);
 			}
 			enunciations.push_back(r);
@@ -529,7 +522,7 @@ void general::readProjectsFromFile()
 	}
 
 	string title, textF;
-	string year;
+	string year, stat;
 	string sNumMax, sIdProf, sIdSt, sMark;
 
 	while (!myfile.eof())
@@ -543,6 +536,7 @@ void general::readProjectsFromFile()
 		getline(linestream, year, ';');
 		getline(linestream, sNumMax, ';');
 		getline(linestream, textF, ';');
+		getline(linestream, stat, ';');
 		getline(linestream, sIdProf, ';');
 
 		while (getline(linestream, sIdSt, ';'))
@@ -574,6 +568,9 @@ void general::readProjectsFromFile()
 		}
 		gp->setMaxNum(atoi(sNumMax.c_str()));
 		gp->setTextFile(textF);
+		gp->setTitle(title);
+		gp->setYear(year);
+		gp->setStatus(stat);
 		for (unsigned int i = 0; i < enunciations.size(); i++)
 		{
 			if (enunciations[i]->getTitle() == title)
@@ -583,6 +580,9 @@ void general::readProjectsFromFile()
 				{
 					if (enunciations[i]->getOccurrences()[j]->getYear() == year)
 					{
+						gp->setType(enunciations[i]->getCode());
+						gProjects.insert(gp);
+						if (stat == "f") notValuatedGP.push(gp);
 						enunciations[i]->getOccurrences()[j]->newGroupProject(
 								gp);
 					}
@@ -698,7 +698,7 @@ void general::storeProjectsInFile()
 	string fName = "projects.txt";
 	ofstream myfile(fName.c_str());
 	myfile.clear();
-	string title, year, textF;
+	string title, year, textF, stat;
 	int idPr, idSt, maxN, mark;
 
 	if (myfile.is_open())
@@ -721,8 +721,10 @@ void general::storeProjectsInFile()
 							enunciations[i]->getOccurrences()[j]->getGroupProjects()[k]->getMax();
 					textF =
 							enunciations[i]->getOccurrences()[j]->getGroupProjects()[k]->getTextFile();
+					stat =
+							enunciations[i]->getOccurrences()[j]->getGroupProjects()[k]->getStatus();
 					myfile << title << ";" << year << ";" << maxN << ";"
-							<< textF << ";" << idPr << ";";
+							<< textF << ";" << stat << ";" << idPr << ";";
 					for (unsigned int l = 0;
 							l
 									< enunciations[i]->getOccurrences()[j]->getGroupProjects()[k]->getStudents().size();
@@ -822,7 +824,7 @@ void general::listEnunciations(vector<Enunciation *> le)
 		{
 			cout << i + 1 << " - " << le[i]->getTitle() << "\n";
 		}
-		cout << "\n" << "Enter the number of enunciation to open it or 'back' to go back to previous menu\n";
+		cout << "\n" << "Enter the number of assignment to open it or 'back' to go back to previous menu\n";
 		cout << ">> ";
 		getline(cin, input);
 		cin.clear();
@@ -906,12 +908,14 @@ void general::createEnunciationMenu()
 void general::createNewOccurrence(string title, string year)
 {
 	Occurrence *o = new Occurrence(year);
+	o->setTitle(title);
 	bool check = false;
 	for (unsigned int i = 0; i < unused_enunciation.size(); i++)
 	{
 		if (unused_enunciation[i]->getTitle() == title)
 		{
 			Enunciation *d = unused_enunciation[i];
+			o->setType(d->getCode());
 			d->addYear(o);
 			enunciations.push_back(d);
 			unused_enunciation.erase(unused_enunciation.begin() + i);
@@ -924,6 +928,7 @@ void general::createNewOccurrence(string title, string year)
 		{
 			if (enunciations[i]->getTitle() == title)
 			{
+				o->setType(enunciations[i]->getCode());
 				enunciations[i]->addYear(o);
 				check = true;
 			}
@@ -1280,11 +1285,11 @@ void general::browseEnunciationMenu()
 	{
 		system("cls");
 
-		cout << "ENUNCIATIONS MANAGEMENT\n\n";
-		cout << "1. List all enunciations\n";
-		cout << "2. Create new enunciation\n";
-		cout << "3. To filter enunciations \n";
-		cout << "4. Show unused enunciations\n";
+		cout << "ASSIGNMENT MANAGEMENT\n\n";
+		cout << "1. List all assignments\n";
+		cout << "2. Create new assignment\n";
+		cout << "3. To filter assignments \n";
+		cout << "4. Show unused assignments\n";
 		cout << "5. Back to main menu\n";
 
 		cout << ">> ";
@@ -1320,7 +1325,7 @@ void general::MainMenu()
 	{
 		system("cls");
 		cout << "ENUNCIATIONS MANAGEMENT OF FEUP\n\n";
-		cout << "1. Browse Enunciations\n";
+		cout << "1. Browse Assignments\n";
 		cout << "2. Browse Students / Teachers\n";
 		cout << "3. Exit\n";
 

@@ -37,6 +37,8 @@ void Enunciation::setDescription(string newDescription)
 
 void Enunciation::addYear(Occurrence *newYear)
 {
+	newYear->setTitle(title);
+	newYear->setType(getCode());
 	years.push_back(newYear);
 }
 
@@ -66,7 +68,7 @@ string Enunciation::getInfo()
 
 string Enunciation::getCode()
 {
-	return "0";
+	return "9";
 }
 
 void Enunciation::sortOccurrences()
