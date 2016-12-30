@@ -12,13 +12,35 @@ struct groupProjectHash
 {
 	int operator() (const groupProject & gp) const
 	{
-		int n = 0;
-		return n;
+		int v = 0;
+		int sum;
+		string s1 = gp.getTitle();
+		string s2 = gp.getYear();
+		string s3 = gp.getStudents()[0]->getName();
+		for ( unsigned int i=0; i< s1.size(); i++ )
+			v = 37*v + s1[i];
+		for ( unsigned int i=0; i< s2.size(); i++ )
+			v = 37*v + s2[i];
+		for ( unsigned int i=0; i< s3.size(); i++ )
+			v = 37*v + s3[i];
+		return v;
 	}
 
 	bool operator() (const groupProject & gp1, const groupProject & gp2) const
 	{
-		return false;
+		if (gp1.getTitle() != gp2.getTitle())
+		{
+			return false;
+		}
+		else if (gp1.getYear() != gp2.getYear())
+		{
+			return false;
+		}
+		else if (gp1.getStudents() != gp2.getStudents())
+		{
+			return false;
+		}
+		else return true;
 	}
 };
 typedef tr1::unordered_set<groupProject, groupProjectHash, groupProjectHash> tabHProject;
@@ -68,6 +90,7 @@ public:
 	void yearShow(Occurrence *year, string title);
 	void projectShow(groupProject *pr, string title, Occurrence *year);
 	void listUnusedEnunciations();
+	void evaluateEnunciations();
 };
 
 int general::personId = 1000;
@@ -1278,6 +1301,59 @@ void general::listUnusedEnunciations()
 	return;
 }
 
+void general::evaluateEnunciations()
+{
+	if (notValuatedGP.size() == 0)
+	{
+		cout << "no group projects to evaluate\n";
+		return;
+	}
+	groupProject *gp = notValuatedGP.top();
+	string input;
+	string id, mark;
+	system("cls");
+	cout << gp->printInfoProject(gp->getTitle()) << "\n";
+
+	cout << "Enter the id of student to evaluate\n";
+	cout << "Write 'finish' to finish evaluation of this group project and to go to the next one\n";
+	cout << "Write 'back' to go back to previous menu\n";
+	cout << ">> ";
+	getline(cin, input);
+	cin.clear();
+	if (input == "back")
+	{
+		browseEnunciationMenu();
+	}
+	else if (input == "finish")
+	{
+		gp->setStatus("ev");
+		notValuatedGP.pop();
+		evaluateEnunciations();
+	}
+	else
+	{
+		id = input;
+		cout << "Enter the mark\n";
+		cout << ">> ";
+		getline(cin, mark);
+		cin.clear();
+		for (unsigned int i = 0; i < gp->getStudents().size(); i++)
+		{
+			if (gp->getStudents()[i]->getId() == atoi(id.c_str()))
+			{
+				gp->setMark(gp->getStudents()[i], atoi(mark.c_str()), gp->getTitle());
+				break;
+			}
+			if (students[i]->getId() == atoi(id.c_str()))
+			{
+				students[i]->setMark(atoi(mark.c_str()), gp->getTitle());
+				break;
+			}
+		}
+		evaluateEnunciations();
+	}
+}
+
 void general::browseEnunciationMenu()
 {
 	string input;
@@ -1290,7 +1366,8 @@ void general::browseEnunciationMenu()
 		cout << "2. Create new assignment\n";
 		cout << "3. To filter assignments \n";
 		cout << "4. Show unused assignments\n";
-		cout << "5. Back to main menu\n";
+		cout << "5. Evaluate assignments\n";
+		cout << "6. Back to main menu\n";
 
 		cout << ">> ";
 		getline(cin, input);
@@ -1312,7 +1389,9 @@ void general::browseEnunciationMenu()
 	else if (input == "4")
 		//listUnusedEnunciations();
 		listEnunciations(unused_enunciation);
-	else if (input == "5" || input == "back")
+	else if (input == "5")
+		evaluateEnunciations();
+	else if (input == "6" || input == "back")
 		MainMenu();
 
 	return;
@@ -1324,7 +1403,7 @@ void general::MainMenu()
 	do
 	{
 		system("cls");
-		cout << "ENUNCIATIONS MANAGEMENT OF FEUP\n\n";
+		cout << "ASSIGNMENTS MANAGEMENT OF FEUP\n\n";
 		cout << "1. Browse Assignments\n";
 		cout << "2. Browse Students / Teachers\n";
 		cout << "3. Exit\n";

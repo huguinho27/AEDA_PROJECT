@@ -66,15 +66,18 @@ Professor groupProject::getTeacher() const
 	return teacher;
 }
 
-string groupProject::getTitle(){
+string groupProject::getTitle() const
+{
 	return title;
 }
 
-string groupProject::getYear(){
+string groupProject::getYear() const
+{
 	return year;
 }
 
-string groupProject::getType(){
+string groupProject::getType() const
+{
 	return type;
 }
 
@@ -117,7 +120,22 @@ void groupProject::setStatus(string newSt)
 	status = newSt;
 }
 
-string groupProject::getStatus()
+void groupProject::setTitle(string title)
+{
+	this->title = title;
+}
+
+void groupProject::setYear(string year)
+{
+	this->year = year;
+}
+
+void groupProject::setType(string type)
+{
+	this->type = type;
+}
+
+string groupProject::getStatus() const
 {
 	return status;
 }

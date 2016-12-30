@@ -15,6 +15,16 @@ void Occurrence::setYear(string year)
 	schoolYear = year;
 }
 
+void Occurrence::setTitle(string title)
+{
+	this->title = title;
+}
+
+void Occurrence::setType(string type)
+{
+	this->type = type;
+}
+
 void Occurrence::newGroupProject(groupProject *proj)
 {
 	proj->setTitle(title);

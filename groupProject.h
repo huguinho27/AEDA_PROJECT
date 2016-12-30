@@ -33,10 +33,10 @@ public:
 	void setYear(string year);
 	void setType(string type);
 	void setStatus(string newSt);
-	string getStatus();
-	string getTitle();
-	string getYear();
-	string getType();
+	string getStatus() const;
+	string getTitle() const;
+	string getYear() const;
+	string getType() const;
 	vector<Student *> getStudents() const;
 	string getTextFile();
 	Professor getTeacher() const;
