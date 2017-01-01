@@ -14,7 +14,7 @@ groupProject::groupProject(vector<Student *> studentsIN)
 
 bool groupProject::addStudent(Student *st)
 {
-	if (students.size() < maxN)
+	if (students.size() < (unsigned)maxN)
 	{
 		students.push_back(st);
 		return true;
@@ -154,6 +154,5 @@ bool groupProject::operator < (const groupProject &right) const
 
 bool groupProject::operator == (const groupProject &right) const
 {
-	if ((title == right.title) && (year == right.year) && (students == right.students)) return true;
-	else return false;
+	return (title == right.title && year == right.year && students == right.students);
 }

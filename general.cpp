@@ -10,37 +10,23 @@
 using namespace std;
 struct groupProjectHash
 {
-	int operator() (const groupProject & gp) const
+	int operator()(const groupProject & gp) const
 	{
-		int v = 0;
-		int sum;
-		string s1 = gp.getTitle();
-		string s2 = gp.getYear();
-		string s3 = gp.getStudents()[0]->getName();
-		for ( unsigned int i=0; i< s1.size(); i++ )
-			v = 37*v + s1[i];
-		for ( unsigned int i=0; i< s2.size(); i++ )
-			v = 37*v + s2[i];
-		for ( unsigned int i=0; i< s3.size(); i++ )
-			v = 37*v + s3[i];
+		int v;
+		stringstream ss;
+		for (unsigned int i = 0; i < gp.getStudents().size(); i++)
+			ss << gp.getStudents()[i]->getName();
+
+		string names = ss.str();
+
+		for (unsigned int i = 0; i < names.size(); i++)
+			v = 37 * names[i];
 		return v;
 	}
 
-	bool operator() (const groupProject & gp1, const groupProject & gp2) const
+	bool operator()(const groupProject & gp1, const groupProject & gp2) const
 	{
-		if (gp1.getTitle() != gp2.getTitle())
-		{
-			return false;
-		}
-		else if (gp1.getYear() != gp2.getYear())
-		{
-			return false;
-		}
-		else if (gp1.getStudents() != gp2.getStudents())
-		{
-			return false;
-		}
-		else return true;
+		return gp1 == gp2;
 	}
 };
 typedef tr1::unordered_set<groupProject, groupProjectHash, groupProjectHash> tabHProject;
@@ -48,22 +34,27 @@ typedef priority_queue<groupProject *> HEAP_GP;
 
 class general
 {
-	BST<groupProject *> gProjects;
-	tabHProject oldGP;
-	HEAP_GP notValuatedGP;
-
 	vector<Enunciation *> enunciations;
 	vector<Enunciation *> unused_enunciation;
 	vector<Student *> students;
 	vector<Professor *> professors;
 	int static personId;
+
+	//2nd part
+	BST<groupProject *> gProjects;
+	tabHProject oldGP;
+	HEAP_GP notValuatedGP;
+
 public:
-	general():gProjects(new groupProject()){};
+	general() :
+			gProjects(new groupProject())
+	{
+	}
+	;
 	void MainMenu();
 	bool verifyGetline(int init, int end, string input);
 	void browseTechersStudentMenu();
 	void browseEnunciationMenu();
-	//void displayLectureTeacher();
 	void createEnunciationMenu();
 	void listEnunciations(vector<Enunciation *> le);
 	void findTeacher();
@@ -73,7 +64,6 @@ public:
 	void addTeacher();
 	void addStudent();
 	void createNewOccurrence(string title, string year);
-	//void createNewpProject(Occurrence *year);
 	bool checkGoodDateInput(string date);
 	void storeALLEnunciationsInFile();
 	void storeUnusedEnunciationsInFile();
@@ -85,11 +75,13 @@ public:
 	void storePeopleInFile();
 	void storeProjectsInFile();
 	void sortByNumberStudentsEnunciations();
-	//void listProjects();
 	void enunciationShow(Enunciation *en);
 	void yearShow(Occurrence *year, string title);
 	void projectShow(groupProject *pr, string title, Occurrence *year);
 	void listUnusedEnunciations();
+
+	//2nd part
+	void listBSTEnunciationsByType();
 	void evaluateEnunciations();
 };
 
@@ -114,6 +106,55 @@ int general::newId()
 		}
 	}
 	return personId;
+}
+
+void general::listBSTEnunciationsByType()
+{
+	string input;
+	do
+	{
+		system("cls");
+		cout << "What is the type of enunciation you wish to display?\n";
+		getline(cin, input);
+		cin.clear();
+
+		if (input != "general" || input != "development" || input != "research" || input != "analysis")
+		{
+			cout << "Wrong type. Available types are: general, development, research, analysis\n";
+			system("pause");
+		} else
+			break;
+
+	} while (true);
+
+	vector<string> end;
+	BSTItrIn<groupProject *> it(gProjects);
+	if (it.isAtEnd())
+	{
+		cout << "No Enunciations to show, size = 0\n";
+		system("pause");
+		return;
+	}
+
+	while (!it.isAtEnd())
+	{
+		if (it.retrieve()->getType() == input)
+		{
+			end.push_back(it.retrieve()->printInfoProject(it.retrieve()->getTitle()));
+			end.push_back("--------------------------------------------\n");
+		}
+		it.advance();
+	}
+
+	if (end.empty())
+	{
+		cout << "No Enunciations of type " << input << " to show\n";
+		system("pause");
+		return;
+	}
+
+	for (unsigned int i = 0; i < end.size(); i++)
+		cout << end[i];
 }
 
 void general::enunciationShow(Enunciation *en)
@@ -145,14 +186,14 @@ void general::enunciationShow(Enunciation *en)
 
 		cout << "n: " << n << endl;
 
-		if ((n-1) >= en->getOccurrences().size())
+		if ((n - 1) >= en->getOccurrences().size())
 		{
 			cout << "No info of that occurrence\n";
 			sleep(2);
 			browseEnunciationMenu();
 			return;
 		}
-		yearShow(en->getOccurrences()[n-1], en->getTitle());
+		yearShow(en->getOccurrences()[n - 1], en->getTitle());
 	} else if (input == "2")
 	{
 		cout << "\nEnter the year (e.g. 2014/2015)\n";
@@ -328,28 +369,6 @@ void general::projectShow(groupProject *pr, string title, Occurrence *year)
 
 }
 
-
-/*void general::listProjects()
- {
- system("cls");
- for (unsigned int i = 0; i < enunciations.size(); i++)
- {
- for (unsigned int j = 0; j < enunciations[i]->getOccurrences().size(); j++)
- {
- cout << enunciations[i]->getOccurrences()[j]->getGroupProjects().size() << "\n";
- for (unsigned int k = 0; k < enunciations[i]->getOccurrences()[j]->getGroupProjects().size(); k++)
- {
- cout << enunciations[i]->getOccurrences()[j]->getGroupProjects()[k]->printInfoProject(enunciations[i]->getTitle());
- cout << "--------------------------------------------\n";
- }
- }
- }
-
- system("pause");
- MainMenu();
- return;
- }*/
-
 void general::readUnusedEnunciationsFromFile()
 {
 	string line;
@@ -384,20 +403,17 @@ void general::readUnusedEnunciationsFromFile()
 			unused_enunciation.push_back(r);
 		} else if (code == "1")
 		{
-			EnunciationResearch *r = new EnunciationResearch(title,
-					description);
+			EnunciationResearch *r = new EnunciationResearch(title, description);
 			r->setBiblio(addition);
 			unused_enunciation.push_back(r);
 		} else if (code == "2")
 		{
-			EnunciationAnalysis *r = new EnunciationAnalysis(title,
-					description);
+			EnunciationAnalysis *r = new EnunciationAnalysis(title, description);
 			r->setRepos(addition);
 			unused_enunciation.push_back(r);
 		} else if (code == "3")
 		{
-			EnunciationDevelopment *r = new EnunciationDevelopment(title,
-					description);
+			EnunciationDevelopment *r = new EnunciationDevelopment(title, description);
 			r->setResult(addition);
 			unused_enunciation.push_back(r);
 		}
@@ -448,8 +464,7 @@ void general::readALLEnunciationsFromFile()
 			enunciations.push_back(r);
 		} else if (code == "1")
 		{
-			EnunciationResearch *r = new EnunciationResearch(title,
-					description);
+			EnunciationResearch *r = new EnunciationResearch(title, description);
 			r->setBiblio(addition);
 			for (unsigned int i = 0; i < years.size(); i++)
 			{
@@ -461,8 +476,7 @@ void general::readALLEnunciationsFromFile()
 			enunciations.push_back(r);
 		} else if (code == "2")
 		{
-			EnunciationAnalysis *r = new EnunciationAnalysis(title,
-					description);
+			EnunciationAnalysis *r = new EnunciationAnalysis(title, description);
 			r->setRepos(addition);
 			for (unsigned int i = 0; i < years.size(); i++)
 			{
@@ -474,8 +488,7 @@ void general::readALLEnunciationsFromFile()
 			enunciations.push_back(r);
 		} else if (code == "3")
 		{
-			EnunciationDevelopment *r = new EnunciationDevelopment(title,
-					description);
+			EnunciationDevelopment *r = new EnunciationDevelopment(title, description);
 			r->setResult(addition);
 			for (unsigned int i = 0; i < years.size(); i++)
 			{
@@ -598,16 +611,15 @@ void general::readProjectsFromFile()
 		{
 			if (enunciations[i]->getTitle() == title)
 			{
-				for (unsigned int j = 0;
-						j < enunciations[i]->getOccurrences().size(); j++)
+				for (unsigned int j = 0; j < enunciations[i]->getOccurrences().size(); j++)
 				{
 					if (enunciations[i]->getOccurrences()[j]->getYear() == year)
 					{
 						gp->setType(enunciations[i]->getCode());
 						gProjects.insert(gp);
-						if (stat == "f") notValuatedGP.push(gp);
-						enunciations[i]->getOccurrences()[j]->newGroupProject(
-								gp);
+						if (stat == "f")
+							notValuatedGP.push(gp);
+						enunciations[i]->getOccurrences()[j]->newGroupProject(gp);
 					}
 				}
 			}
@@ -671,11 +683,9 @@ void general::storeALLEnunciationsInFile()
 
 			if (enunciations[i]->getOccurrences().size() != 0)
 			{
-				for (unsigned int j = 0;
-						j < enunciations[i]->getOccurrences().size(); j++)
+				for (unsigned int j = 0; j < enunciations[i]->getOccurrences().size(); j++)
 				{
-					myfile << enunciations[i]->getOccurrences()[j]->getYear()
-							<< ";";
+					myfile << enunciations[i]->getOccurrences()[j]->getYear() << ";";
 				}
 			}
 			if ((i + 1) < enunciations.size())
@@ -729,42 +739,24 @@ void general::storeProjectsInFile()
 		for (unsigned int i = 0; i < enunciations.size(); i++)
 		{
 			title = enunciations[i]->getTitle();
-			for (unsigned int j = 0;
-					j < enunciations[i]->getOccurrences().size(); j++)
+			for (unsigned int j = 0; j < enunciations[i]->getOccurrences().size(); j++)
 			{
 				year = enunciations[i]->getOccurrences()[j]->getYear();
-				for (unsigned int k = 0;
-						k
-								< enunciations[i]->getOccurrences()[j]->getGroupProjects().size();
-						k++)
+				for (unsigned int k = 0; k < enunciations[i]->getOccurrences()[j]->getGroupProjects().size(); k++)
 				{
-					idPr =
-							enunciations[i]->getOccurrences()[j]->getGroupProjects()[k]->getTeacher().getId();
-					maxN =
-							enunciations[i]->getOccurrences()[j]->getGroupProjects()[k]->getMax();
-					textF =
-							enunciations[i]->getOccurrences()[j]->getGroupProjects()[k]->getTextFile();
-					stat =
-							enunciations[i]->getOccurrences()[j]->getGroupProjects()[k]->getStatus();
-					myfile << title << ";" << year << ";" << maxN << ";"
-							<< textF << ";" << stat << ";" << idPr << ";";
-					for (unsigned int l = 0;
-							l
-									< enunciations[i]->getOccurrences()[j]->getGroupProjects()[k]->getStudents().size();
-							l++)
+					idPr = enunciations[i]->getOccurrences()[j]->getGroupProjects()[k]->getTeacher().getId();
+					maxN = enunciations[i]->getOccurrences()[j]->getGroupProjects()[k]->getMax();
+					textF = enunciations[i]->getOccurrences()[j]->getGroupProjects()[k]->getTextFile();
+					stat = enunciations[i]->getOccurrences()[j]->getGroupProjects()[k]->getStatus();
+					myfile << title << ";" << year << ";" << maxN << ";" << textF << ";" << stat << ";" << idPr << ";";
+					for (unsigned int l = 0; l < enunciations[i]->getOccurrences()[j]->getGroupProjects()[k]->getStudents().size(); l++)
 					{
-						idSt =
-								enunciations[i]->getOccurrences()[j]->getGroupProjects()[k]->getStudents()[l]->getId();
-						mark =
-								enunciations[i]->getOccurrences()[j]->getGroupProjects()[k]->getStudents()[l]->getMark(
-										title);
+						idSt = enunciations[i]->getOccurrences()[j]->getGroupProjects()[k]->getStudents()[l]->getId();
+						mark = enunciations[i]->getOccurrences()[j]->getGroupProjects()[k]->getStudents()[l]->getMark(title);
 						myfile << idSt << ";" << mark << ";";
 					}
-					if (((i + 1) == enunciations.size())
-							&& ((i + 1)
-									== enunciations[i]->getOccurrences().size())
-							&& ((k + 1)
-									== enunciations[i]->getOccurrences()[j]->getGroupProjects().size()))
+					if (((i + 1) == enunciations.size()) && ((i + 1) == enunciations[i]->getOccurrences().size())
+							&& ((k + 1) == enunciations[i]->getOccurrences()[j]->getGroupProjects().size()))
 					{
 					} else
 						myfile << "\n";
@@ -860,7 +852,7 @@ void general::listEnunciations(vector<Enunciation *> le)
 		return;
 	}
 	unsigned int n = atoi(input.c_str());
-	enunciationShow(le[n-1]);
+	enunciationShow(le[n - 1]);
 
 	return;
 }
@@ -906,8 +898,7 @@ void general::createEnunciationMenu()
 		unused_enunciation.push_back(d);
 	} else if (input == "3")
 	{
-		EnunciationDevelopment *d = new EnunciationDevelopment(title,
-				description);
+		EnunciationDevelopment *d = new EnunciationDevelopment(title, description);
 		unused_enunciation.push_back(d);
 	} else if (input == "4")
 	{
@@ -973,8 +964,7 @@ void general::findTeacher()
 		{
 			system("cls");
 
-			cout
-					<< "Search teacher by name or id? (0: name ; 1: id) OR " "back" " to return to menu\n";
+			cout << "Search teacher by name or id? (0: name ; 1: id) OR " "back" " to return to menu\n";
 			cout << ">> ";
 			cin.clear();
 			getline(cin, input);
@@ -1026,8 +1016,7 @@ void general::findTeacher()
 		{
 			if (input == "0")
 			{
-				cout << " '" << name << "'"
-						<< " was not found in the system.\n";
+				cout << " '" << name << "'" << " was not found in the system.\n";
 				cout << "Try again.\n";
 				sleep(2);
 			} else if (input == "1")
@@ -1056,13 +1045,11 @@ void general::sortByNumberStudentsEnunciations()
 
 	system("cls");
 
-	cout
-			<< "Enter the latest acceptable year when the enunciation was proposed (e.g. 1999/2000)\n";
+	cout << "Enter the latest acceptable year when the enunciation was proposed (e.g. 1999/2000)\n";
 	cin.clear();
 	getline(cin, yearsAgo);
 
-	cout
-			<< "What is the maximum number of group projects for an enunciation?\n";
+	cout << "What is the maximum number of group projects for an enunciation?\n";
 	cin.clear();
 	cin >> minNumStu;
 
@@ -1072,11 +1059,9 @@ void general::sortByNumberStudentsEnunciations()
 		enunciations[i]->sortOccurrences();
 		if (enunciations[i]->getOccurrences()[0]->getYear() <= yearsAgo)
 		{
-			for (unsigned int j = 0;
-					j < enunciations[i]->getOccurrences().size(); j++)
+			for (unsigned int j = 0; j < enunciations[i]->getOccurrences().size(); j++)
 			{
-				counter +=
-						enunciations[i]->getOccurrences()[j]->getGroupProjects().size();
+				counter += enunciations[i]->getOccurrences()[j]->getGroupProjects().size();
 			}
 
 			if (counter <= minNumStu)
@@ -1098,8 +1083,7 @@ void general::findStudent()
 		{
 			system("cls");
 
-			cout
-					<< "Search student by name or id? (0: name ; 1: id) OR " "back" " to return to menu\n";
+			cout << "Search student by name or id? (0: name ; 1: id) OR " "back" " to return to menu\n";
 			cout << ">> ";
 			cin.clear();
 			getline(cin, input);
@@ -1305,9 +1289,11 @@ void general::evaluateEnunciations()
 {
 	if (notValuatedGP.size() == 0)
 	{
-		cout << "no group projects to evaluate\n";
+		cout << "No group projects to evaluate\n";
+		system("pause");
 		return;
 	}
+
 	groupProject *gp = notValuatedGP.top();
 	string input;
 	string id, mark;
@@ -1320,11 +1306,11 @@ void general::evaluateEnunciations()
 	cout << ">> ";
 	getline(cin, input);
 	cin.clear();
+
 	if (input == "back")
 	{
 		browseEnunciationMenu();
-	}
-	else if (input == "finish")
+	} else if (input == "finish")
 	{
 		gp->setStatus("ev");
 		notValuatedGP.pop();
@@ -1337,6 +1323,7 @@ void general::evaluateEnunciations()
 		cout << ">> ";
 		getline(cin, mark);
 		cin.clear();
+
 		for (unsigned int i = 0; i < gp->getStudents().size(); i++)
 		{
 			if (gp->getStudents()[i]->getId() == atoi(id.c_str()))

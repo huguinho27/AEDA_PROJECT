@@ -5,7 +5,6 @@
 #include <iostream>
 #include <tr1/unordered_set>
 #include "BST.h"
-
 #include "student.h"
 
 using namespace std;
