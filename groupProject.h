@@ -41,8 +41,8 @@ public:
 	Professor getTeacher() const;
 	string printInfoProject(string title);
 	int getMax();
-	bool operator < (const groupProject &right) const;
-	bool operator == (const groupProject &right) const;
+	bool operator < (const groupProject *right) const;
+	bool operator == (const groupProject *right) const;
 };
 
 #endif

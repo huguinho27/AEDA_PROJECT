@@ -95,7 +95,8 @@ void groupProject::setMark(Student *st, int mark, string title)
 string groupProject::printInfoProject(string title)
 {
 	stringstream ss;
-	ss << "Title: " << title << "\n\n";
+	ss << "Title: " << title << "\n";
+	ss << "Year: " << year << "\n";
 	ss << "Status: ";
 	if (status == "nf") ss << "not finished\n";
 	else if (status == "f") ss << "finished, not evaluated\n";
@@ -140,19 +141,27 @@ string groupProject::getStatus() const
 	return status;
 }
 
-bool groupProject::operator < (const groupProject &right) const
+bool groupProject::operator < (const groupProject *right) const
 {
-	if (type == right.type)
+	if (type == right->type)
 	{
-		if (title == right.title)
-			return year >= right.year;
+		if (title == right->title)
+			return year >= right->year;
 		else
-			return title < right.title;
+			return title < right->title;
 	}
-	return type < right.type;
+	return type < right->type;
+
+	/*if (this->type < right.type) return true;
+	else if (this->type > right.type) return false;
+	else if (this->title < right.title) return true;
+	else if (this->title > right.title) return false;
+	else if (this->year >= right.year) return true;
+	else return false;*/
+
 }
 
-bool groupProject::operator == (const groupProject &right) const
+bool groupProject::operator == (const groupProject *right) const
 {
-	return (title == right.title && year == right.year && students == right.students);
+	return (title == right->title && year == right->year && students == right->students);
 }

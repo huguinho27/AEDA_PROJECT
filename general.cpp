@@ -11,18 +11,18 @@
 using namespace std;
 struct groupProjectHash
 {
-	int operator()(const groupProject & gp) const
+	int operator()(const groupProject *gp) const
 	{
 		int v;
 		stringstream ss;
-		for (unsigned int i = 0; i < gp.getStudents().size(); i++)
-			ss << (gp.getStudents()[i]->getId()-1000);
+		for (unsigned int i = 0; i < gp->getStudents().size(); i++)
+			ss << (gp->getStudents()[i]->getId()-1000);
 		string ids = ss.str();
 		v = atoi(ids.c_str());
 		return v;
 	}
 
-	bool operator()(const groupProject & gp1, const groupProject & gp2) const
+	bool operator()(const groupProject *gp1, const groupProject *gp2) const
 	{
 		return gp1 == gp2;
 	}
@@ -205,7 +205,7 @@ void general::listOldByType()
 		getline(cin, input);
 		cin.clear();
 
-		if (input != "1" || input != "2" || input != "3" || input != "9")
+		if (input != "1" && input != "2" && input != "3" && input != "9" && input != "back")
 		{
 			cout << "Wrong code. Available types are: 1 - research, 2 - analysis, 3 - development, 9 - general\n";
 			system("pause");
@@ -213,6 +213,8 @@ void general::listOldByType()
 			break;
 
 	} while (true);
+
+	if (input == "back") {browseGPMenu(); return;}
 
 	if (oldGP.empty())
 	{
@@ -228,7 +230,7 @@ void general::listOldByType()
 		{
 			if ((*it)->getType() == input)
 			{
-				end.push_back((*it)->printInfoProject(input));
+				end.push_back((*it)->printInfoProject((*it)->getTitle()));
 				end.push_back("--------------------------------------------\n");
 			}
 			it++;
@@ -305,7 +307,7 @@ void general::listBSTEnunciationsByType()
 		getline(cin, input);
 		cin.clear();
 
-		if (input != "1" || input != "2" || input != "3" || input != "9")
+		if (input != "1" && input != "2" && input != "3" && input != "9" && input != "back")
 		{
 			cout << "Wrong code. Available types are: 1 - research, 2 - analysis, 3 - development, 9 - general\n";
 			system("pause");
@@ -313,6 +315,8 @@ void general::listBSTEnunciationsByType()
 			break;
 
 	} while (true);
+
+	if (input == "back") {browseGPMenu(); return;}
 
 	vector<string> end;
 	BSTItrIn<groupProject *> it(gProjects);
@@ -1503,7 +1507,7 @@ void general::evaluateEnunciations()
 
 	if (input == "back")
 	{
-		browseEnunciationMenu();
+		browseGPMenu();
 	} else if (input == "finish")
 	{
 		gp->setStatus("ev");
@@ -1601,10 +1605,10 @@ void general::browseGPMenu()
 		findLastProject();
 	else if (input == "3")
 		evaluateEnunciations();
-	/*else if (input == "4")
-		listUnusedEnunciations();
+	else if (input == "4")
+		listOldByType();
 	else if (input == "5")
-		evaluateEnunciations();*/
+		listOldByTopic();
 	else if (input == "6" || input == "back")
 		MainMenu();
 
