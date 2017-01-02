@@ -145,7 +145,7 @@ bool groupProject::operator < (const groupProject &right) const
 	if (type == right.type)
 	{
 		if (title == right.title)
-			return year > right.year;
+			return year >= right.year;
 		else
 			return title < right.title;
 	}

@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <string>
 #include <queue>
+#include <ctime>
 #include "enunciation.h"
 #include "insertionSort.h"
 #include "groupProject.h"
@@ -15,12 +16,9 @@ struct groupProjectHash
 		int v;
 		stringstream ss;
 		for (unsigned int i = 0; i < gp.getStudents().size(); i++)
-			ss << gp.getStudents()[i]->getName();
-
-		string names = ss.str();
-
-		for (unsigned int i = 0; i < names.size(); i++)
-			v = 37 * names[i];
+			ss << (gp.getStudents()[i]->getId()-1000);
+		string ids = ss.str();
+		v = atoi(ids.c_str());
 		return v;
 	}
 
@@ -29,7 +27,7 @@ struct groupProjectHash
 		return gp1 == gp2;
 	}
 };
-typedef tr1::unordered_set<groupProject, groupProjectHash, groupProjectHash> tabHProject;
+typedef tr1::unordered_set<groupProject*, groupProjectHash, groupProjectHash> tabHProject;
 typedef priority_queue<groupProject *> HEAP_GP;
 
 class general
@@ -83,6 +81,12 @@ public:
 	//2nd part
 	void listBSTEnunciationsByType();
 	void evaluateEnunciations();
+	void findLastProject();
+	void browseGPMenu();
+	void moveOldProjects();
+	string getOldYear();
+	void listOldByTopic();
+	void listOldByType();
 };
 
 int general::personId = 1000;
@@ -108,19 +112,202 @@ int general::newId()
 	return personId;
 }
 
+string general::getOldYear()
+{
+	time_t t = time(NULL);
+	tm* timePtr = localtime(&t);
+	int year;
+	int month;
+	year = timePtr->tm_year + 1900;
+	month = timePtr->tm_mon + 1;
+	stringstream ss;
+	if (month > 8)
+	{
+		ss << year - 5 << "/" << year - 4;
+	}
+	else
+	{
+		ss << year - 6 << "/" << year - 5;
+	}
+	return ss.str();
+}
+
+void general::moveOldProjects()
+{
+	BSTItrIn<groupProject *> it(gProjects);
+	string year = getOldYear();
+	while (!it.isAtEnd())
+	{
+		if (it.retrieve()->getYear() <= year)
+		{
+			groupProject *gp = it.retrieve();
+			oldGP.insert(gp);
+			gProjects.remove(gp);
+		}
+		it.advance();
+	}
+}
+
+void general::listOldByTopic()
+{
+	moveOldProjects();
+	string input;
+	system("cls");
+	cout << "Group projects for which assignment do you wish to display? (enter the title)\n";
+	getline(cin, input);
+	cin.clear();
+
+	if (oldGP.empty())
+	{
+		cout << "No group projects to show, size = 0\n";
+		system("pause");
+		return;
+	}
+	else
+	{
+		vector<string> end;
+		tabHProject::iterator it = oldGP.begin();
+		while (it != oldGP.end())
+		{
+			if ((*it)->getTitle() == input)
+			{
+				end.push_back((*it)->printInfoProject(input));
+				end.push_back("--------------------------------------------\n");
+			}
+			it++;
+		}
+		if (end.empty())
+		{
+			cout << "No group projects for this assignment\n";
+			system("pause");
+			return;
+		}
+
+		for (unsigned int i = 0; i < end.size(); i++)
+			cout << end[i];
+
+		cout << "Write 'back' to go back to previous menu\n";
+		cout << ">> ";
+		getline(cin, input);
+		cin.clear();
+		if (input == "back") browseGPMenu();
+	}
+}
+
+void general::listOldByType()
+{
+	moveOldProjects();
+	string input;
+	do
+	{
+		system("cls");
+		cout << "What is the type of assignment you wish to display? ( 1 - research, 2 - analysis, 3 - development, 9 - general)\n";
+		getline(cin, input);
+		cin.clear();
+
+		if (input != "1" || input != "2" || input != "3" || input != "9")
+		{
+			cout << "Wrong code. Available types are: 1 - research, 2 - analysis, 3 - development, 9 - general\n";
+			system("pause");
+		} else
+			break;
+
+	} while (true);
+
+	if (oldGP.empty())
+	{
+		cout << "No group projects to show, size = 0\n";
+		system("pause");
+		return;
+	}
+	else
+	{
+		vector<string> end;
+		tabHProject::iterator it = oldGP.begin();
+		while (it != oldGP.end())
+		{
+			if ((*it)->getType() == input)
+			{
+				end.push_back((*it)->printInfoProject(input));
+				end.push_back("--------------------------------------------\n");
+			}
+			it++;
+		}
+		if (end.empty())
+		{
+			cout << "No group projects for this type\n";
+			system("pause");
+			return;
+		}
+
+		for (unsigned int i = 0; i < end.size(); i++)
+			cout << end[i];
+
+		cout << "Write 'back' to go back to previous menu\n";
+		cout << ">> ";
+		getline(cin, input);
+		cin.clear();
+		if (input == "back") browseGPMenu();
+	}
+}
+
+void general::findLastProject()
+{
+	string input;
+	system("cls");
+	cout << "The most recent work for which assignment do you wish to display? (enter the title)\n";
+	getline(cin, input);
+	cin.clear();
+	bool control = false;
+	bool found = false;
+
+	BSTItrIn<groupProject *> it(gProjects);
+	if (it.isAtEnd())
+	{
+		cout << "No group projects to show, size = 0\n";
+		control = true;
+		system("pause");
+		return;
+	}
+
+	while (!it.isAtEnd())
+	{
+		if (it.retrieve()->getTitle() == input)
+		{
+			cout << it.retrieve()->printInfoProject(it.retrieve()->getTitle());
+			control = true;
+			found = true;
+			break;
+		}
+		it.advance();
+	}
+	if (it.isAtEnd() && (!control))
+	{
+		cout << "There is not any project for this assignment\n";
+	}
+
+	if (found) cout << "Write 'open' to open project's menu\n";
+	cout << "Write 'back' to go back to previous menu\n";
+	cout << ">> ";
+	getline(cin, input);
+	cin.clear();
+	if (input == "back") browseGPMenu();
+	else if (input == "open") projectShow(it.retrieve(), it.retrieve()->getTitle(), NULL);
+}
+
 void general::listBSTEnunciationsByType()
 {
 	string input;
 	do
 	{
 		system("cls");
-		cout << "What is the type of enunciation you wish to display?\n";
+		cout << "What is the type of assignment you wish to display? ( 1 - research, 2 - analysis, 3 - development, 9 - general)\n";
 		getline(cin, input);
 		cin.clear();
 
-		if (input != "general" || input != "development" || input != "research" || input != "analysis")
+		if (input != "1" || input != "2" || input != "3" || input != "9")
 		{
-			cout << "Wrong type. Available types are: general, development, research, analysis\n";
+			cout << "Wrong code. Available types are: 1 - research, 2 - analysis, 3 - development, 9 - general\n";
 			system("pause");
 		} else
 			break;
@@ -131,7 +318,7 @@ void general::listBSTEnunciationsByType()
 	BSTItrIn<groupProject *> it(gProjects);
 	if (it.isAtEnd())
 	{
-		cout << "No Enunciations to show, size = 0\n";
+		cout << "No group projects to show, size = 0\n";
 		system("pause");
 		return;
 	}
@@ -148,13 +335,19 @@ void general::listBSTEnunciationsByType()
 
 	if (end.empty())
 	{
-		cout << "No Enunciations of type " << input << " to show\n";
+		cout << "No group projects for assignments of type " << input << " to show\n";
 		system("pause");
 		return;
 	}
 
 	for (unsigned int i = 0; i < end.size(); i++)
 		cout << end[i];
+
+	cout << "Write 'back' to go back to previous menu\n";
+	cout << ">> ";
+	getline(cin, input);
+	cin.clear();
+	if (input == "back") browseGPMenu();
 }
 
 void general::enunciationShow(Enunciation *en)
@@ -364,7 +557,8 @@ void general::projectShow(groupProject *pr, string title, Occurrence *year)
 		projectShow(pr, title, year);
 	} else if (input == "back")
 	{
-		yearShow(year, title);
+		if (year != NULL) yearShow(year, title);
+		else browseGPMenu();
 	}
 
 }
@@ -1351,10 +1545,9 @@ void general::browseEnunciationMenu()
 		cout << "ASSIGNMENT MANAGEMENT\n\n";
 		cout << "1. List all assignments\n";
 		cout << "2. Create new assignment\n";
-		cout << "3. To filter assignments \n";
+		cout << "3. Filter assignments \n";
 		cout << "4. Show unused assignments\n";
-		cout << "5. Evaluate assignments\n";
-		cout << "6. Back to main menu\n";
+		cout << "5. Back to main menu\n";
 
 		cout << ">> ";
 		getline(cin, input);
@@ -1369,15 +1562,49 @@ void general::browseEnunciationMenu()
 			el.push_back(enunciations[i]);
 		}
 		listEnunciations(el);
-	} else if (input == "2")
+	}
+	else if (input == "2")
 		createEnunciationMenu();
 	else if (input == "3")
 		sortByNumberStudentsEnunciations();
 	else if (input == "4")
-		//listUnusedEnunciations();
 		listEnunciations(unused_enunciation);
-	else if (input == "5")
+	else if (input == "5" || input == "back")
+		MainMenu();
+
+	return;
+}
+
+void general::browseGPMenu()
+{
+	string input;
+	do
+	{
+		system("cls");
+
+		cout << "GROUP PROJECTS MANAGEMENT\n\n";
+		cout << "1. List group projects by type\n";
+		cout << "2. Find the most recent group project for assignment\n";
+		cout << "3. Evaluate group projects\n";
+		cout << "4. List old group projects by type\n";
+		cout << "5. List old group projects by title\n";
+		cout << "6. Back to main menu\n";
+
+		cout << ">> ";
+		getline(cin, input);
+		cin.clear();
+	} while (!verifyGetline(1, 6, input));
+
+	if (input == "1")
+		listBSTEnunciationsByType();
+	else if (input == "2")
+		findLastProject();
+	else if (input == "3")
 		evaluateEnunciations();
+	/*else if (input == "4")
+		listUnusedEnunciations();
+	else if (input == "5")
+		evaluateEnunciations();*/
 	else if (input == "6" || input == "back")
 		MainMenu();
 
@@ -1393,18 +1620,21 @@ void general::MainMenu()
 		cout << "ASSIGNMENTS MANAGEMENT OF FEUP\n\n";
 		cout << "1. Browse Assignments\n";
 		cout << "2. Browse Students / Teachers\n";
-		cout << "3. Exit\n";
+		cout << "3. Browse Group Projects\n";
+		cout << "4. Exit\n";
 
 		cout << ">> ";
 		getline(cin, input);
 		cin.clear();
-	} while (!verifyGetline(1, 3, input));
+	} while (!verifyGetline(1, 4, input));
 
 	if (input == "1")
 		browseEnunciationMenu();
 	else if (input == "2")
 		browseTechersStudentMenu();
 	else if (input == "3")
+		browseGPMenu();
+	else if (input == "4")
 		return; //MUST BE 'RETURN' OTHERWISE FILES WOULD NOT BE UPDATED!!
 }
 
@@ -1414,6 +1644,7 @@ int main()
 	g.readALLEnunciationsFromFile();
 	g.readPeopleFromFile();
 	g.readProjectsFromFile();
+	g.moveOldProjects();
 	g.MainMenu();
 	g.storeALLEnunciationsInFile();
 	g.storePeopleInFile();

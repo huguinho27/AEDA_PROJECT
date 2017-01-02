@@ -1,6 +1,5 @@
-Athlete Formation;2011/2012;3;athlete_formation.txt;1000;1003;17;1009;18;1008;18;
-Athlete Formation;2015/2016;3;;1002;1004;9;1006;0;
-Athlete Formation;2012/2013;3;;1000;1005;15;
-Athlete Formation;2015/2016;3;;1001;1007;0;
-The Voice;2009/2010;2;;1000;1010;16;1011;16;
-The Voice;2011/2012;2;;1002;1005;17;
+Athlete Formation;2012/2013;3;;nf;1000;1005;0;
+Athlete Formation;2015/2016;3;;f;1002;1004;0;1006;0;
+Athlete Formation;2015/2016;3;;f;1001;1007;0;
+Athlete Formation;2011/2012;3;athlete_formation.txt;ev;1000;1003;17;1009;18;1008;18;
+The Voice;2009/2010;2;;ev;1000;1010;15;1011;16;
