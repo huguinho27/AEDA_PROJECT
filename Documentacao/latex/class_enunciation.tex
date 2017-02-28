@@ -1,0 +1,232 @@
+\hypertarget{class_enunciation}{}\section{Enunciation Class Reference}
+\label{class_enunciation}\index{Enunciation@{Enunciation}}
+
+
+{\ttfamily \#include $<$enunciation.\+h$>$}
+
+Inheritance diagram for Enunciation\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_enunciation}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_enunciation_a78a6f3656b8d057dfef51593de59193f}{Enunciation} ()
+\begin{DoxyCompactList}\small\item\em Default constructor of \hyperlink{class_enunciation}{Enunciation} class. \end{DoxyCompactList}\item 
+\hyperlink{class_enunciation_a954fa90c85714409ab224e6f405c26e4}{Enunciation} (string \hyperlink{class_enunciation_a5e2accd01df4c81578dc8f7b83507167}{title}, string \hyperlink{class_enunciation_a0b30051b66bd07b227f6a227befb6c0c}{description})
+\begin{DoxyCompactList}\small\item\em Custom constructor of \hyperlink{class_enunciation}{Enunciation} class. \end{DoxyCompactList}\item 
+string \hyperlink{class_enunciation_a7db0b7bc585b133d7faae9a7a8f78be6}{get\+Title} () const
+\item 
+string \hyperlink{class_enunciation_a8f5a6300cf6eb691ca1600191bf20e5e}{get\+Description} () const
+\item 
+void \hyperlink{class_enunciation_a84cebe1417311997307664608305b305}{set\+Title} (string new\+Title)
+\begin{DoxyCompactList}\small\item\em Sets a new title for the enunciation associated. \end{DoxyCompactList}\item 
+void \hyperlink{class_enunciation_ae3a90d3e7ed1072d44c9801c689aa08f}{set\+Description} (string new\+Description)
+\begin{DoxyCompactList}\small\item\em Sets a new description for the enunciation associated. \end{DoxyCompactList}\item 
+void \hyperlink{class_enunciation_a86a3547dd604f7050a5e12b473ba6eef}{add\+Year} (\hyperlink{class_occurrence}{Occurrence} $\ast$new\+Year)
+\begin{DoxyCompactList}\small\item\em Adds a new year to the occurrences vector. \end{DoxyCompactList}\item 
+vector$<$ \hyperlink{class_occurrence}{Occurrence} $\ast$ $>$ \hyperlink{class_enunciation_a8fe49ff095b219adb6841976b8983ebe}{get\+Occurrences} () const
+\item 
+virtual string \hyperlink{class_enunciation_a032b5ff494595ab52d152d605544525c}{get\+Info} ()
+\begin{DoxyCompactList}\small\item\em Virtual function to get information of a certain enunciation. \end{DoxyCompactList}\item 
+virtual string \hyperlink{class_enunciation_a2c27d4c83302dd7d21e1064c9e4ec97d}{get\+Code} ()
+\begin{DoxyCompactList}\small\item\em Virtual function to get code of a certain enunciation. \end{DoxyCompactList}\item 
+virtual string \hyperlink{class_enunciation_ad0bf6d8d34f6246cd5bc674b15b5958b}{get\+Addition} ()
+\begin{DoxyCompactList}\small\item\em Virtual function to get addition of a certain enunciation. \end{DoxyCompactList}\item 
+void \hyperlink{class_enunciation_a1ae5e84684d7aea08b888836661c0a01}{sort\+Occurrences} ()
+\begin{DoxyCompactList}\small\item\em Sorts occurrences. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+string \hyperlink{class_enunciation_a5e2accd01df4c81578dc8f7b83507167}{title}
+\item 
+string \hyperlink{class_enunciation_a0b30051b66bd07b227f6a227befb6c0c}{description}
+\item 
+vector$<$ \hyperlink{class_occurrence}{Occurrence} $\ast$ $>$ \hyperlink{class_enunciation_a54cce81b8d17a0e2f06d651988507a4a}{years}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_enunciation_a78a6f3656b8d057dfef51593de59193f}\label{class_enunciation_a78a6f3656b8d057dfef51593de59193f}} 
+\index{Enunciation@{Enunciation}!Enunciation@{Enunciation}}
+\index{Enunciation@{Enunciation}!Enunciation@{Enunciation}}
+\subsubsection{\texorpdfstring{Enunciation()}{Enunciation()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Enunciation\+::\+Enunciation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Default constructor of \hyperlink{class_enunciation}{Enunciation} class. 
+
+\mbox{\Hypertarget{class_enunciation_a954fa90c85714409ab224e6f405c26e4}\label{class_enunciation_a954fa90c85714409ab224e6f405c26e4}} 
+\index{Enunciation@{Enunciation}!Enunciation@{Enunciation}}
+\index{Enunciation@{Enunciation}!Enunciation@{Enunciation}}
+\subsubsection{\texorpdfstring{Enunciation()}{Enunciation()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Enunciation\+::\+Enunciation (\begin{DoxyParamCaption}\item[{string}]{title,  }\item[{string}]{description }\end{DoxyParamCaption})}
+
+
+
+Custom constructor of \hyperlink{class_enunciation}{Enunciation} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em title} & Title of the enunciation \\
+\hline
+{\em description} & Description of that enunciation \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_enunciation_a86a3547dd604f7050a5e12b473ba6eef}\label{class_enunciation_a86a3547dd604f7050a5e12b473ba6eef}} 
+\index{Enunciation@{Enunciation}!add\+Year@{add\+Year}}
+\index{add\+Year@{add\+Year}!Enunciation@{Enunciation}}
+\subsubsection{\texorpdfstring{add\+Year()}{addYear()}}
+{\footnotesize\ttfamily void Enunciation\+::add\+Year (\begin{DoxyParamCaption}\item[{\hyperlink{class_occurrence}{Occurrence} $\ast$}]{new\+Year }\end{DoxyParamCaption})}
+
+
+
+Adds a new year to the occurrences vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Year} & Pointer to the new \hyperlink{class_occurrence}{Occurrence} to be added \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_enunciation_ad0bf6d8d34f6246cd5bc674b15b5958b}\label{class_enunciation_ad0bf6d8d34f6246cd5bc674b15b5958b}} 
+\index{Enunciation@{Enunciation}!get\+Addition@{get\+Addition}}
+\index{get\+Addition@{get\+Addition}!Enunciation@{Enunciation}}
+\subsubsection{\texorpdfstring{get\+Addition()}{getAddition()}}
+{\footnotesize\ttfamily string Enunciation\+::get\+Addition (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Virtual function to get addition of a certain enunciation. 
+
+
+
+Reimplemented in \hyperlink{class_enunciation_development_a5480d39ba25c6fac36d07d3aad6b6de9}{Enunciation\+Development}, \hyperlink{class_enunciation_analysis_a19fa90c811af4addfe77c4109520a8e1}{Enunciation\+Analysis}, and \hyperlink{class_enunciation_research_ad5021c15b3cf600191d21aec467529d4}{Enunciation\+Research}.
+
+\mbox{\Hypertarget{class_enunciation_a2c27d4c83302dd7d21e1064c9e4ec97d}\label{class_enunciation_a2c27d4c83302dd7d21e1064c9e4ec97d}} 
+\index{Enunciation@{Enunciation}!get\+Code@{get\+Code}}
+\index{get\+Code@{get\+Code}!Enunciation@{Enunciation}}
+\subsubsection{\texorpdfstring{get\+Code()}{getCode()}}
+{\footnotesize\ttfamily string Enunciation\+::get\+Code (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Virtual function to get code of a certain enunciation. 
+
+
+
+Reimplemented in \hyperlink{class_enunciation_development_aa0e2d2c396cc3ec68df31334ae475850}{Enunciation\+Development}, \hyperlink{class_enunciation_analysis_a8393cb5e4c7a096f09e1112dbc854cf8}{Enunciation\+Analysis}, and \hyperlink{class_enunciation_research_a424e392956c1c7bbccfdf74d72b3d4dd}{Enunciation\+Research}.
+
+\mbox{\Hypertarget{class_enunciation_a8f5a6300cf6eb691ca1600191bf20e5e}\label{class_enunciation_a8f5a6300cf6eb691ca1600191bf20e5e}} 
+\index{Enunciation@{Enunciation}!get\+Description@{get\+Description}}
+\index{get\+Description@{get\+Description}!Enunciation@{Enunciation}}
+\subsubsection{\texorpdfstring{get\+Description()}{getDescription()}}
+{\footnotesize\ttfamily string Enunciation\+::get\+Description (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\begin{DoxyReturn}{Returns}
+The description of the enunciation 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_enunciation_a032b5ff494595ab52d152d605544525c}\label{class_enunciation_a032b5ff494595ab52d152d605544525c}} 
+\index{Enunciation@{Enunciation}!get\+Info@{get\+Info}}
+\index{get\+Info@{get\+Info}!Enunciation@{Enunciation}}
+\subsubsection{\texorpdfstring{get\+Info()}{getInfo()}}
+{\footnotesize\ttfamily string Enunciation\+::get\+Info (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Virtual function to get information of a certain enunciation. 
+
+
+
+Reimplemented in \hyperlink{class_enunciation_development_a06289f811338e030977e59f083c618b6}{Enunciation\+Development}, \hyperlink{class_enunciation_analysis_a6cc8894f92eecbb68a7ebeb4a8365896}{Enunciation\+Analysis}, and \hyperlink{class_enunciation_research_a57ce30430703246bdd6a1103530a8a5f}{Enunciation\+Research}.
+
+\mbox{\Hypertarget{class_enunciation_a8fe49ff095b219adb6841976b8983ebe}\label{class_enunciation_a8fe49ff095b219adb6841976b8983ebe}} 
+\index{Enunciation@{Enunciation}!get\+Occurrences@{get\+Occurrences}}
+\index{get\+Occurrences@{get\+Occurrences}!Enunciation@{Enunciation}}
+\subsubsection{\texorpdfstring{get\+Occurrences()}{getOccurrences()}}
+{\footnotesize\ttfamily vector$<$ \hyperlink{class_occurrence}{Occurrence} $\ast$ $>$ Enunciation\+::get\+Occurrences (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\begin{DoxyReturn}{Returns}
+The ocurrences of an enunciation 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_enunciation_a7db0b7bc585b133d7faae9a7a8f78be6}\label{class_enunciation_a7db0b7bc585b133d7faae9a7a8f78be6}} 
+\index{Enunciation@{Enunciation}!get\+Title@{get\+Title}}
+\index{get\+Title@{get\+Title}!Enunciation@{Enunciation}}
+\subsubsection{\texorpdfstring{get\+Title()}{getTitle()}}
+{\footnotesize\ttfamily string Enunciation\+::get\+Title (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\begin{DoxyReturn}{Returns}
+Gets the title of the enunciation 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_enunciation_ae3a90d3e7ed1072d44c9801c689aa08f}\label{class_enunciation_ae3a90d3e7ed1072d44c9801c689aa08f}} 
+\index{Enunciation@{Enunciation}!set\+Description@{set\+Description}}
+\index{set\+Description@{set\+Description}!Enunciation@{Enunciation}}
+\subsubsection{\texorpdfstring{set\+Description()}{setDescription()}}
+{\footnotesize\ttfamily void Enunciation\+::set\+Description (\begin{DoxyParamCaption}\item[{string}]{new\+Description }\end{DoxyParamCaption})}
+
+
+
+Sets a new description for the enunciation associated. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Description} & The new description \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_enunciation_a84cebe1417311997307664608305b305}\label{class_enunciation_a84cebe1417311997307664608305b305}} 
+\index{Enunciation@{Enunciation}!set\+Title@{set\+Title}}
+\index{set\+Title@{set\+Title}!Enunciation@{Enunciation}}
+\subsubsection{\texorpdfstring{set\+Title()}{setTitle()}}
+{\footnotesize\ttfamily void Enunciation\+::set\+Title (\begin{DoxyParamCaption}\item[{string}]{new\+Title }\end{DoxyParamCaption})}
+
+
+
+Sets a new title for the enunciation associated. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Title} & The new title \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_enunciation_a1ae5e84684d7aea08b888836661c0a01}\label{class_enunciation_a1ae5e84684d7aea08b888836661c0a01}} 
+\index{Enunciation@{Enunciation}!sort\+Occurrences@{sort\+Occurrences}}
+\index{sort\+Occurrences@{sort\+Occurrences}!Enunciation@{Enunciation}}
+\subsubsection{\texorpdfstring{sort\+Occurrences()}{sortOccurrences()}}
+{\footnotesize\ttfamily void Enunciation\+::sort\+Occurrences (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Sorts occurrences. 
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_enunciation_a0b30051b66bd07b227f6a227befb6c0c}\label{class_enunciation_a0b30051b66bd07b227f6a227befb6c0c}} 
+\index{Enunciation@{Enunciation}!description@{description}}
+\index{description@{description}!Enunciation@{Enunciation}}
+\subsubsection{\texorpdfstring{description}{description}}
+{\footnotesize\ttfamily string Enunciation\+::description\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_enunciation_a5e2accd01df4c81578dc8f7b83507167}\label{class_enunciation_a5e2accd01df4c81578dc8f7b83507167}} 
+\index{Enunciation@{Enunciation}!title@{title}}
+\index{title@{title}!Enunciation@{Enunciation}}
+\subsubsection{\texorpdfstring{title}{title}}
+{\footnotesize\ttfamily string Enunciation\+::title\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_enunciation_a54cce81b8d17a0e2f06d651988507a4a}\label{class_enunciation_a54cce81b8d17a0e2f06d651988507a4a}} 
+\index{Enunciation@{Enunciation}!years@{years}}
+\index{years@{years}!Enunciation@{Enunciation}}
+\subsubsection{\texorpdfstring{years}{years}}
+{\footnotesize\ttfamily vector$<$\hyperlink{class_occurrence}{Occurrence} $\ast$$>$ Enunciation\+::years\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{enunciation_8h}{enunciation.\+h}\item 
+\hyperlink{enunciation_8cpp}{enunciation.\+cpp}\end{DoxyCompactItemize}

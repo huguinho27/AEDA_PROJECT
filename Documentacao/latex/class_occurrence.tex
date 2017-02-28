@@ -1,0 +1,169 @@
+\hypertarget{class_occurrence}{}\section{Occurrence Class Reference}
+\label{class_occurrence}\index{Occurrence@{Occurrence}}
+
+
+{\ttfamily \#include $<$occurrence.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_occurrence_a63911c7c452d1a43cbe135150c8c7764}{Occurrence} ()
+\begin{DoxyCompactList}\small\item\em Default constructor of \hyperlink{class_occurrence}{Occurrence} class. \end{DoxyCompactList}\item 
+\hyperlink{class_occurrence_aa1aa3a08a982d5c15a14a3fd0dc835fe}{Occurrence} (string school\+Year)
+\begin{DoxyCompactList}\small\item\em Custom constructor of \hyperlink{class_occurrence}{Occurrence} class. \end{DoxyCompactList}\item 
+void \hyperlink{class_occurrence_a2b5961ee7403112083776b8f4f4b4a14}{set\+Year} (string year)
+\begin{DoxyCompactList}\small\item\em Sets a new year for the occurrence. \end{DoxyCompactList}\item 
+void \hyperlink{class_occurrence_a7596dd133e475e6dcbb09efd3459ac08}{new\+Group\+Project} (\hyperlink{classgroup_project}{group\+Project} $\ast$proj)
+\begin{DoxyCompactList}\small\item\em Adds a new group project to the occurrence. \end{DoxyCompactList}\item 
+void \hyperlink{class_occurrence_a2e6912cc206246a4028756d49d0951fb}{set\+Title} (string title)
+\begin{DoxyCompactList}\small\item\em Sets a new title for the enunciations. \end{DoxyCompactList}\item 
+void \hyperlink{class_occurrence_a8073f785d9f29ad053fec276c5906531}{set\+Type} (string type)
+\begin{DoxyCompactList}\small\item\em Sets a new type for the enunciation. \end{DoxyCompactList}\item 
+string \hyperlink{class_occurrence_a47363caf55016c2c32641fa7e3f7ae69}{get\+Year} () const
+\item 
+string \hyperlink{class_occurrence_afc85c969e4211d55707b759b0b58eda0}{get\+Type} ()
+\item 
+vector$<$ \hyperlink{classgroup_project}{group\+Project} $\ast$ $>$ \hyperlink{class_occurrence_ab6e9beff62ff5738494b2618b850543b}{get\+Group\+Projects} () const
+\item 
+string \hyperlink{class_occurrence_abdd15553f837a9bc6979908afbb39787}{print\+Info\+Occurrence} (string title)
+\item 
+bool \hyperlink{class_occurrence_a798338bb904c0320817ba139139a548a}{operator$<$} (const \hyperlink{class_occurrence}{Occurrence} \&right)
+\begin{DoxyCompactList}\small\item\em Operator$<$ of \hyperlink{class_occurrence}{Occurrence}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_occurrence_a63911c7c452d1a43cbe135150c8c7764}\label{class_occurrence_a63911c7c452d1a43cbe135150c8c7764}} 
+\index{Occurrence@{Occurrence}!Occurrence@{Occurrence}}
+\index{Occurrence@{Occurrence}!Occurrence@{Occurrence}}
+\subsubsection{\texorpdfstring{Occurrence()}{Occurrence()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Occurrence\+::\+Occurrence (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Default constructor of \hyperlink{class_occurrence}{Occurrence} class. 
+
+\mbox{\Hypertarget{class_occurrence_aa1aa3a08a982d5c15a14a3fd0dc835fe}\label{class_occurrence_aa1aa3a08a982d5c15a14a3fd0dc835fe}} 
+\index{Occurrence@{Occurrence}!Occurrence@{Occurrence}}
+\index{Occurrence@{Occurrence}!Occurrence@{Occurrence}}
+\subsubsection{\texorpdfstring{Occurrence()}{Occurrence()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Occurrence\+::\+Occurrence (\begin{DoxyParamCaption}\item[{string}]{school\+Year }\end{DoxyParamCaption})}
+
+
+
+Custom constructor of \hyperlink{class_occurrence}{Occurrence} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em school\+Year} & The year of the occurrence \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_occurrence_ab6e9beff62ff5738494b2618b850543b}\label{class_occurrence_ab6e9beff62ff5738494b2618b850543b}} 
+\index{Occurrence@{Occurrence}!get\+Group\+Projects@{get\+Group\+Projects}}
+\index{get\+Group\+Projects@{get\+Group\+Projects}!Occurrence@{Occurrence}}
+\subsubsection{\texorpdfstring{get\+Group\+Projects()}{getGroupProjects()}}
+{\footnotesize\ttfamily vector$<$ \hyperlink{classgroup_project}{group\+Project} $\ast$ $>$ Occurrence\+::get\+Group\+Projects (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\begin{DoxyReturn}{Returns}
+The pointer to the vecotr of group projects 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_occurrence_afc85c969e4211d55707b759b0b58eda0}\label{class_occurrence_afc85c969e4211d55707b759b0b58eda0}} 
+\index{Occurrence@{Occurrence}!get\+Type@{get\+Type}}
+\index{get\+Type@{get\+Type}!Occurrence@{Occurrence}}
+\subsubsection{\texorpdfstring{get\+Type()}{getType()}}
+{\footnotesize\ttfamily string Occurrence\+::get\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+The type of the occurrence 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_occurrence_a47363caf55016c2c32641fa7e3f7ae69}\label{class_occurrence_a47363caf55016c2c32641fa7e3f7ae69}} 
+\index{Occurrence@{Occurrence}!get\+Year@{get\+Year}}
+\index{get\+Year@{get\+Year}!Occurrence@{Occurrence}}
+\subsubsection{\texorpdfstring{get\+Year()}{getYear()}}
+{\footnotesize\ttfamily string Occurrence\+::get\+Year (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\begin{DoxyReturn}{Returns}
+The year of the occurrence 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_occurrence_a7596dd133e475e6dcbb09efd3459ac08}\label{class_occurrence_a7596dd133e475e6dcbb09efd3459ac08}} 
+\index{Occurrence@{Occurrence}!new\+Group\+Project@{new\+Group\+Project}}
+\index{new\+Group\+Project@{new\+Group\+Project}!Occurrence@{Occurrence}}
+\subsubsection{\texorpdfstring{new\+Group\+Project()}{newGroupProject()}}
+{\footnotesize\ttfamily void Occurrence\+::new\+Group\+Project (\begin{DoxyParamCaption}\item[{\hyperlink{classgroup_project}{group\+Project} $\ast$}]{proj }\end{DoxyParamCaption})}
+
+
+
+Adds a new group project to the occurrence. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em proj} & Pointer to the new grou project \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_occurrence_a798338bb904c0320817ba139139a548a}\label{class_occurrence_a798338bb904c0320817ba139139a548a}} 
+\index{Occurrence@{Occurrence}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!Occurrence@{Occurrence}}
+\subsubsection{\texorpdfstring{operator$<$()}{operator<()}}
+{\footnotesize\ttfamily bool Occurrence\+::operator$<$ (\begin{DoxyParamCaption}\item[{const \hyperlink{class_occurrence}{Occurrence} \&}]{right }\end{DoxyParamCaption})}
+
+
+
+Operator$<$ of \hyperlink{class_occurrence}{Occurrence}. 
+
+\mbox{\Hypertarget{class_occurrence_abdd15553f837a9bc6979908afbb39787}\label{class_occurrence_abdd15553f837a9bc6979908afbb39787}} 
+\index{Occurrence@{Occurrence}!print\+Info\+Occurrence@{print\+Info\+Occurrence}}
+\index{print\+Info\+Occurrence@{print\+Info\+Occurrence}!Occurrence@{Occurrence}}
+\subsubsection{\texorpdfstring{print\+Info\+Occurrence()}{printInfoOccurrence()}}
+{\footnotesize\ttfamily string Occurrence\+::print\+Info\+Occurrence (\begin{DoxyParamCaption}\item[{string}]{title }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+A string containing the information about this occurrence 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_occurrence_a2e6912cc206246a4028756d49d0951fb}\label{class_occurrence_a2e6912cc206246a4028756d49d0951fb}} 
+\index{Occurrence@{Occurrence}!set\+Title@{set\+Title}}
+\index{set\+Title@{set\+Title}!Occurrence@{Occurrence}}
+\subsubsection{\texorpdfstring{set\+Title()}{setTitle()}}
+{\footnotesize\ttfamily void Occurrence\+::set\+Title (\begin{DoxyParamCaption}\item[{string}]{title }\end{DoxyParamCaption})}
+
+
+
+Sets a new title for the enunciations. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em title} & The new title \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_occurrence_a8073f785d9f29ad053fec276c5906531}\label{class_occurrence_a8073f785d9f29ad053fec276c5906531}} 
+\index{Occurrence@{Occurrence}!set\+Type@{set\+Type}}
+\index{set\+Type@{set\+Type}!Occurrence@{Occurrence}}
+\subsubsection{\texorpdfstring{set\+Type()}{setType()}}
+{\footnotesize\ttfamily void Occurrence\+::set\+Type (\begin{DoxyParamCaption}\item[{string}]{type }\end{DoxyParamCaption})}
+
+
+
+Sets a new type for the enunciation. 
+
+\mbox{\Hypertarget{class_occurrence_a2b5961ee7403112083776b8f4f4b4a14}\label{class_occurrence_a2b5961ee7403112083776b8f4f4b4a14}} 
+\index{Occurrence@{Occurrence}!set\+Year@{set\+Year}}
+\index{set\+Year@{set\+Year}!Occurrence@{Occurrence}}
+\subsubsection{\texorpdfstring{set\+Year()}{setYear()}}
+{\footnotesize\ttfamily void Occurrence\+::set\+Year (\begin{DoxyParamCaption}\item[{string}]{year }\end{DoxyParamCaption})}
+
+
+
+Sets a new year for the occurrence. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em year} & The new year \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{occurrence_8h}{occurrence.\+h}\item 
+\hyperlink{occurrence_8cpp}{occurrence.\+cpp}\end{DoxyCompactItemize}

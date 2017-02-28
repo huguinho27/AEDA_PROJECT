@@ -1,0 +1,350 @@
+\hypertarget{classgroup_project}{}\section{group\+Project Class Reference}
+\label{classgroup_project}\index{group\+Project@{group\+Project}}
+
+
+{\ttfamily \#include $<$group\+Project.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classgroup_project_ac96fe662ac0954e7a0d055ad5d52d324}{group\+Project} ()
+\begin{DoxyCompactList}\small\item\em Default constructor for the group project class. \end{DoxyCompactList}\item 
+\hyperlink{classgroup_project_a6d21dcbab960c214631ddc4506351372}{group\+Project} (vector$<$ \hyperlink{class_student}{Student} $\ast$$>$ students\+IN)
+\begin{DoxyCompactList}\small\item\em Custom constructor for the group project class. \end{DoxyCompactList}\item 
+bool \hyperlink{classgroup_project_ab4e0a6d2a9add0cf2399674540ffb141}{add\+Student} (\hyperlink{class_student}{Student} $\ast$st)
+\begin{DoxyCompactList}\small\item\em Adds a new student to the group project. \end{DoxyCompactList}\item 
+void \hyperlink{classgroup_project_a70388668e291a41025fdd3975f529bae}{remove\+Sudent} (\hyperlink{class_student}{Student} $\ast$st, string title)
+\begin{DoxyCompactList}\small\item\em Removes a student from the group project. \end{DoxyCompactList}\item 
+void \hyperlink{classgroup_project_a12367c1192c7665efcbca4033905aeff}{set\+Teacher} (\hyperlink{class_professor}{Professor} $\ast$prof)
+\begin{DoxyCompactList}\small\item\em Sets a new teacher as tutor. \end{DoxyCompactList}\item 
+void \hyperlink{classgroup_project_a4325f652c171171a820228218ca4dc5d}{set\+Text\+File} (string t\+File)
+\begin{DoxyCompactList}\small\item\em Sets a new text file. \end{DoxyCompactList}\item 
+void \hyperlink{classgroup_project_addcb52de9ce5bdb88778d9cd3f741a2b}{set\+Max\+Num} (int num)
+\begin{DoxyCompactList}\small\item\em Sets a new maximum number of students. \end{DoxyCompactList}\item 
+void \hyperlink{classgroup_project_a16f9213c7a80d49fd28befd620442358}{set\+Mark} (\hyperlink{class_student}{Student} $\ast$st, int mark, string title)
+\begin{DoxyCompactList}\small\item\em Sets a mark to a student. \end{DoxyCompactList}\item 
+void \hyperlink{classgroup_project_ab242628894adcdc4361fc24b676afcf0}{set\+Title} (string title)
+\begin{DoxyCompactList}\small\item\em Sets a new title. \end{DoxyCompactList}\item 
+void \hyperlink{classgroup_project_af145f11631fb84d566abff2349979fcf}{set\+Year} (string year)
+\begin{DoxyCompactList}\small\item\em Sets a new year. \end{DoxyCompactList}\item 
+void \hyperlink{classgroup_project_a25ac89777b6217e2ec9f751ec303601d}{set\+Type} (string type)
+\begin{DoxyCompactList}\small\item\em Sets a new type for the group project. \end{DoxyCompactList}\item 
+void \hyperlink{classgroup_project_a2fc8f6b25bf9365c040bb7e36dbff587}{set\+Status} (string new\+St)
+\begin{DoxyCompactList}\small\item\em Sets a new status for the group project. \end{DoxyCompactList}\item 
+string \hyperlink{classgroup_project_ae10d9246327845a2b1fc07dd1f01fdd7}{get\+Status} () const
+\item 
+string \hyperlink{classgroup_project_ae903de6e07211017fc8133713dbb0a1b}{get\+Title} () const
+\item 
+string \hyperlink{classgroup_project_aab16c18e6890fce4757001735867f810}{get\+Year} () const
+\item 
+string \hyperlink{classgroup_project_a613e44ba4c31ae2f1969e0873526349b}{get\+Type} () const
+\item 
+vector$<$ \hyperlink{class_student}{Student} $\ast$ $>$ \hyperlink{classgroup_project_a09aa7bbd96df1f27afe4f3543990e73c}{get\+Students} () const
+\item 
+string \hyperlink{classgroup_project_a26fc6b2b8c581fa50e618f0c38def88c}{get\+Text\+File} ()
+\item 
+\hyperlink{class_professor}{Professor} \hyperlink{classgroup_project_a92a97c4315a9da791736ae288b066c88}{get\+Teacher} () const
+\item 
+string \hyperlink{classgroup_project_abac981612934adccd4b89a45b5c1b78b}{print\+Info\+Project} (string title)
+\begin{DoxyCompactList}\small\item\em The information about a certain group project. \end{DoxyCompactList}\item 
+int \hyperlink{classgroup_project_ae85c4f31c7a93c0758d75a74dfda0c4d}{get\+Max} ()
+\item 
+bool \hyperlink{classgroup_project_ac6e0cc6d7f29567b698013fec1d74d19}{operator$<$} (const \hyperlink{classgroup_project}{group\+Project} $\ast$right) const
+\begin{DoxyCompactList}\small\item\em Operator$<$ of group project. \end{DoxyCompactList}\item 
+bool \hyperlink{classgroup_project_a4f56536819cb65cf33b36f4ea1d75b13}{operator==} (const \hyperlink{classgroup_project}{group\+Project} $\ast$right) const
+\begin{DoxyCompactList}\small\item\em Operator== of group project. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classgroup_project_ac96fe662ac0954e7a0d055ad5d52d324}\label{classgroup_project_ac96fe662ac0954e7a0d055ad5d52d324}} 
+\index{group\+Project@{group\+Project}!group\+Project@{group\+Project}}
+\index{group\+Project@{group\+Project}!group\+Project@{group\+Project}}
+\subsubsection{\texorpdfstring{group\+Project()}{groupProject()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily group\+Project\+::group\+Project (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Default constructor for the group project class. 
+
+\mbox{\Hypertarget{classgroup_project_a6d21dcbab960c214631ddc4506351372}\label{classgroup_project_a6d21dcbab960c214631ddc4506351372}} 
+\index{group\+Project@{group\+Project}!group\+Project@{group\+Project}}
+\index{group\+Project@{group\+Project}!group\+Project@{group\+Project}}
+\subsubsection{\texorpdfstring{group\+Project()}{groupProject()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily group\+Project\+::group\+Project (\begin{DoxyParamCaption}\item[{vector$<$ \hyperlink{class_student}{Student} $\ast$$>$}]{students\+IN }\end{DoxyParamCaption})}
+
+
+
+Custom constructor for the group project class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em students\+IN} & The vector of students \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classgroup_project_ab4e0a6d2a9add0cf2399674540ffb141}\label{classgroup_project_ab4e0a6d2a9add0cf2399674540ffb141}} 
+\index{group\+Project@{group\+Project}!add\+Student@{add\+Student}}
+\index{add\+Student@{add\+Student}!group\+Project@{group\+Project}}
+\subsubsection{\texorpdfstring{add\+Student()}{addStudent()}}
+{\footnotesize\ttfamily bool group\+Project\+::add\+Student (\begin{DoxyParamCaption}\item[{\hyperlink{class_student}{Student} $\ast$}]{st }\end{DoxyParamCaption})}
+
+
+
+Adds a new student to the group project. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em st} & The pointer to the new student to be added \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgroup_project_ae85c4f31c7a93c0758d75a74dfda0c4d}\label{classgroup_project_ae85c4f31c7a93c0758d75a74dfda0c4d}} 
+\index{group\+Project@{group\+Project}!get\+Max@{get\+Max}}
+\index{get\+Max@{get\+Max}!group\+Project@{group\+Project}}
+\subsubsection{\texorpdfstring{get\+Max()}{getMax()}}
+{\footnotesize\ttfamily int group\+Project\+::get\+Max (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+The maximum number of students on a group project 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgroup_project_ae10d9246327845a2b1fc07dd1f01fdd7}\label{classgroup_project_ae10d9246327845a2b1fc07dd1f01fdd7}} 
+\index{group\+Project@{group\+Project}!get\+Status@{get\+Status}}
+\index{get\+Status@{get\+Status}!group\+Project@{group\+Project}}
+\subsubsection{\texorpdfstring{get\+Status()}{getStatus()}}
+{\footnotesize\ttfamily string group\+Project\+::get\+Status (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\begin{DoxyReturn}{Returns}
+The status of the group project 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgroup_project_a09aa7bbd96df1f27afe4f3543990e73c}\label{classgroup_project_a09aa7bbd96df1f27afe4f3543990e73c}} 
+\index{group\+Project@{group\+Project}!get\+Students@{get\+Students}}
+\index{get\+Students@{get\+Students}!group\+Project@{group\+Project}}
+\subsubsection{\texorpdfstring{get\+Students()}{getStudents()}}
+{\footnotesize\ttfamily vector$<$ \hyperlink{class_student}{Student} $\ast$ $>$ group\+Project\+::get\+Students (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\begin{DoxyReturn}{Returns}
+The vector of students of the group project 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgroup_project_a92a97c4315a9da791736ae288b066c88}\label{classgroup_project_a92a97c4315a9da791736ae288b066c88}} 
+\index{group\+Project@{group\+Project}!get\+Teacher@{get\+Teacher}}
+\index{get\+Teacher@{get\+Teacher}!group\+Project@{group\+Project}}
+\subsubsection{\texorpdfstring{get\+Teacher()}{getTeacher()}}
+{\footnotesize\ttfamily \hyperlink{class_professor}{Professor} group\+Project\+::get\+Teacher (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\begin{DoxyReturn}{Returns}
+The teacher of the group project 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgroup_project_a26fc6b2b8c581fa50e618f0c38def88c}\label{classgroup_project_a26fc6b2b8c581fa50e618f0c38def88c}} 
+\index{group\+Project@{group\+Project}!get\+Text\+File@{get\+Text\+File}}
+\index{get\+Text\+File@{get\+Text\+File}!group\+Project@{group\+Project}}
+\subsubsection{\texorpdfstring{get\+Text\+File()}{getTextFile()}}
+{\footnotesize\ttfamily string group\+Project\+::get\+Text\+File (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+The text file of the group project 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgroup_project_ae903de6e07211017fc8133713dbb0a1b}\label{classgroup_project_ae903de6e07211017fc8133713dbb0a1b}} 
+\index{group\+Project@{group\+Project}!get\+Title@{get\+Title}}
+\index{get\+Title@{get\+Title}!group\+Project@{group\+Project}}
+\subsubsection{\texorpdfstring{get\+Title()}{getTitle()}}
+{\footnotesize\ttfamily string group\+Project\+::get\+Title (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\begin{DoxyReturn}{Returns}
+The title of the group project 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgroup_project_a613e44ba4c31ae2f1969e0873526349b}\label{classgroup_project_a613e44ba4c31ae2f1969e0873526349b}} 
+\index{group\+Project@{group\+Project}!get\+Type@{get\+Type}}
+\index{get\+Type@{get\+Type}!group\+Project@{group\+Project}}
+\subsubsection{\texorpdfstring{get\+Type()}{getType()}}
+{\footnotesize\ttfamily string group\+Project\+::get\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\begin{DoxyReturn}{Returns}
+The type of the group project 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgroup_project_aab16c18e6890fce4757001735867f810}\label{classgroup_project_aab16c18e6890fce4757001735867f810}} 
+\index{group\+Project@{group\+Project}!get\+Year@{get\+Year}}
+\index{get\+Year@{get\+Year}!group\+Project@{group\+Project}}
+\subsubsection{\texorpdfstring{get\+Year()}{getYear()}}
+{\footnotesize\ttfamily string group\+Project\+::get\+Year (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\begin{DoxyReturn}{Returns}
+The year of the group project 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgroup_project_ac6e0cc6d7f29567b698013fec1d74d19}\label{classgroup_project_ac6e0cc6d7f29567b698013fec1d74d19}} 
+\index{group\+Project@{group\+Project}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!group\+Project@{group\+Project}}
+\subsubsection{\texorpdfstring{operator$<$()}{operator<()}}
+{\footnotesize\ttfamily bool group\+Project\+::operator$<$ (\begin{DoxyParamCaption}\item[{const \hyperlink{classgroup_project}{group\+Project} $\ast$}]{right }\end{DoxyParamCaption}) const}
+
+
+
+Operator$<$ of group project. 
+
+\mbox{\Hypertarget{classgroup_project_a4f56536819cb65cf33b36f4ea1d75b13}\label{classgroup_project_a4f56536819cb65cf33b36f4ea1d75b13}} 
+\index{group\+Project@{group\+Project}!operator==@{operator==}}
+\index{operator==@{operator==}!group\+Project@{group\+Project}}
+\subsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily bool group\+Project\+::operator== (\begin{DoxyParamCaption}\item[{const \hyperlink{classgroup_project}{group\+Project} $\ast$}]{right }\end{DoxyParamCaption}) const}
+
+
+
+Operator== of group project. 
+
+\mbox{\Hypertarget{classgroup_project_abac981612934adccd4b89a45b5c1b78b}\label{classgroup_project_abac981612934adccd4b89a45b5c1b78b}} 
+\index{group\+Project@{group\+Project}!print\+Info\+Project@{print\+Info\+Project}}
+\index{print\+Info\+Project@{print\+Info\+Project}!group\+Project@{group\+Project}}
+\subsubsection{\texorpdfstring{print\+Info\+Project()}{printInfoProject()}}
+{\footnotesize\ttfamily string group\+Project\+::print\+Info\+Project (\begin{DoxyParamCaption}\item[{string}]{title }\end{DoxyParamCaption})}
+
+
+
+The information about a certain group project. 
+
+\mbox{\Hypertarget{classgroup_project_a70388668e291a41025fdd3975f529bae}\label{classgroup_project_a70388668e291a41025fdd3975f529bae}} 
+\index{group\+Project@{group\+Project}!remove\+Sudent@{remove\+Sudent}}
+\index{remove\+Sudent@{remove\+Sudent}!group\+Project@{group\+Project}}
+\subsubsection{\texorpdfstring{remove\+Sudent()}{removeSudent()}}
+{\footnotesize\ttfamily void group\+Project\+::remove\+Sudent (\begin{DoxyParamCaption}\item[{\hyperlink{class_student}{Student} $\ast$}]{st,  }\item[{string}]{title }\end{DoxyParamCaption})}
+
+
+
+Removes a student from the group project. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em st} & The pointer to the student \\
+\hline
+{\em title} & Title of the enunciation to be removed \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgroup_project_a16f9213c7a80d49fd28befd620442358}\label{classgroup_project_a16f9213c7a80d49fd28befd620442358}} 
+\index{group\+Project@{group\+Project}!set\+Mark@{set\+Mark}}
+\index{set\+Mark@{set\+Mark}!group\+Project@{group\+Project}}
+\subsubsection{\texorpdfstring{set\+Mark()}{setMark()}}
+{\footnotesize\ttfamily void group\+Project\+::set\+Mark (\begin{DoxyParamCaption}\item[{\hyperlink{class_student}{Student} $\ast$}]{st,  }\item[{int}]{mark,  }\item[{string}]{title }\end{DoxyParamCaption})}
+
+
+
+Sets a mark to a student. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em st} & The student to evaluate \\
+\hline
+{\em mark} & The mark to evaluate the student \\
+\hline
+{\em title} & The title of the enunciation \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgroup_project_addcb52de9ce5bdb88778d9cd3f741a2b}\label{classgroup_project_addcb52de9ce5bdb88778d9cd3f741a2b}} 
+\index{group\+Project@{group\+Project}!set\+Max\+Num@{set\+Max\+Num}}
+\index{set\+Max\+Num@{set\+Max\+Num}!group\+Project@{group\+Project}}
+\subsubsection{\texorpdfstring{set\+Max\+Num()}{setMaxNum()}}
+{\footnotesize\ttfamily void group\+Project\+::set\+Max\+Num (\begin{DoxyParamCaption}\item[{int}]{num }\end{DoxyParamCaption})}
+
+
+
+Sets a new maximum number of students. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em num} & The new maximum number of students \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgroup_project_a2fc8f6b25bf9365c040bb7e36dbff587}\label{classgroup_project_a2fc8f6b25bf9365c040bb7e36dbff587}} 
+\index{group\+Project@{group\+Project}!set\+Status@{set\+Status}}
+\index{set\+Status@{set\+Status}!group\+Project@{group\+Project}}
+\subsubsection{\texorpdfstring{set\+Status()}{setStatus()}}
+{\footnotesize\ttfamily void group\+Project\+::set\+Status (\begin{DoxyParamCaption}\item[{string}]{new\+St }\end{DoxyParamCaption})}
+
+
+
+Sets a new status for the group project. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+St} & The new status \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgroup_project_a12367c1192c7665efcbca4033905aeff}\label{classgroup_project_a12367c1192c7665efcbca4033905aeff}} 
+\index{group\+Project@{group\+Project}!set\+Teacher@{set\+Teacher}}
+\index{set\+Teacher@{set\+Teacher}!group\+Project@{group\+Project}}
+\subsubsection{\texorpdfstring{set\+Teacher()}{setTeacher()}}
+{\footnotesize\ttfamily void group\+Project\+::set\+Teacher (\begin{DoxyParamCaption}\item[{\hyperlink{class_professor}{Professor} $\ast$}]{prof }\end{DoxyParamCaption})}
+
+
+
+Sets a new teacher as tutor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em prof} & Pointer to the new teacher \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgroup_project_a4325f652c171171a820228218ca4dc5d}\label{classgroup_project_a4325f652c171171a820228218ca4dc5d}} 
+\index{group\+Project@{group\+Project}!set\+Text\+File@{set\+Text\+File}}
+\index{set\+Text\+File@{set\+Text\+File}!group\+Project@{group\+Project}}
+\subsubsection{\texorpdfstring{set\+Text\+File()}{setTextFile()}}
+{\footnotesize\ttfamily void group\+Project\+::set\+Text\+File (\begin{DoxyParamCaption}\item[{string}]{t\+File }\end{DoxyParamCaption})}
+
+
+
+Sets a new text file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em t\+File} & New text file to be set \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgroup_project_ab242628894adcdc4361fc24b676afcf0}\label{classgroup_project_ab242628894adcdc4361fc24b676afcf0}} 
+\index{group\+Project@{group\+Project}!set\+Title@{set\+Title}}
+\index{set\+Title@{set\+Title}!group\+Project@{group\+Project}}
+\subsubsection{\texorpdfstring{set\+Title()}{setTitle()}}
+{\footnotesize\ttfamily void group\+Project\+::set\+Title (\begin{DoxyParamCaption}\item[{string}]{title }\end{DoxyParamCaption})}
+
+
+
+Sets a new title. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em title} & The new title \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgroup_project_a25ac89777b6217e2ec9f751ec303601d}\label{classgroup_project_a25ac89777b6217e2ec9f751ec303601d}} 
+\index{group\+Project@{group\+Project}!set\+Type@{set\+Type}}
+\index{set\+Type@{set\+Type}!group\+Project@{group\+Project}}
+\subsubsection{\texorpdfstring{set\+Type()}{setType()}}
+{\footnotesize\ttfamily void group\+Project\+::set\+Type (\begin{DoxyParamCaption}\item[{string}]{type }\end{DoxyParamCaption})}
+
+
+
+Sets a new type for the group project. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & The new type \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgroup_project_af145f11631fb84d566abff2349979fcf}\label{classgroup_project_af145f11631fb84d566abff2349979fcf}} 
+\index{group\+Project@{group\+Project}!set\+Year@{set\+Year}}
+\index{set\+Year@{set\+Year}!group\+Project@{group\+Project}}
+\subsubsection{\texorpdfstring{set\+Year()}{setYear()}}
+{\footnotesize\ttfamily void group\+Project\+::set\+Year (\begin{DoxyParamCaption}\item[{string}]{year }\end{DoxyParamCaption})}
+
+
+
+Sets a new year. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em year} & The new year \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group_project_8h}{group\+Project.\+h}\item 
+\hyperlink{group_project_8cpp}{group\+Project.\+cpp}\end{DoxyCompactItemize}

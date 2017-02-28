@@ -1,0 +1,165 @@
+\hypertarget{class_student}{}\section{Student Class Reference}
+\label{class_student}\index{Student@{Student}}
+
+
+{\ttfamily \#include $<$student.\+h$>$}
+
+Inheritance diagram for Student\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_student}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_student_af9168cedbfa5565cf0b20c1a9d3f5c9d}{Student} ()
+\begin{DoxyCompactList}\small\item\em Default constructor for class \hyperlink{class_student}{Student}. \end{DoxyCompactList}\item 
+\hyperlink{class_student_afc317f470d694b6ef52387a4e21a1e08}{Student} (string \hyperlink{class_person_a669b64897b4d823a27bb5866368d4dfa}{name}, int \hyperlink{class_person_aec48a92f614a854ff380a15eb8e2f479}{id})
+\begin{DoxyCompactList}\small\item\em Custom constructor for the class \hyperlink{class_student}{Student}. \end{DoxyCompactList}\item 
+virtual \hyperlink{class_student_a71f6d37e021e98dff29ffe67bfac6ce1}{$\sim$\+Student} ()
+\begin{DoxyCompactList}\small\item\em Destructor of \hyperlink{class_student}{Student}. \end{DoxyCompactList}\item 
+vector$<$ int $>$ \hyperlink{class_student_aff1ed57b8df6e9a3a43a32dc99923b34}{get\+Marks} ()
+\item 
+int \hyperlink{class_student_a05a0feee9294d3502af003fb65e56adf}{get\+Mark} (string title)
+\item 
+void \hyperlink{class_student_ad197a15a65230e59d0a690a49738e9af}{set\+Mark} (int mark, string title)
+\begin{DoxyCompactList}\small\item\em Sets a mark for a student on a certain title. \end{DoxyCompactList}\item 
+string \hyperlink{class_student_a4b566cc6bf1a725ca1569f306046b16b}{print\+Info\+Student} ()
+\item 
+void \hyperlink{class_student_a616e34f2eebf885b3419bcd27e8f3840}{add\+New\+Title} (string title)
+\begin{DoxyCompactList}\small\item\em Adds a new title to the person. \end{DoxyCompactList}\item 
+void \hyperlink{class_student_a16d2a2c6abe8aa9ce53a2a15c4656eee}{delete\+Title} (string title)
+\begin{DoxyCompactList}\small\item\em Deletes a title from the student. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_student_af9168cedbfa5565cf0b20c1a9d3f5c9d}\label{class_student_af9168cedbfa5565cf0b20c1a9d3f5c9d}} 
+\index{Student@{Student}!Student@{Student}}
+\index{Student@{Student}!Student@{Student}}
+\subsubsection{\texorpdfstring{Student()}{Student()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Student\+::\+Student (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Default constructor for class \hyperlink{class_student}{Student}. 
+
+\mbox{\Hypertarget{class_student_afc317f470d694b6ef52387a4e21a1e08}\label{class_student_afc317f470d694b6ef52387a4e21a1e08}} 
+\index{Student@{Student}!Student@{Student}}
+\index{Student@{Student}!Student@{Student}}
+\subsubsection{\texorpdfstring{Student()}{Student()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Student\+::\+Student (\begin{DoxyParamCaption}\item[{string}]{name,  }\item[{int}]{id }\end{DoxyParamCaption})}
+
+
+
+Custom constructor for the class \hyperlink{class_student}{Student}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & The name of the student \\
+\hline
+{\em id} & The id of the student \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_student_a71f6d37e021e98dff29ffe67bfac6ce1}\label{class_student_a71f6d37e021e98dff29ffe67bfac6ce1}} 
+\index{Student@{Student}!````~Student@{$\sim$\+Student}}
+\index{````~Student@{$\sim$\+Student}!Student@{Student}}
+\subsubsection{\texorpdfstring{$\sim$\+Student()}{~Student()}}
+{\footnotesize\ttfamily virtual Student\+::$\sim$\+Student (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Destructor of \hyperlink{class_student}{Student}. 
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_student_a616e34f2eebf885b3419bcd27e8f3840}\label{class_student_a616e34f2eebf885b3419bcd27e8f3840}} 
+\index{Student@{Student}!add\+New\+Title@{add\+New\+Title}}
+\index{add\+New\+Title@{add\+New\+Title}!Student@{Student}}
+\subsubsection{\texorpdfstring{add\+New\+Title()}{addNewTitle()}}
+{\footnotesize\ttfamily void Student\+::add\+New\+Title (\begin{DoxyParamCaption}\item[{string}]{title }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Adds a new title to the person. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em title} & The new title to be added \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{class_person_a1f6361e735885ead2549717bb31d0437}{Person}.
+
+\mbox{\Hypertarget{class_student_a16d2a2c6abe8aa9ce53a2a15c4656eee}\label{class_student_a16d2a2c6abe8aa9ce53a2a15c4656eee}} 
+\index{Student@{Student}!delete\+Title@{delete\+Title}}
+\index{delete\+Title@{delete\+Title}!Student@{Student}}
+\subsubsection{\texorpdfstring{delete\+Title()}{deleteTitle()}}
+{\footnotesize\ttfamily void Student\+::delete\+Title (\begin{DoxyParamCaption}\item[{string}]{title }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Deletes a title from the student. 
+
+
+
+Reimplemented from \hyperlink{class_person_a14f687637476ef033a3c9b865e67fd69}{Person}.
+
+\mbox{\Hypertarget{class_student_a05a0feee9294d3502af003fb65e56adf}\label{class_student_a05a0feee9294d3502af003fb65e56adf}} 
+\index{Student@{Student}!get\+Mark@{get\+Mark}}
+\index{get\+Mark@{get\+Mark}!Student@{Student}}
+\subsubsection{\texorpdfstring{get\+Mark()}{getMark()}}
+{\footnotesize\ttfamily int Student\+::get\+Mark (\begin{DoxyParamCaption}\item[{string}]{title }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+The mark of the student on a certain title(g.\+p.) 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em title} & Title of the enunciation \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_student_aff1ed57b8df6e9a3a43a32dc99923b34}\label{class_student_aff1ed57b8df6e9a3a43a32dc99923b34}} 
+\index{Student@{Student}!get\+Marks@{get\+Marks}}
+\index{get\+Marks@{get\+Marks}!Student@{Student}}
+\subsubsection{\texorpdfstring{get\+Marks()}{getMarks()}}
+{\footnotesize\ttfamily vector$<$ int $>$ Student\+::get\+Marks (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+Vector of marks of the student 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_student_a4b566cc6bf1a725ca1569f306046b16b}\label{class_student_a4b566cc6bf1a725ca1569f306046b16b}} 
+\index{Student@{Student}!print\+Info\+Student@{print\+Info\+Student}}
+\index{print\+Info\+Student@{print\+Info\+Student}!Student@{Student}}
+\subsubsection{\texorpdfstring{print\+Info\+Student()}{printInfoStudent()}}
+{\footnotesize\ttfamily string Student\+::print\+Info\+Student (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+String containing the info of the student 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_student_ad197a15a65230e59d0a690a49738e9af}\label{class_student_ad197a15a65230e59d0a690a49738e9af}} 
+\index{Student@{Student}!set\+Mark@{set\+Mark}}
+\index{set\+Mark@{set\+Mark}!Student@{Student}}
+\subsubsection{\texorpdfstring{set\+Mark()}{setMark()}}
+{\footnotesize\ttfamily void Student\+::set\+Mark (\begin{DoxyParamCaption}\item[{int}]{mark,  }\item[{string}]{title }\end{DoxyParamCaption})}
+
+
+
+Sets a mark for a student on a certain title. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mark} & Mark to be added \\
+\hline
+{\em title} & Title of the enunciation \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{student_8h}{student.\+h}\item 
+\hyperlink{student_8cpp}{student.\+cpp}\end{DoxyCompactItemize}
